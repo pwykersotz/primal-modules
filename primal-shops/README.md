@@ -165,6 +165,15 @@ shops.linkTokens(actor, [tokenDoc]);     // tokens that open a shop (GM)
 shops.revealPins();                      // reveal every pin and ribbon on the scene (false: hide them) (GM)
 ```
 
+## Checks
+
+Plain Node, no Foundry needed:
+
+- `node --test tests/money.test.mjs`: prices, purses, paying with change (500 random purses, none of which may gain or lose more than the price), receiving coins and prices typed by the GM.
+- `node --test tests/shop.test.mjs`: shop settings and saved state, what's on sale and why not, markup, stock and rolled stock, the random pick, checking a purchase, restocking from a sale, and what a shop pays for things (harvested components in full).
+
+Trades themselves (the windows, sockets and GM approval) need a running world and are checked by hand.
+
 ## Made with AI
 
 This module was built with Claude, an AI model made by Anthropic. Pwykersotz decides what it should do, tests it in play and approves each release. Claude wrote the code, the tests and this README from those requests.

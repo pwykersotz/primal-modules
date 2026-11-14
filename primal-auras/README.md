@@ -168,7 +168,7 @@ auras.openItemAuras(item);
   icons and are removed automatically when no longer valid.
 * Turning *Automate aura effects* off removes all "while inside" effects from the current scene.
 
-Tests: `node --test tests/automation.test.mjs`
+Tests (plain Node, no Foundry): `node --test tests/automation.test.mjs tests/passthrough.test.mjs tests/geometry.test.mjs`. They cover who starts and ends a turn, passing through an aura, and who's inside: grid and circle shapes, donuts, large creatures, diagonals, elevation, levels and who an effect affects.
 
 ## Made with AI
 
