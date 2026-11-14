@@ -1,6 +1,7 @@
 {
   "name": "primal-modules",
   "private": true,
+  "repository": "pwykersotz/primal-modules",
   "description": "Pwykersotz's Foundry VTT modules for dnd5e. Made with AI: written with Claude (Anthropic).",
   "type": "module",
   "scripts": {

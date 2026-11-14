@@ -43,5 +43,11 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-cr",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-cr/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-cr-v1.1.2/primal-cr.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-cr/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-cr/CHANGELOG.md"
 }

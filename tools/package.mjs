@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { deflateRawSync } from "node:zlib";
 import { spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
+import { releaseLinks } from "./links.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -32,19 +33,6 @@ if (!wanted.length) { console.error("Usage: node tools/package.mjs <module>... |
 const SKIP_DIRS = new Set(["tests", "test", "tools", "src", "node_modules", "dist", ".github", ".git"]);
 const SKIP_FILES = new Set(["RELEASING.md", ".gitignore", ".gitattributes", "package.json", "package-lock.json", "LOCK", "LOG", "LOG.old"]);
 const SKIP_EXT = [".zip", ".tar.gz", ".tgz"];
-
-/** Release links for a module in this repository (one release per module version, tagged <module>-v<version>). */
-export function releaseLinks(repoName, id, version) {
-  const base = `https://github.com/${repoName}`;
-  return {
-    url: `${base}/tree/main/${id}`,
-    manifest: `https://raw.githubusercontent.com/${repoName}/main/${id}/module.json`,
-    download: `${base}/releases/download/${id}-v${version}/${id}.zip`,
-    bugs: `${base}/issues`,
-    readme: `${base}/blob/main/${id}/README.md`,
-    changelog: `${base}/blob/main/${id}/CHANGELOG.md`
-  };
-}
 
 function packageModule(id) {
   const dir = join(root, id);

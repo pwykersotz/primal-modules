@@ -15,4 +15,6 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Install links match each module's version
+        run: node tools/set-links.mjs && git diff --exit-code -- '*/module.json'
       - run: npm test

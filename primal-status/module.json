@@ -33,5 +33,11 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-status",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-status/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-status-v4.9.0/primal-status.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-status/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-status/CHANGELOG.md"
 }

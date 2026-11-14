@@ -53,5 +53,11 @@
         "type": "module"
       }
     ]
-  }
+  },
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-drakkenheim",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-drakkenheim/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-drakkenheim-v1.1.2/primal-drakkenheim.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-drakkenheim/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-drakkenheim/CHANGELOG.md"
 }

@@ -10,7 +10,6 @@ that installs and works on its own; where two modules know about each other, the
 | --- | --- |
 | [Primal Attacks](primal-attacks) | Roll several attacks at once, and an NPC's whole Multiattack in one click. |
 | [Primal Auras](primal-auras) | Token auras you switch from the Token HUD, with automated saves, damage and conditions. |
-| [Primal Classes](primal-classes) | The Binder class, with vestiges, pacts and their automation. |
 | [Primal Combat](primal-combat) | A combat carousel across the top of the screen, with side initiative. |
 | [Primal Compendiums](primal-compendiums) | A Compendiums tab in every sidebar directory, with filters. |
 | [Primal CR](primal-cr) | How dangerous a fight is for this party, simulated from the sheets. |
@@ -23,7 +22,6 @@ that installs and works on its own; where two modules know about each other, the
 | [Primal Spell Points](primal-spell-points) | The *Dungeon Master's Guide* spell points variant, per character. |
 | [Primal Status](primal-status) | Status effects with animated token visuals and rules automation. |
 | [Primal Weather](primal-weather) | Daily weather under dnd5e's calendar, with its rules. |
-| [Warding Flare Automation](warding-flare-automation) | Warding Flare, Primal Warding and Beastheart Ferocity. |
 
 Each module's README explains its settings, its macro API and its limits.
 
@@ -40,11 +38,21 @@ world before you update.
 
 ## Book content
 
-Some modules carry rules, not book text: Primal Harvesting's tables, for example, are filled in by the
-GM from their own copy. Two modules do carry text from published books, and are for owners of those
-books: Primal Classes (the Binder, from *Tome of Magic*) and Warding Flare Automation (the Beastheart
-options, from MCDM's *Beastheart and Monstrous Companions*). None of these modules is made, endorsed or
-checked by the books' publishers.
+These modules carry rules, not book text: Primal Harvesting's tables, for example, are filled in by the GM
+from their own copy. Pwykersotz's modules that do carry text from published books (the Binder class from
+*Tome of Magic*, and the Beastheart options from MCDM's *Beastheart and Monstrous Companions*) are kept in
+a private repository. None of these modules is made, endorsed or checked by any book's publisher.
+
+## Installing
+
+In Foundry, open **Add-on Modules → Install Module** and paste a module's manifest link into
+*Manifest URL*:
+
+    https://raw.githubusercontent.com/pwykersotz/primal-modules/main/<module>/module.json
+
+for example `.../main/primal-weather/module.json`. Foundry then offers updates when a new version is
+released. Each release on the [Releases](https://github.com/pwykersotz/primal-modules/releases) page also
+has the module's zip, to unzip into `Data/modules/<module>/` by hand.
 
 ## Working on the modules
 
@@ -56,9 +64,9 @@ module in to try it.
     node tools/test-all.mjs primal-auras          # one module's checks
     node tools/package.mjs primal-auras           # dist/primal-auras/: module.json and the zip
 
-Compendium packs live in `<module>/src/packs/` as one JSON file per entry, so changes show up as
-readable diffs. After editing a compendium in Foundry, bring the changes back with
-`node tools/packs.mjs unpack primal-classes --from <path to Data/modules/primal-classes>`.
+A module with compendium packs keeps them in `<module>/src/packs/` as one JSON file per entry, so changes
+show up as readable diffs. After editing a compendium in Foundry, bring the changes back with
+`node tools/packs.mjs unpack <module> --from <path to Data/modules/<module>>`.
 
 Primal Status is built from `primal-status/src/`: run `node primal-status/tools/build.mjs` after
 changing anything there.

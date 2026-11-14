@@ -48,5 +48,11 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-attacks",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-attacks/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-attacks-v1.6.0/primal-attacks.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-attacks/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-attacks/CHANGELOG.md"
 }

@@ -58,7 +58,7 @@
 			"path": "lang/pt-BR.json"
 		}
 	],
-	"url": "https://github.com/zeel01/MonsterBlocks",
+	"url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-monster-blocks",
 	"media": [
 		{
 			"type": "cover",
@@ -68,5 +68,9 @@
 			"type": "icon",
 			"url": "https://avatars2.githubusercontent.com/u/1721836"
 		}
-	]
+	],
+	"manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-monster-blocks/module.json",
+	"download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-monster-blocks-v4.0.3/primal-monster-blocks.zip",
+	"bugs": "https://github.com/pwykersotz/primal-modules/issues",
+	"readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-monster-blocks/README.md"
 }

@@ -44,5 +44,11 @@
       "path": "lang/en.json"
     }
   ],
-  "socket": true
+  "socket": true,
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-harvesting",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-harvesting/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-harvesting-v1.2.0/primal-harvesting.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-harvesting/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-harvesting/CHANGELOG.md"
 }

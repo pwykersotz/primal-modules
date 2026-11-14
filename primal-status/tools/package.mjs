@@ -45,6 +45,10 @@ if (repo) {
     readme: `${base}/blob/main/README.md`,
     changelog: `${base}/blob/main/CHANGELOG.md`
   });
+} else {
+  // A zip for installing by hand: no update links, even when module.json carries some (as in primal-modules).
+  delete manifest.manifest;
+  delete manifest.download;
 }
 if ((manifest.authors ?? []).some(a => a?.name === "You")) console.warn("Note: module.json still lists the author as \"You\"; put your name there before sharing.");
 const manifestText = JSON.stringify(manifest, null, 2) + "\n";

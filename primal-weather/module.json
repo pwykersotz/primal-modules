@@ -24,5 +24,11 @@
       "name": "English",
       "path": "lang/en.json"
     }
-  ]
+  ],
+  "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-weather",
+  "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-weather/module.json",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-weather-v1.1.0/primal-weather.zip",
+  "bugs": "https://github.com/pwykersotz/primal-modules/issues",
+  "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-weather/README.md",
+  "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-weather/CHANGELOG.md"
 }

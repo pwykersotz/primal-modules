@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Compendium packs, kept in the repository as one JSON file per entry instead of Foundry's database files.
 //
-//   node tools/packs.mjs unpack primal-classes [--from path/to/primal-classes]
+//   node tools/packs.mjs unpack <module> [--from path/to/<module>]
 //       Reads the module's packs/ (by default the one in this repository; --from reads an installed copy,
-//       for example Data/modules/primal-classes after editing the compendiums in Foundry) and writes
-//       primal-classes/src/packs/<pack>/*.json.
-//   node tools/packs.mjs build primal-classes [--to path/to/primal-classes]
+//       for example Data/modules/<module> after editing the compendiums in Foundry) and writes
+//       <module>/src/packs/<pack>/*.json.
+//   node tools/packs.mjs build <module> [--to path/to/<module>]
 //       Builds packs/ from src/packs/ (into this repository by default). Foundry must not have the world
 //       open while writing into an installed copy.
 //
