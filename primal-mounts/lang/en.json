@@ -1,0 +1,172 @@
+{
+  "PRIMAL_MOUNTS": {
+    "HUD": {
+      "Mount": "Mount: {rider} rides {mount}",
+      "MountChoose": "Mount… (choose which creature)",
+      "Unmount": "Unmount {rider} from {mount}",
+      "ControlledToggle": "{mount} is a controlled mount (click to make it independent)",
+      "IndependentToggle": "{mount} is an independent mount (click to make it controlled)",
+      "FallSave": "{rider}: DC 10 Dexterity save to stay mounted (the mount is being moved against its will)"
+    },
+    "Control": {
+      "Controlled": "Controlled",
+      "Independent": "Independent"
+    },
+    "Dialog": {
+      "ControlTitle": "Mount",
+      "ControlPrompt": "How will {rider} ride {mount}?",
+      "ControlledHint": "the mount is trained to accept a rider. Its initiative changes to match the rider's, it moves as the rider directs, and on its turn it can only Dash, Disengage, or Dodge.",
+      "IndependentHint": "the mount lets the rider on but ignores their control. It keeps its place in the initiative order and moves and acts as it likes.",
+      "PartnerTitle": "Mount which creature?",
+      "PartnerPrompt": "{token} overlaps more than one creature. Choose the pairing:",
+      "PartnerOption": "{rider} rides {mount}"
+    },
+    "Effect": {
+      "Mounted": "Mounted on {mount}",
+      "MountedDescription": "<p>Riding a mount. The rider moves with the mount and must succeed on a DC 10 Dexterity saving throw or fall off (landing Prone) if the mount is moved against its will, or if the rider or the mount is knocked Prone.</p>",
+      "RiddenControlled": "Ridden by {rider} (controlled)",
+      "RiddenIndependent": "Ridden by {rider} (independent)",
+      "ControlledDescription": "<p>A controlled mount moves on its rider's turn as the rider directs, and has only three action options during that turn: Dash, Disengage, and Dodge.</p>",
+      "IndependentDescription": "<p>An independent mount keeps its place in the initiative order and moves and acts as it likes.</p>"
+    },
+    "Rules": {
+      "MountedStrike": "Mounted Strike",
+      "VeerTitle": "Mounted Combatant: Veer",
+      "RedirectTitle": "Mounted Combatant: Redirect"
+    },
+    "Chat": {
+      "MountTitle": "Mounted",
+      "UnmountTitle": "Dismounted",
+      "FallTitle": "Staying in the saddle",
+      "Mounted": "<strong>{rider}</strong> mounts <strong>{mount}</strong>.",
+      "MountCost": "Mounting costs {cost} {units} of movement (half of a {speed} {units} Speed).",
+      "DismountCost": "Dismounting costs {cost} {units} of movement (half of their Speed).",
+      "ControlledRules": "{mount} is a <strong>controlled</strong> mount: its initiative now matches its rider's, it moves as directed, and on that turn it can only Dash, Disengage, or Dodge.",
+      "IndependentRules": "{mount} is an <strong>independent</strong> mount: it keeps its place in the initiative order and moves and acts as it likes.",
+      "FeatModern": "<strong>Mounted Combatant</strong> applies: {rider} has Advantage on attacks against unmounted creatures within 5 feet of the mount that are at least one size smaller than it (Mounted Strike); the mount takes no damage on a successful Dexterity save for half damage, and half on a failure (Leap Aside); and {rider} can take a hit meant for the mount (Veer).",
+      "FeatLegacy": "<strong>Mounted Combatant</strong> applies: {rider} has advantage on melee attacks against unmounted creatures smaller than the mount; the mount takes no damage on a successful Dexterity save for half damage, and half on a failure; and {rider} can force an attack on the mount to target them instead.",
+      "OpportunityLegacy": "If the mount provokes an opportunity attack while ridden, the attacker can target the rider or the mount.",
+      "Dismounted": "<strong>{rider}</strong> dismounts from <strong>{mount}</strong>.",
+      "FellOff": "<strong>{rider}</strong> falls off <strong>{mount}</strong> and lands Prone.",
+      "MountFell": "<strong>{mount}</strong> goes down and <strong>{rider}</strong> is thrown, landing Prone.",
+      "Separated": "<strong>{rider}</strong> and <strong>{mount}</strong> are separated.",
+      "NowControlled": "{rider} takes control of {mount}: it now acts on {rider}'s turn and can only Dash, Disengage, or Dodge.",
+      "NowIndependent": "{mount} now acts independently of {rider}.",
+      "Cause": {
+        "riderProne": "<strong>{rider}</strong> is knocked Prone while riding {mount}.",
+        "mountProne": "<strong>{mount}</strong> is knocked Prone with {rider} on its back.",
+        "mountDown": "<strong>{mount}</strong> collapses with {rider} on its back.",
+        "forced": "An effect is moving <strong>{mount}</strong> against its will while {rider} rides it."
+      },
+      "FallReminder": "{rider} must succeed on a DC 10 Dexterity saving throw or fall off, landing Prone within 5 feet of {mount}.",
+      "SavePrompt": "{rider} must succeed on a DC 10 Dexterity saving throw or fall off, landing Prone within 5 feet of {mount}.",
+      "SaveButton": "Roll DC 10 Dexterity save",
+      "SaveFlavor": "Staying mounted: {rider}",
+      "KeepsSeat": "<strong>{rider}</strong> keeps their seat on {mount}.",
+      "ReactionOption": "{rider} is dismounted and lands Prone within 5 feet of {mount}. If they used their reaction to dismount as it fell, they land on their feet instead.",
+      "ReactionButton": "Used reaction: land on feet",
+      "LandsOnFeet": "<strong>{rider}</strong> uses their reaction and lands on their feet.",
+      "AnAttacker": "An attacker",
+      "AttackHitsMount": "{attacker}'s attack ({total}) hits <strong>{mount}</strong>.",
+      "VeerModern": "<strong>{rider}</strong> can force the attack to hit them instead (Veer).",
+      "RedirectLegacy": "<strong>{rider}</strong> can force the attack to target them instead (AC {ac}).",
+      "RedirectWouldHit": "The roll would still hit {rider}.",
+      "RedirectWouldMiss": "The roll would miss {rider}.",
+      "VeerTiming": "Choose before the damage is applied: the next damage applied to the mount is redirected.",
+      "VeerButton": "Veer: {rider} takes the hit",
+      "RedirectButton": "Redirect the attack to {rider}",
+      "VeerArmed": "<strong>{rider}</strong> veers to take the hit meant for {mount}.",
+      "RedirectArmedMiss": "<strong>{rider}</strong> draws the attack away from {mount}, and it misses.",
+      "VeerApplied": "The damage meant for {mount} is applied to <strong>{rider}</strong>.",
+      "RedirectMissed": "The redirected attack misses {rider}: {mount} takes no damage."
+    },
+    "Notify": {
+      "NoGM": "Primal Mounts: a GM must be connected to do that, because you don't own both tokens.",
+      "InvalidPair": "Those tokens can't form a mount pair.",
+      "AlreadyMounted": "One of those creatures is already mounted or carrying a rider.",
+      "TooSmall": "{mount} ({mountSize}) must be at least one size larger than {rider} ({riderSize}) to serve as a mount.",
+      "NoPermission": "You don't have permission to do that.",
+      "NeedBoth": "You must own both creatures to mount one on the other.",
+      "NothingToMount": "Drag this token onto a larger creature (or a smaller creature onto it) first.",
+      "IndependentMount": "{mount} is an independent mount and moves on its own. Move the mount, make it controlled, or Unmount first.",
+      "ControlledAction": "{mount} is controlled by {rider}: on its turn it can only Dash, Disengage, or Dodge.",
+      "Blocked": "The action was not used.",
+      "PairGone": "That rider and mount are no longer together."
+    },
+    "Settings": {
+      "rulesVersion": {
+        "Name": "Mounted combat rules",
+        "Hint": "Which version of the mounted combat rules and the Mounted Combatant feat to apply. Automatic uses the feat's source book, then the D&D 5e system's rules setting.",
+        "Modern": "2024 (modern)",
+        "Legacy": "2014 (legacy)",
+        "Auto": "Automatic"
+      },
+      "enforceSize": {
+        "Name": "Mount must be at least one size larger",
+        "Hint": "Only allow mounting a creature that is at least one size category larger than the rider. Turn off to let same-size creatures ride each other."
+      },
+      "playersMountUnowned": {
+        "Name": "Players can mount creatures they don't own",
+        "Hint": "Let a player mount (or put a rider on) a creature as long as they own one of the two tokens. The GM's client carries out the change."
+      },
+      "askControl": {
+        "Name": "Ask whether the mount is controlled",
+        "Hint": "When mounting, ask whether the mount is controlled or independent. If off, low-Intelligence creatures are controlled and everything else is independent."
+      },
+      "controlledMountActions": {
+        "Name": "Controlled mount action limit",
+        "Hint": "During combat, a controlled mount can only Dash, Disengage, or Dodge. Choose what happens when it uses another action.",
+        "Warn": "Warn",
+        "Block": "Block the action",
+        "Off": "Do nothing"
+      },
+      "fallSaves": {
+        "Name": "Falling off",
+        "Hint": "When the rider or the mount is knocked Prone, or the mount goes down: roll the rider's DC 10 Dexterity save automatically, post a button for the rider's owner to roll it, or only post a reminder.",
+        "Auto": "Roll automatically",
+        "Prompt": "Ask the rider's owner to roll",
+        "Off": "Reminder only"
+      },
+      "removeProneOnSave": {
+        "Name": "Remove Prone when the rider keeps their seat",
+        "Hint": "If a rider knocked Prone succeeds on the save to stay mounted, remove the Prone condition."
+      },
+      "mountedCombatant": {
+        "Name": "Automate Mounted Combatant",
+        "Hint": "Apply Mounted Strike advantage, Leap Aside and Veer for riders who have the Mounted Combatant feat."
+      },
+      "stackOrder": {
+        "Name": "Smaller tokens on top",
+        "Hint": "When tokens overlap, keep smaller tokens drawn (and clickable) above larger ones, and riders above their mounts. The GM's client updates the stacking order."
+      },
+      "chatCards": {
+        "Name": "Post mounting chat cards",
+        "Hint": "Post a chat message when creatures mount, dismount, fall off or change control. Cards with buttons are always posted."
+      },
+      "autoShowHud": {
+        "Name": "Open the Token HUD after dropping onto a creature",
+        "Hint": "When you drag a token onto a creature it could mount (or be mounted by), open its Token HUD so the Mount button is ready."
+      },
+      "fanOut": {
+        "Name": "Fan out stacked same-size tokens",
+        "Hint": "When same-size tokens sit on top of each other (at any elevation), draw them smaller and spread out so each one can be seen and clicked."
+      },
+      "mountBadge": {
+        "Name": "Saddle badge on mounts",
+        "Hint": "Mark a creature that is carrying a rider with a small saddle badge just outside its top-right corner (gold: controlled, grey: independent). It never covers the tokens."
+      },
+      "raisedOpacity": {
+        "Name": "Opacity of a raised token over a smaller one",
+        "Hint": "A token at a higher elevation stays drawn on top of the smaller tokens below it, but at this opacity so they show through, and clicks over a lower token select it. Hover the raised token to see it solid. 1 turns this off."
+      },
+      "debug": {
+        "Name": "Debug logging",
+        "Hint": "Write mount movement details to the browser console (F12), to help troubleshoot."
+      },
+      "riderScale": {
+        "Name": "Rider size on a mount",
+        "Hint": "How large a rider is drawn relative to its mount, so the mount stays visible (and clickable) around it. Riders are never drawn larger than their own token."
+      }
+    }
+  }
+}

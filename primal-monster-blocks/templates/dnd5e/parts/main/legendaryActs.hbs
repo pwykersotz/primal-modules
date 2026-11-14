@@ -1,0 +1,13 @@
+{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"
+	title="DND5E.NPC.SECTIONS.LegendaryActions"
+	section="legendary"
+	resource-key="system.resources.legact"}}
+	<p class="legendary-description">
+		{{localize "MOBLOKS5E.LegendaryText" name=actor.name number=system.resources.legact.max}}
+	</p>
+	{{#each features.legendary.items as |item iid|}}
+		{{#if (and item.is.legendary (not item.is.legResist))}}
+			{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item legendaryactions=true}}
+		{{/if}}
+	{{/each}}
+{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}

@@ -1,0 +1,90 @@
+{
+  "PRIMAL_COMPENDIUMS": {
+    "Switch": {
+      "Label": "{directory}: world or compendiums",
+      "World": "World",
+      "Packs": "Compendiums",
+      "WorldHint": "{directory} in this world",
+      "PacksHint": "{directory} in your chosen compendiums"
+    },
+    "View": {
+      "Choose": "Choose Compendiums",
+      "Search": "Search {types}",
+      "Empty": "No compendiums of {types} are chosen for this tab yet.",
+      "NoMatch": "Nothing matches the search."
+    },
+    "Context": {
+      "OpenPack": "Open Compendium",
+      "Remove": "Remove from This Tab",
+      "Show": "Show in {directory} Sidebar",
+      "Hide": "Remove from {directory} Sidebar"
+    },
+    "Chooser": {
+      "Title": "Choose Compendiums",
+      "TitleFor": "Choose Compendiums: {directory}",
+      "Hint": "Ticked compendiums appear on the Compendiums tab of their sidebar directory. Only you see them there; players are not affected.",
+      "Filter": "Filter compendiums",
+      "All": "All",
+      "None": "None",
+      "Tally": "{ticked} of {total}",
+      "NoPacks": "This world has no compendiums of these kinds.",
+      "NoMatch": "No compendium matches the filter.",
+      "HideUnused": "Leave the Compendiums tab off directories with nothing chosen",
+      "ShowAll": "Show Every Directory"
+    },
+    "Settings": {
+      "chooser": {
+        "Name": "Compendiums in the Sidebar",
+        "Label": "Choose Compendiums",
+        "Hint": "Pick which compendiums appear on the Compendiums tab of the Actors, Items, Scenes, Journal, Roll Tables, Cards, Macros and Playlists sidebars. Each GM chooses their own."
+      }
+    },
+    "Filter": {
+      "Toggle": "Filters",
+      "ToggleHint": "Show or hide the filters",
+      "SortBy": "Sort by",
+      "Ascending": "Ascending",
+      "Descending": "Descending",
+      "Hint": "Click a tag to show only those, again to hide them, and again to clear it.",
+      "Clear": "Clear Filters",
+      "Shown": "{shown} of {total} shown",
+      "Loading": "Reading compendium details…",
+      "Nothing": "Nothing here to filter by yet.",
+      "Any": "Any",
+      "To": "to",
+      "RangeFrom": "{label} from",
+      "RangeTo": "{label} up to",
+      "Mundane": "Mundane",
+      "Custom": "Custom",
+      "Pill": {
+        "off": "Click to show only these. Right-click to hide them.",
+        "yes": "Showing only these. Click to hide them instead.",
+        "no": "Hidden. Click to clear."
+      },
+      "Sorts": {
+        "default": "Default order",
+        "name": "Name",
+        "cr": "Challenge rating",
+        "type": "Creature type",
+        "source": "Source",
+        "rarity": "Rarity",
+        "itemType": "Item type"
+      },
+      "Facets": {
+        "cr": "CR",
+        "type": "Type",
+        "source": "Source",
+        "rarity": "Rarity",
+        "itemType": "Type"
+      },
+      "Flat": "Ignore folders",
+      "FlatHint": "Show everything in one list, without folders",
+      "FlatHintPacks": "Show everything in one list, without compendiums or folders",
+      "FlatNoMove": "Turn off Ignore folders to move things between folders."
+    },
+    "Badge": {
+      "CR": "CR {value}",
+      "Level": "Lvl {value}"
+    }
+  }
+}

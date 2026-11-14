@@ -1,0 +1,47 @@
+{
+  "id": "primal-spell-points",
+  "title": "Primal Spell Points",
+  "description": "The GM chooses which characters and NPCs spend spell points instead of spell slots, one at a time, using the Dungeon Master's Guide spell points variant. Casting a spell takes its cost out of the caster's pool, spells of 6th level and higher can each be cast once per long rest, and a long rest restores everything. The pool shows on the spells tab (dnd5e and Tidy 5e sheets). Only the GM can choose who uses spell points or change the rules, the tables, or anyone's pool. Made with AI: written with Claude (Anthropic).",
+  "version": "1.1.0",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "conflicts": [
+      {
+        "id": "dnd5e-spellpoints",
+        "type": "module",
+        "reason": "Both modules replace spell slots with spell points. Turn on only one of them."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-spell-points.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

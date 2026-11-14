@@ -1,0 +1,23 @@
+<div class="primal-hud-button-groups">
+    <p class="hint">{{localize "PRIMAL_HUD.Buttons.Intro"}}</p>
+    {{#each groups as |group|}}
+    <fieldset>
+        <legend>{{group.title}}</legend>
+        {{#each group.entries as |entry|}}
+        <div class="primal-hud-button-row">
+            <label>
+                <input type="checkbox" data-button-id="{{entry.id}}" {{checked entry.shown}}>
+                <span class="primal-hud-button-icon">
+                    {{#if entry.img}}<img src="{{entry.img}}" alt="">{{else if entry.icon}}<i class="{{entry.icon}}" inert></i>{{/if}}
+                </span>
+                <span class="primal-hud-button-label">{{entry.label}}</span>
+            </label>
+            {{#if entry.canForget}}
+            <button type="button" class="icon fa-solid fa-xmark" data-action="forget" data-button-id="{{entry.id}}"
+                    data-tooltip aria-label="{{localize "PRIMAL_HUD.Buttons.Forget"}}"></button>
+            {{/if}}
+        </div>
+        {{/each}}
+    </fieldset>
+    {{/each}}
+</div>

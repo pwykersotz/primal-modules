@@ -1,0 +1,116 @@
+{{! 2024 Monster Manual layout for the top of the stat block }}
+<section class="monster-attributes1">
+	<ul class="attributes">
+		<li class="attribute modern-split">
+			<span class="attribute-wrapper">
+				<h4 class="attribute-name">{{localize "DND5E.AC"}}</h4>
+				<span class="ac-value">{{system.attributes.ac.value}}</span>
+				<a class="config-button" data-config="armor" data-tooltip="DND5E.ARMORCLASS.Action.Configure"><i class="fas fa-cog"></i></a>
+			</span>
+			<span class="attribute-wrapper initiative">
+				<h4 class="attribute-name">{{localize "DND5E.Initiative"}}</h4>
+				<span class="init-value">{{initiative}}</span>
+			</span>
+		</li>
+		<li class="attribute health">
+			{{> "modules/primal-monster-blocks/templates/dnd5e/parts/header/attributes/hitpoints.hbs"}}
+		</li>
+		<li class="attribute">
+			<span class="attribute-wrapper">
+				{{> "modules/primal-monster-blocks/templates/dnd5e/parts/header/attributes/movement.hbs"}}
+			</span>
+		</li>
+	</ul>
+</section>
+
+<section class="monster-abilities modern-abilities">
+	{{#each abilityTables as |table|}}
+	<table class="ability-table">
+		<thead>
+			<tr>
+				<th></th>
+				<th></th>
+				<th>{{localize "DND5E.AbilityModifierShort"}}</th>
+				<th>{{localize "DND5E.SavingThrowShort"}}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each table as |ability|}}
+			<tr class="{{ability.group}}">
+				<th class="ability ability-label" data-ability="{{ability.id}}" title="{{ability.label}}">
+					{{~ability.abbr~}}
+					<a class="config-button" data-config="ability" data-tooltip="DND5E.AbilityConfigure"><i class="fas fa-cog"></i></a>
+				</th>
+				<td class="score">
+					<span class="attr-value"
+						contenteditable="{{@root.flags.editing}}"
+						placeholder="0"
+						data-field-key="system.abilities.{{ability.id}}.value"
+						data-dtype="Number"
+						title="{{localize "MOBLOKS5E.Score"}}">
+						{{~ability.value~}}
+					</span>
+				</td>
+				<td class="ability mod" data-ability="{{ability.id}}" title="{{localize "MOBLOKS5E.Modifier"}}">{{ability.modLabel}}</td>
+				<td class="saving-throw save{{#if ability.proficient}} proficient{{/if}}" data-ability="{{ability.id}}" title="{{localize "DND5E.SavingThrowShort"}}">{{ability.saveLabel}}</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+	{{/each}}
+</section>
+
+<section class="monster-attributes2{{#if menus.attributes.visible}} menu-active{{/if}}">
+	{{#if flags.editing}}
+		{{> "modules/primal-monster-blocks/templates/dnd5e/parts/menuItem.hbs" item=menus.attributes}}
+	{{/if}}
+	<ul class="attributes">
+	{{#if (or info.hasSkills flags.show-not-prof)}}
+		<li class="monster-skills attribute">
+			<span class="attribute-wrapper">
+				{{> "modules/primal-monster-blocks/templates/dnd5e/parts/header/attributes/skills.hbs"}}
+			</span>
+		</li>
+	{{/if}}
+	{{#each modernTraits as |trait|}}
+		<li class="attribute">
+			<span class="attribute-wrapper">
+				<h4 class="attribute-name">{{localize trait.label}}</h4>
+				<span class="trait-value">{{trait.text}}</span>
+			</span>
+		</li>
+	{{/each}}
+		<li class="attribute">
+			<span class="attribute-wrapper">
+				<h4 class="attribute-name">{{localize "DND5E.Senses"}}</h4>
+				<span class="trait-value">{{sensesText}}</span>
+				<a class="config-button" data-config="senses" data-tooltip="DND5E.SensesConfig"><i class="fas fa-cog"></i></a>
+			</span>
+		</li>
+		<li class="attribute">
+			<span class="attribute-wrapper">
+				<h4 class="attribute-name">{{localize "DND5E.Languages"}}</h4>
+				<ul class="traits-list inline-list">
+				{{#if languages.length}}
+					{{#each languages as |v|}}
+						<li class="trait-value">{{v}}</li>
+					{{/each}}
+				{{else}}
+					<li class="trait-value">&mdash;</li>
+				{{/if}}
+				</ul>
+			</span>
+		</li>
+		<li class="attribute modern-cr">
+			<span class="attribute-wrapper">
+				<h4 class="attribute-name">{{localize "MOBLOKS5E.modern.cr"}}</h4>
+				<span class="trait-value"
+					placeholder="0"
+					contenteditable="{{flags.editing}}"
+					data-dtype="Number"
+					data-field-key="system.details.cr"
+					>{{labels.cr}}</span> <span>({{crDetails}})</span>
+			</span>
+		</li>
+	</ul>
+</section>

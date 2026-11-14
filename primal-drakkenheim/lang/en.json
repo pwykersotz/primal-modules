@@ -1,0 +1,6 @@
+{
+  "PDK.Settings.PartySize.Name": "Party size for Epic Bosses",
+  "PDK.Settings.PartySize.Hint": "Epic Bosses get their per-player-character hit points and one Epic Action per player character. 0 counts the characters in the primary party (dnd5e's party sidebar), else the players' own characters, else every player-owned character in the world.",
+  "PDK.Settings.Debug.Name": "Debug logging",
+  "PDK.Settings.Debug.Hint": "Write what the automation does to the browser console."
+}

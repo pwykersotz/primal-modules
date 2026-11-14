@@ -1,0 +1,44 @@
+name: Release
+
+# When a module's version in its module.json changes on main, this builds that module and publishes a
+# GitHub release tagged <module>-v<version>, with the zip and module.json attached. Modules whose
+# version already has a release are left alone, so one push can release several modules.
+on:
+  push:
+    branches: [main]
+    paths: ["*/module.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Release new versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for manifest in */module.json; do
+            id="$(dirname "$manifest")"
+            version="$(node -p "require('./$manifest').version")"
+            tag="$id-v$version"
+            if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then continue; fi
+            echo "::group::$tag"
+            node tools/test-all.mjs "$id"
+            node tools/package.mjs "$id" --repo "$GITHUB_REPOSITORY"
+            node tools/changelog-section.mjs "$id" "$version" > notes.md
+            gh release create "$tag" "dist/$id/$id.zip" "dist/$id/module.json" \
+              --title "$(node -p "require('./$manifest').title") $version" --notes-file notes.md --target "$GITHUB_SHA"
+            echo "::endgroup::"
+          done

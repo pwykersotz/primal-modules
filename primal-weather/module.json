@@ -1,0 +1,28 @@
+{
+  "id": "primal-weather",
+  "title": "Primal Weather",
+  "description": "A weather generator shown in a small bar under dnd5e's calendar. It rolls each day's weather for the climate and the calendar's season, following on from the day before, so warm spells and wet weeks last a while. The temperature follows the time of day, and hovering the bar shows the rules for heavy rain, strong wind, extreme heat and cold. The GM can roll again, set the weather by hand, see tomorrow's forecast, post it to chat, and show it on outdoor scenes with Foundry's rain, fog and snow effects. Made with AI: written with Claude (Anthropic).",
+  "version": "1.1.0",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-weather.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

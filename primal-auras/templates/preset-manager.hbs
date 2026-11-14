@@ -1,0 +1,39 @@
+<div class="pa-presets">
+  <p class="hint">{{localize "PRIMAL_AURAS.Presets.Intro"}}</p>
+  <div class="pa-toolbar">
+    {{#if isGM}}
+    <button type="button" data-action="create"><i class="fa-solid fa-plus"></i> {{localize "PRIMAL_AURAS.Presets.Create"}}</button>
+    <button type="button" data-action="importPresets"><i class="fa-solid fa-file-import"></i> {{localize "PRIMAL_AURAS.Presets.Import"}}</button>
+    {{/if}}
+    <button type="button" data-action="exportPresets"><i class="fa-solid fa-file-export"></i> {{localize "PRIMAL_AURAS.Presets.Export"}}</button>
+    {{#if isGM}}
+    <button type="button" data-action="restoreDefaults" data-tooltip="{{localize 'PRIMAL_AURAS.Presets.RestoreHint'}}"><i class="fa-solid fa-rotate"></i> {{localize "PRIMAL_AURAS.Presets.Restore"}}</button>
+    {{/if}}
+  </div>
+
+  <ol class="pa-preset-list">
+    {{#each presets}}
+    <li class="pa-preset" data-preset-id="{{id}}">
+      <span class="pa-swatch" style="background-color: {{fillColor}}; border-color: {{borderColor}};"><i class="fa-solid {{shapeIcon}}"></i></span>
+      <div class="pa-preset-info">
+        <div class="pa-preset-name">{{name}}</div>
+        <div class="pa-preset-meta">
+          {{shapeLabel}} · {{radius}} {{../units}}{{#if innerRadius}} · {{localize "PRIMAL_AURAS.Presets.Donut"}} {{innerRadius}}{{/if}}
+          {{#if effectCount}} · <span data-tooltip="{{effectNames}}">{{localize "PRIMAL_AURAS.Presets.EffectCount" count=effectCount}}</span>{{/if}}
+        </div>
+        {{#if description}}<p class="pa-preset-desc">{{description}}</p>{{/if}}
+      </div>
+      <div class="pa-preset-controls">
+        <button type="button" class="pa-icon" data-action="apply" data-tooltip="{{localize 'PRIMAL_AURAS.Presets.Apply'}}"><i class="fa-solid fa-user-plus"></i></button>
+        {{#if ../isGM}}
+        <button type="button" class="pa-icon" data-action="edit" data-tooltip="{{localize 'PRIMAL_AURAS.Presets.Edit'}}"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="pa-icon" data-action="duplicate" data-tooltip="{{localize 'PRIMAL_AURAS.Presets.Duplicate'}}"><i class="fa-solid fa-copy"></i></button>
+        <button type="button" class="pa-icon pa-danger" data-action="delete" data-tooltip="{{localize 'PRIMAL_AURAS.Presets.Delete'}}"><i class="fa-solid fa-trash"></i></button>
+        {{/if}}
+      </div>
+    </li>
+    {{else}}
+    <li class="pa-empty">{{localize "PRIMAL_AURAS.Presets.Empty"}}</li>
+    {{/each}}
+  </ol>
+</div>

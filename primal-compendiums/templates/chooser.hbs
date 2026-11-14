@@ -1,0 +1,54 @@
+<div class="pcs-chooser">
+    <p class="hint">{{ localize "PRIMAL_COMPENDIUMS.Chooser.Hint" }}</p>
+
+    <search class="pcs-chooser-search">
+        <i class="fa-solid fa-magnifying-glass" inert></i>
+        <input type="search" class="pcs-filter" autocomplete="off"
+               placeholder="{{ localize "PRIMAL_COMPENDIUMS.Chooser.Filter" }}"
+               aria-label="{{ localize "PRIMAL_COMPENDIUMS.Chooser.Filter" }}">
+    </search>
+
+    <div class="pcs-chooser-list">
+        {{#each sections}}
+        <fieldset class="pcs-section" data-document-name="{{ documentName }}">
+            <legend>
+                <i class="{{ icon }}" inert></i>
+                <span>{{ label }}</span>
+                <span class="pcs-tally">{{ tally }}</span>
+            </legend>
+            <div class="pcs-section-buttons">
+                <button type="button" data-action="tickAll" data-document-name="{{ documentName }}">
+                    {{ localize "PRIMAL_COMPENDIUMS.Chooser.All" }}
+                </button>
+                <button type="button" data-action="tickNone" data-document-name="{{ documentName }}">
+                    {{ localize "PRIMAL_COMPENDIUMS.Chooser.None" }}
+                </button>
+            </div>
+            {{#each packs}}
+            <label class="pcs-chooser-pack" data-search="{{ title }} {{ source }}">
+                <input type="checkbox" data-pack="{{ id }}" {{ checked checked }}>
+                <span class="pcs-title">{{ title }}</span>
+                <span class="pcs-source">{{ source }}</span>
+                <span class="pcs-count">{{ count }}</span>
+            </label>
+            {{/each}}
+        </fieldset>
+        {{else}}
+        <p class="pcs-none">{{ localize "PRIMAL_COMPENDIUMS.Chooser.NoPacks" }}</p>
+        {{/each}}
+        <p class="pcs-no-match" hidden>{{ localize "PRIMAL_COMPENDIUMS.Chooser.NoMatch" }}</p>
+    </div>
+
+    <footer class="pcs-chooser-footer">
+        <label class="checkbox">
+            <input type="checkbox" name="hideUnused" {{ checked hideUnused }}>
+            {{ localize "PRIMAL_COMPENDIUMS.Chooser.HideUnused" }}
+        </label>
+        {{#if filtered}}
+        <button type="button" data-action="showAll">
+            <i class="fa-solid fa-layer-group" inert></i>
+            <span>{{ localize "PRIMAL_COMPENDIUMS.Chooser.ShowAll" }}</span>
+        </button>
+        {{/if}}
+    </footer>
+</div>

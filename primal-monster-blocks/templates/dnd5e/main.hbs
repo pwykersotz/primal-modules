@@ -1,0 +1,125 @@
+<main class="main-section{{#if menus.features.visible}} menu-active{{/if}}">
+{{! Features Menu }}
+	{{#if flags.editing}}
+		{{> "modules/primal-monster-blocks/templates/dnd5e/parts/menuItem.hbs" item=menus.features}}
+		{{#unless info.hasAbilities}}
+			<p class="menu-hint">{{localize "MOBLOKS5E.EditButtonHint"}}</p>
+		{{/unless}}
+	{{/if}}
+
+{{! Features }}
+	{{#if info.hasFeatures}}
+		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title=featuresTitle hide-title=(not modern) section="feats"}}
+			{{! Spellcasting Features }}
+			{{#each features.casting.items as |casting id|}}
+				{{#if @root.flags.casting-feature}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/main/spellcasting.hbs" casting=casting}}
+				{{else}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=casting}}
+				{{/if}}
+			{{/each}}
+
+			{{! Non-action Features }}
+			{{#each features.features.items as |item iid|}}
+				{{#unless item.is.specialAction}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item}}
+				{{/unless}}
+			{{/each}}
+
+			{{! Legendary Resistance }}
+			{{#if features.legResist.items}}
+				{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=features.legResist.items.[0]}}
+			{{/if}}
+		{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}
+	{{/if}}
+
+{{! Actions }}
+	{{#if info.hasActions}}
+		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title="DND5E.ActionPl" section="actions"}}
+			{{! Global attack modifiers }}
+			{{#if (and flags.editing owner)}}
+				<p class="attack-modifiers">
+					<span class="attack-modifiers-label">{{localize "MOBLOKS5E.attackMods.label"}}</span>
+					{{localize "MOBLOKS5E.attackMods.toHit"}}
+					<span class="attr-value"
+						placeholder="+0"
+						contenteditable="true"
+						data-dtype="Formula"
+						data-field-key="system.rolls.attack.bonus"
+						data-tooltip="MOBLOKS5E.attackMods.toHitHint">{{attackMods.toHit}}</span>{{localize "MOBLOKS5E.Comma"}}
+					{{localize "MOBLOKS5E.attackMods.damage"}}
+					<span class="attr-value"
+						placeholder="{{#if attackMods.mixed}}{{localize "MOBLOKS5E.attackMods.mixed"}}{{else}}+0{{/if}}"
+						contenteditable="true"
+						data-dtype="Formula"
+						data-field-key="monsterblock.damageBonus"
+						data-tooltip="MOBLOKS5E.attackMods.damageHint">{{attackMods.damage}}</span>
+				</p>
+			{{/if}}
+			{{! Multiattack }}
+			{{#if features.multiattack.items}}
+				{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=features.multiattack.items.[0]}}
+			{{/if}}
+
+			{{! Attacks }}
+			{{#each features.attacks.items as |item iid|}}
+				{{#unless item.is.specialAction}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/main/attack.hbs" item=item}}
+				{{/unless}}
+			{{/each}}
+
+			{{! Other Actions}}
+			{{#each features.actions.items as |item iid|}}
+				{{#unless item.is.specialAction}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item}}
+				{{/unless}}
+			{{/each}}
+		{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}
+	{{/if}}
+
+{{! Bonus Actions }}
+	{{#if info.hasBonusActions}}
+		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title="MOBLOKS5E.BonusActions" section="bonus"}}
+			<section>
+				{{#each features.bonusActions.items as |item iid|}}
+					{{#if item.is.bonusAction}}
+						{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item}}
+					{{/if}}
+				{{/each}}
+			</section>
+		{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}
+	{{/if}}
+
+{{! Reactions }}
+	{{#if info.hasReactions}}
+		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title="MOBLOKS5E.Reactions" section="reaction"}}
+			<section>
+				{{#each features.reaction.items as |item iid|}}
+					{{#if item.is.reaction}}
+						{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item}}
+					{{/if}}
+				{{/each}}
+			</section>
+		{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}
+	{{/if}}
+{{! Legendary Actions }}
+	{{#if info.hasLegendaryActions}}
+		{{> "modules/primal-monster-blocks/templates/dnd5e/parts/main/legendaryActs.hbs"}}
+	{{/if}}
+
+{{! Lair Actions }}
+	{{#if (and info.hasLair flags.show-lair-actions)}}
+		{{> "modules/primal-monster-blocks/templates/dnd5e/parts/main/lairActs.hbs"}}
+	{{/if}}
+
+{{! Loot Items }}
+	{{#if info.hasLoot}}
+		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title="DND5E.Inventory" section="inventory"}}
+			<section>
+				{{#each features.equipment.items as |item iid|}}
+					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=item}}
+				{{/each}}
+			</section>
+		{{/"modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs"}}
+	{{/if}}
+</main>

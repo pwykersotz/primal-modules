@@ -1,0 +1,272 @@
+/* ---------------------------------------- */
+/* Primal Attacks                           */
+/* ---------------------------------------- */
+
+.primal-attacks-summary {
+  --primal-attacks-hit: #7bd88f;
+  --primal-attacks-miss: #ff8a7a;
+  --primal-attacks-crit: #ffd166;
+  --primal-attacks-line: color-mix(in srgb, currentColor 18%, transparent);
+  --primal-attacks-faint: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+body.theme-light .primal-attacks-summary,
+.theme-light .primal-attacks-summary {
+  --primal-attacks-hit: #2e7d32;
+  --primal-attacks-miss: #b3261e;
+  --primal-attacks-crit: #9a6700;
+}
+
+/* ---------------------------------------- */
+/* The Attacks field in the roll window     */
+/* ---------------------------------------- */
+
+.primal-attacks-count .form-fields {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.primal-attacks-count input[type="number"] {
+  flex: 0 0 4rem;
+  width: 4rem;
+  text-align: center;
+}
+
+.primal-attacks-count .primal-attacks-step {
+  flex: 0 0 auto;
+  width: 1.75rem;
+  min-width: 1.75rem;
+  height: var(--input-height, 1.75rem);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.primal-attacks-count .primal-attacks-step i {
+  margin: 0;
+}
+
+/* ---------------------------------------- */
+/* The summary card                         */
+/* ---------------------------------------- */
+
+.primal-attacks-summary header {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.primal-attacks-summary ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.primal-attacks-summary .primal-attacks-entry {
+  display: block;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--primal-attacks-line);
+}
+
+.primal-attacks-summary .primal-attacks-entry .line {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.primal-attacks-summary .primal-attacks-entry img {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.primal-attacks-summary .primal-attacks-entry .what {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.primal-attacks-summary .primal-attacks-entry .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primal-attacks-summary .primal-attacks-entry .target,
+.primal-attacks-summary .primal-attacks-entry .breakdown {
+  font-size: var(--font-size-11, 11px);
+  color: var(--primal-attacks-faint);
+}
+
+.primal-attacks-summary .primal-attacks-entry .breakdown {
+  white-space: normal;
+  font-family: var(--font-monospace, monospace);
+}
+
+.primal-attacks-summary .primal-attacks-entry .roll {
+  flex: 0 0 auto;
+  min-width: 1.8em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.primal-attacks-summary .primal-attacks-entry .roll.crit {
+  color: var(--primal-attacks-crit);
+}
+
+.primal-attacks-summary .primal-attacks-entry .roll.fumble {
+  color: var(--primal-attacks-miss);
+}
+
+.primal-attacks-summary .primal-attacks-entry .outcome {
+  flex: 0 0 auto;
+  font-size: var(--font-size-12, 12px);
+}
+
+.primal-attacks-summary .primal-attacks-entry.hit .outcome {
+  color: var(--primal-attacks-hit);
+}
+
+.primal-attacks-summary .primal-attacks-entry.crit .outcome {
+  color: var(--primal-attacks-crit);
+  font-weight: bold;
+}
+
+.primal-attacks-summary .primal-attacks-entry.miss .outcome {
+  color: var(--primal-attacks-miss);
+}
+
+.primal-attacks-summary .primal-attacks-entry.skipped {
+  opacity: 0.6;
+}
+
+.primal-attacks-summary .primal-attacks-entry .damage {
+  flex: 0 0 auto;
+  min-width: 2.2em;
+  text-align: right;
+  font-weight: bold;
+}
+
+.primal-attacks-summary .primal-attacks-entry .damage .types {
+  display: block;
+  font-weight: normal;
+  font-size: var(--font-size-10, 10px);
+  color: var(--primal-attacks-faint);
+}
+
+/* The dice of an attack and of its damage, under it. */
+.primal-attacks-summary .primal-attacks-entry .rolls {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 3px 0 1px calc(24px + 0.35rem);
+}
+
+.primal-attacks-roll {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: var(--font-size-11, 11px);
+  line-height: 1;
+}
+
+.primal-attacks-roll .label {
+  flex: 0 0 3.8em;
+  line-height: 1.75em;
+  color: var(--primal-attacks-faint);
+}
+
+.primal-attacks-roll .expr {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  min-height: 1.75em;
+}
+
+.primal-attacks-roll .term {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+
+.primal-attacks-roll .formula,
+.primal-attacks-roll .op,
+.primal-attacks-roll .type {
+  color: var(--primal-attacks-faint);
+}
+
+.primal-attacks-roll .formula {
+  margin-right: 1px;
+}
+
+.primal-attacks-roll .die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 1.75em;
+  height: 1.75em;
+  padding: 0 2px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 3px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.primal-attacks-roll .die.d20 {
+  min-width: 2.1em;
+  border-radius: 50% / 35%;
+}
+
+.primal-attacks-roll .die.max {
+  color: var(--primal-attacks-hit);
+  border-color: var(--primal-attacks-hit);
+}
+
+.primal-attacks-roll .die.min {
+  color: var(--primal-attacks-miss);
+  border-color: var(--primal-attacks-miss);
+}
+
+.primal-attacks-roll .die.dropped {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.primal-attacks-roll .sum {
+  font-weight: bold;
+}
+
+/* A set of attacks' own cards, folded into its summary. */
+.chat-message.primal-attacks-folded,
+.message.primal-attacks-folded {
+  display: none !important;
+}
+
+.primal-attacks-summary button.primal-attacks-cards {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  font-size: var(--font-size-12, 12px);
+  line-height: 1.6;
+}
+
+.primal-attacks-summary footer {
+  margin-top: 0.3rem;
+  text-align: right;
+  font-weight: bold;
+}

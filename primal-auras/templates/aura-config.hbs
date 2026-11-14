@@ -1,0 +1,311 @@
+<div class="pa-config">
+  <nav class="pa-tabs">
+    <button type="button" class="pa-tab-btn {{#if tabs.appearance}}active{{/if}}" data-action="switchTab" data-tab="appearance">
+      <i class="fa-solid fa-palette"></i> {{localize "PRIMAL_AURAS.Config.Tabs.Appearance"}}
+    </button>
+    <button type="button" class="pa-tab-btn {{#if tabs.effects}}active{{/if}}" data-action="switchTab" data-tab="effects">
+      <i class="fa-solid fa-wand-sparkles"></i> {{localize "PRIMAL_AURAS.Config.Tabs.Effects"}} <span class="pa-badge">{{effects.length}}</span>
+    </button>
+  </nav>
+
+  <section class="pa-body">
+    {{!-- ================= Appearance ================= --}}
+    <div class="pa-tab {{#if tabs.appearance}}active{{/if}}">
+      <div class="form-group">
+        <label>{{localize "PRIMAL_AURAS.Config.Name"}}</label>
+        <div class="form-fields"><input type="text" name="name" value="{{aura.name}}"></div>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PRIMAL_AURAS.Config.Enabled"}}</label>
+        <div class="form-fields"><input type="checkbox" name="enabled" {{checked aura.enabled}}></div>
+      </div>
+      {{#if isPreset}}
+      <div class="form-group stacked">
+        <label>{{localize "PRIMAL_AURAS.Config.Description"}}</label>
+        <textarea name="description" rows="2">{{aura.description}}</textarea>
+      </div>
+      {{/if}}
+
+      <fieldset>
+        <legend>{{localize "PRIMAL_AURAS.Config.ShapeAndRange"}}</legend>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Shape"}}</label>
+          <div class="form-fields">
+            <select name="shape">{{selectOptions choices.shape selected=aura.shape}}</select>
+          </div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.ShapeHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Radius"}} {{#if units}}<span class="units">({{units}})</span>{{/if}}</label>
+          <div class="form-fields"><input type="number" name="radius" value="{{aura.radius}}" min="0" step="any"></div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.InnerRadius"}} {{#if units}}<span class="units">({{units}})</span>{{/if}}</label>
+          <div class="form-fields"><input type="number" name="innerRadius" value="{{aura.innerRadius}}" min="0" step="any"></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.InnerRadiusHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.MeasureFrom"}}</label>
+          <div class="form-fields"><select name="measureFrom">{{selectOptions choices.measureFrom selected=aura.measureFrom}}</select></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.MeasureFromHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.WallsBlock"}}</label>
+          <div class="form-fields"><input type="checkbox" name="wallsBlock" {{checked aura.wallsBlock}}></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.WallsBlockHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.EnterOnAppear"}}</label>
+          <div class="form-fields"><input type="checkbox" name="enterOnAppear" {{checked aura.enterOnAppear}}></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.EnterOnAppearHint"}}</p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>{{localize "PRIMAL_AURAS.Config.Colors"}}</legend>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Fill"}}</label>
+          <div class="form-fields">
+            <input type="color" name="fillColor" value="{{aura.fillColor}}">
+            <input type="range" name="fillAlphaPct" value="{{fillAlphaPct}}" min="0" max="100" step="5" data-tooltip="{{localize 'PRIMAL_AURAS.Config.Opacity'}}">
+            <span class="pa-range-value">{{fillAlphaPct}}%</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Border"}}</label>
+          <div class="form-fields">
+            <input type="color" name="borderColor" value="{{aura.borderColor}}">
+            <input type="range" name="borderAlphaPct" value="{{borderAlphaPct}}" min="0" max="100" step="5" data-tooltip="{{localize 'PRIMAL_AURAS.Config.Opacity'}}">
+            <span class="pa-range-value">{{borderAlphaPct}}%</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.BorderWidth"}}</label>
+          <div class="form-fields"><input type="number" name="borderWidth" value="{{aura.borderWidth}}" min="0" max="20" step="1"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>{{localize "PRIMAL_AURAS.Config.Visibility"}}</legend>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.VisibleTo"}}</label>
+          <div class="form-fields"><select name="visibility">{{selectOptions choices.visibility selected=aura.visibility}}</select></div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.ShowWhen"}}</label>
+          <div class="form-fields"><select name="showWhen">{{selectOptions choices.showWhen selected=aura.showWhen}}</select></div>
+        </div>
+      </fieldset>
+
+      {{#if isItem}}
+      <fieldset>
+        <legend>{{localize "PRIMAL_AURAS.Config.ItemSettings"}}</legend>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Activation"}}</label>
+          <div class="form-fields"><select name="activation">{{selectOptions choices.activation selected=aura.activation}}</select></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.ActivationHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.EnableOnUse"}}</label>
+          <div class="form-fields"><input type="checkbox" name="enableOnUse" {{checked aura.enableOnUse}}></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.EnableOnUseHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.EndWithConcentration"}}</label>
+          <div class="form-fields"><input type="checkbox" name="endWithConcentration" {{checked aura.endWithConcentration}}></div>
+          <p class="hint">{{localize "PRIMAL_AURAS.Config.EndWithConcentrationHint"}}</p>
+        </div>
+      </fieldset>
+      {{/if}}
+      {{#if isPreset}}
+      <fieldset>
+        <legend>{{localize "PRIMAL_AURAS.Config.ItemSettings"}}</legend>
+        <p class="hint">{{localize "PRIMAL_AURAS.Config.PresetItemHint"}}</p>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.Activation"}}</label>
+          <div class="form-fields"><select name="activation">{{selectOptions choices.activation selected=aura.activation}}</select></div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.EnableOnUse"}}</label>
+          <div class="form-fields"><input type="checkbox" name="enableOnUse" {{checked aura.enableOnUse}}></div>
+        </div>
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Config.EndWithConcentration"}}</label>
+          <div class="form-fields"><input type="checkbox" name="endWithConcentration" {{checked aura.endWithConcentration}}></div>
+        </div>
+      </fieldset>
+      {{/if}}
+    </div>
+
+    {{!-- ================= Effects ================= --}}
+    <div class="pa-tab {{#if tabs.effects}}active{{/if}}">
+      <p class="hint pa-intro">{{localize "PRIMAL_AURAS.Config.EffectsIntro"}}</p>
+
+      {{#each effects as |effect|}}
+      <fieldset class="pa-effect" data-effect-index="{{effect.idx}}">
+        <legend>
+          <i class="fa-solid {{#if effect.isContinuous}}fa-infinity{{else}}fa-bolt{{/if}}"></i> {{effect.name}}
+        </legend>
+        <input type="hidden" name="effects.{{effect.idx}}.id" value="{{effect.id}}">
+        <div class="pa-effect-head">
+          <input type="text" name="effects.{{effect.idx}}.name" value="{{effect.name}}" placeholder="{{localize 'PRIMAL_AURAS.Effect.Name'}}">
+          <file-picker name="effects.{{effect.idx}}.img" type="image" value="{{effect.img}}"></file-picker>
+          <button type="button" class="pa-icon" data-action="duplicateEffect" data-tooltip="{{localize 'PRIMAL_AURAS.Effect.Duplicate'}}"><i class="fa-solid fa-copy"></i></button>
+          <button type="button" class="pa-icon pa-danger" data-action="removeEffect" data-tooltip="{{localize 'PRIMAL_AURAS.Effect.Remove'}}"><i class="fa-solid fa-trash"></i></button>
+        </div>
+
+        <div class="pa-grid-2">
+          <div class="form-group">
+            <label>{{localize "PRIMAL_AURAS.Effect.Mode"}}</label>
+            <div class="form-fields"><select name="effects.{{effect.idx}}.mode" data-rerender>{{selectOptions @root.choices.mode selected=effect.mode}}</select></div>
+          </div>
+          <div class="form-group">
+            <label>{{localize "PRIMAL_AURAS.Effect.Affects"}}</label>
+            <div class="form-fields"><select name="effects.{{effect.idx}}.affects" data-rerender>{{selectOptions @root.choices.affects selected=effect.affects}}</select></div>
+          </div>
+        </div>
+        {{#if effect.notSelf}}
+        <div class="form-group">
+          <label>{{localize "PRIMAL_AURAS.Effect.IncludeSelf"}}</label>
+          <div class="form-fields"><input type="checkbox" name="effects.{{effect.idx}}.includeSelf" {{checked effect.includeSelf}}></div>
+        </div>
+        {{/if}}
+        <p class="hint">{{#if effect.isContinuous}}{{localize "PRIMAL_AURAS.Effect.ContinuousHint"}}{{else}}{{localize "PRIMAL_AURAS.Effect.TriggeredHint"}}{{/if}}</p>
+
+        {{#if effect.isTriggered}}
+        <div class="pa-subsection">
+          <h4><i class="fa-solid fa-clock"></i> {{localize "PRIMAL_AURAS.Effect.When"}}</h4>
+          <div class="pa-checkgrid">
+            {{#each effect.triggerList as |trig|}}
+            <label class="pa-check"><input type="checkbox" name="effects.{{effect.idx}}.triggers.{{trig.key}}" {{checked trig.checked}}> {{trig.label}}</label>
+            {{/each}}
+          </div>
+          <label class="pa-check"><input type="checkbox" name="effects.{{effect.idx}}.oncePerTurn" {{checked effect.oncePerTurn}}> {{localize "PRIMAL_AURAS.Effect.OncePerTurn"}}</label>
+        </div>
+
+        <div class="pa-subsection">
+          <h4><i class="fa-solid fa-shield-halved"></i> {{localize "PRIMAL_AURAS.Effect.SavingThrow"}}</h4>
+          <div class="pa-grid-3">
+            <div class="form-group stacked">
+              <label>{{localize "PRIMAL_AURAS.Effect.SaveAbility"}}</label>
+              {{#if @root.hasAbilityChoices}}
+              <select name="effects.{{effect.idx}}.save.ability" data-rerender>{{selectOptions @root.choices.abilities selected=effect.save.ability blank=(localize "PRIMAL_AURAS.Effect.NoSave")}}</select>
+              {{else}}
+              <input type="text" name="effects.{{effect.idx}}.save.ability" value="{{effect.save.ability}}" placeholder="{{localize 'PRIMAL_AURAS.Effect.NoSave'}}" data-rerender>
+              {{/if}}
+            </div>
+            {{#if effect.hasSave}}
+            <div class="form-group stacked">
+              <label>{{localize "PRIMAL_AURAS.Effect.DC"}}</label>
+              <input type="text" name="effects.{{effect.idx}}.save.dc" value="{{effect.save.dc}}" placeholder="13 / @attributes.spell.dc">
+            </div>
+            <div class="form-group stacked">
+              <label>{{localize "PRIMAL_AURAS.Effect.OnSuccess"}}</label>
+              <select name="effects.{{effect.idx}}.save.onSuccess">{{selectOptions @root.choices.onSuccess selected=effect.save.onSuccess}}</select>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="pa-subsection">
+          <h4><i class="fa-solid fa-heart-pulse"></i> {{localize "PRIMAL_AURAS.Effect.DamageHealing"}}</h4>
+          <div class="pa-grid-2">
+            <div class="form-group stacked">
+              <label>{{localize "PRIMAL_AURAS.Effect.Damage"}}</label>
+              <div class="form-fields">
+                <input type="text" name="effects.{{effect.idx}}.damage.formula" value="{{effect.damage.formula}}" placeholder="2d6">
+                {{#if @root.hasDamageChoices}}
+                <select name="effects.{{effect.idx}}.damage.type">{{selectOptions @root.choices.damageTypes selected=effect.damage.type blank="—"}}</select>
+                {{else}}
+                <input type="text" name="effects.{{effect.idx}}.damage.type" value="{{effect.damage.type}}" placeholder="{{localize 'PRIMAL_AURAS.Effect.Type'}}">
+                {{/if}}
+              </div>
+            </div>
+            <div class="form-group stacked">
+              <label>{{localize "PRIMAL_AURAS.Effect.Healing"}}</label>
+              <div class="form-fields">
+                <input type="text" name="effects.{{effect.idx}}.healing.formula" value="{{effect.healing.formula}}" placeholder="1d4 + @abilities.wis.mod">
+                <select name="effects.{{effect.idx}}.healing.type">{{selectOptions @root.choices.healingTypes selected=effect.healing.type}}</select>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        <div class="pa-subsection">
+          <h4><i class="fa-solid fa-circle-exclamation"></i> {{localize "PRIMAL_AURAS.Effect.Conditions"}}</h4>
+          <div class="pa-status-grid">
+            {{#each effect.statusList as |status|}}
+            <label class="pa-status {{#if status.checked}}checked{{/if}}" data-tooltip="{{status.label}}">
+              <input type="checkbox" name="effects.{{effect.idx}}.statuses.{{status.id}}" {{checked status.checked}}>
+              {{#if status.img}}<img src="{{status.img}}" alt="">{{/if}}
+              <span>{{status.label}}</span>
+            </label>
+            {{/each}}
+            {{#each effect.unknownStatuses as |sid|}}
+            <input type="hidden" name="effects.{{effect.idx}}.statuses.{{sid}}" value="true">
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="pa-subsection">
+          <h4><i class="fa-solid fa-sliders"></i> {{localize "PRIMAL_AURAS.Effect.Modifiers"}}</h4>
+          <p class="hint">{{localize "PRIMAL_AURAS.Effect.ModifiersHint"}}</p>
+          <ol class="pa-changes">
+            {{#each effect.changeList as |change|}}
+            <li class="pa-change" data-change-index="{{change.cidx}}">
+              <input type="text" name="effects.{{effect.idx}}.changes.{{change.cidx}}.key" value="{{change.key}}" placeholder="system.bonuses.abilities.save">
+              <select name="effects.{{effect.idx}}.changes.{{change.cidx}}.type">{{selectOptions @root.choices.changeTypes selected=change.type}}</select>
+              <input type="text" name="effects.{{effect.idx}}.changes.{{change.cidx}}.value" value="{{change.value}}" placeholder="+2">
+              <button type="button" class="pa-icon pa-danger" data-action="removeChange" data-tooltip="{{localize 'PRIMAL_AURAS.Effect.RemoveModifier'}}"><i class="fa-solid fa-xmark"></i></button>
+            </li>
+            {{/each}}
+          </ol>
+          <button type="button" class="pa-small" data-action="addChange"><i class="fa-solid fa-plus"></i> {{localize "PRIMAL_AURAS.Effect.AddModifier"}}</button>
+        </div>
+
+        <div class="pa-subsection pa-grid-2">
+          {{#if effect.isTriggered}}
+          <div class="form-group stacked">
+            <label>{{localize "PRIMAL_AURAS.Effect.Duration"}}</label>
+            <div class="form-fields">
+              <select name="effects.{{effect.idx}}.duration.type" data-rerender>{{selectOptions @root.choices.duration selected=effect.duration.type}}</select>
+              {{#if effect.isRounds}}
+              <input type="number" name="effects.{{effect.idx}}.duration.rounds" value="{{effect.duration.rounds}}" min="1" step="1">
+              {{/if}}
+            </div>
+          </div>
+          <div class="form-group stacked">
+            <label class="pa-check"><input type="checkbox" name="effects.{{effect.idx}}.chat" {{checked effect.chat}}> {{localize "PRIMAL_AURAS.Effect.Chat"}}</label>
+            <label class="pa-check"><input type="checkbox" name="effects.{{effect.idx}}.stacks" {{checked effect.stacks}}> {{localize "PRIMAL_AURAS.Effect.StacksTriggered"}}</label>
+          </div>
+          {{else}}
+          <div class="form-group stacked">
+            <label class="pa-check"><input type="checkbox" name="effects.{{effect.idx}}.stacks" {{checked effect.stacks}}> {{localize "PRIMAL_AURAS.Effect.Stacks"}}</label>
+          </div>
+          {{/if}}
+        </div>
+      </fieldset>
+      {{else}}
+      <p class="pa-empty">{{localize "PRIMAL_AURAS.Config.NoEffects"}}</p>
+      {{/each}}
+
+      <div class="pa-effect-actions">
+        <button type="button" data-action="addEffect"><i class="fa-solid fa-plus"></i> {{localize "PRIMAL_AURAS.Config.AddEffect"}}</button>
+        {{#if hasPresets}}
+        <div class="pa-preset-picker">
+          <select class="pa-import-select">{{selectOptions presetChoices}}</select>
+          <button type="button" data-action="importEffects"><i class="fa-solid fa-file-import"></i> {{localize "PRIMAL_AURAS.Config.ImportEffects"}}</button>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+
+  <footer class="form-footer pa-footer">
+    {{#if canSavePreset}}
+    <button type="button" data-action="saveAsPreset"><i class="fa-solid fa-book-medical"></i> {{localize "PRIMAL_AURAS.Config.SaveAsPreset"}}</button>
+    {{/if}}
+    <button type="submit"><i class="fa-solid fa-floppy-disk"></i> {{localize "PRIMAL_AURAS.Config.Save"}}</button>
+  </footer>
+</div>

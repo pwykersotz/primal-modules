@@ -1,0 +1,583 @@
+/* ---------------------------------------- */
+/* Primal Combat: carousel                  */
+/* ---------------------------------------- */
+
+/*
+ * The carousel sits in Foundry's #ui-top column, the same column dnd5e's calendar HUD uses. A high `order` keeps it
+ * below the calendar (and anything else placed there) whichever was added first.
+ */
+#primal-combat-carousel {
+  --pc-size: 58px;
+  --pc-offset: 0px;
+  --pc-frame-size: calc(var(--pc-size) * 1.24);
+  --pc-small: calc(var(--pc-size) * 0.78);
+  --pc-gap: 5px;
+  --pc-accent: #ffb25e;
+  --pc-friendly: #6cb8ff;
+  --pc-hostile: #ff6b5b;
+  --pc-neutral: #e9c65b;
+  --pc-secret: #b98cff;
+  --pc-event: #5fd4b4;
+  --pc-party: var(--pc-friendly);
+  --pc-enemies: var(--pc-hostile);
+  --pc-panel-bg: var(--control-bg-color, rgba(11, 10, 19, 0.65));
+  --pc-panel-border: var(--control-border-color, rgba(255, 255, 255, 0.15));
+  --pc-text: var(--control-icon-color, #e7d1b1);
+
+  position: relative;
+  z-index: 1;
+  order: 100;
+  flex: none;
+  max-width: 100%;
+  margin-block-start: calc(10px + var(--pc-offset));
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+}
+
+#primal-combat-carousel.pc-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+}
+
+/* dnd5e's calendar drop-downs open over the carousel, not under it. */
+#ui-top > #calendar-hud {
+  position: relative;
+  z-index: 2;
+}
+
+#primal-combat-carousel .pc-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+#primal-combat-carousel .pc-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 65%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: auto;
+}
+
+#primal-combat-carousel .pc-controls {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#primal-combat-carousel .pc-controls:empty {
+  display: none;
+}
+
+/* ---------- The track of portraits ---------- */
+
+#primal-combat-carousel .pc-track {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--pc-gap);
+  margin: 0;
+  padding: 4px 4px 6px;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+#primal-combat-carousel .pc-track::-webkit-scrollbar {
+  display: none;
+}
+
+#primal-combat-carousel .pc-track.pc-overflow {
+  mask-image: linear-gradient(to right, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+}
+
+#primal-combat-carousel .pc-slot {
+  --pc-slot: calc(var(--pc-small) + 4px);
+  --pc-p: var(--pc-small);
+  --pc-ring: var(--pc-neutral);
+  position: relative;
+  flex: none;
+  width: var(--pc-slot);
+  height: var(--pc-frame-size);
+  margin: 0;
+  padding: 0;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#primal-combat-carousel .pc-slot.pc-framed {
+  --pc-slot: var(--pc-frame-size);
+  --pc-p: var(--pc-size);
+}
+
+#primal-combat-carousel .pc-slot.pc-friendly { --pc-ring: var(--pc-friendly); }
+#primal-combat-carousel .pc-slot.pc-hostile { --pc-ring: var(--pc-hostile); }
+#primal-combat-carousel .pc-slot.pc-neutral { --pc-ring: var(--pc-neutral); }
+#primal-combat-carousel .pc-slot.pc-secret { --pc-ring: var(--pc-secret); }
+#primal-combat-carousel .pc-slot.pc-side-party { --pc-ring: var(--pc-party); }
+#primal-combat-carousel .pc-slot.pc-side-enemies { --pc-ring: var(--pc-enemies); }
+#primal-combat-carousel .pc-slot.pc-event,
+#primal-combat-carousel .pc-slot.pc-side-event { --pc-ring: var(--pc-event); }
+
+#primal-combat-carousel .pc-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease;
+}
+
+#primal-combat-carousel .pc-portrait {
+  width: var(--pc-p);
+  height: var(--pc-p);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--pc-ring);
+  background: #15131c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* Lair actions and other events: square-ish, so they don't read as creatures (round inside the turn frame). */
+#primal-combat-carousel .pc-slot.pc-is-event:not(.pc-framed) .pc-portrait {
+  border-radius: 24%;
+}
+
+#primal-combat-carousel .pc-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  pointer-events: none;
+}
+
+/* The turn frame (Foundry's turn marker art) around whoever is acting. */
+#primal-combat-carousel .pc-frame {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--pc-frame-size);
+  height: var(--pc-frame-size);
+  border: none;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#primal-combat-carousel .pc-framed .pc-frame {
+  opacity: 1;
+  animation: pc-frame-glow 2.6s ease-in-out infinite;
+}
+
+#primal-combat-carousel .pc-framed .pc-portrait {
+  border-color: rgba(0, 0, 0, 0.85);
+}
+
+@keyframes pc-frame-glow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(255, 150, 70, 0.4)); }
+  50% { filter: drop-shadow(0 0 8px rgba(255, 150, 70, 0.95)); }
+}
+
+/* Hover (here or on the token on the canvas). */
+#primal-combat-carousel .pc-slot:is(.pc-hover, .pc-token-hover) .pc-face {
+  transform: translateY(2px) scale(1.07);
+}
+
+#primal-combat-carousel .pc-slot:is(.pc-hover, .pc-token-hover) .pc-portrait {
+  border-color: var(--pc-accent);
+  box-shadow: 0 0 0 1px var(--pc-accent), 0 0 12px var(--pc-accent);
+}
+
+/* Done for this round (side initiative): the whole portrait fades. */
+#primal-combat-carousel .pc-done .pc-face {
+  opacity: 0.35;
+  filter: grayscale(0.8) brightness(0.85);
+}
+
+#primal-combat-carousel .pc-done .pc-frame {
+  animation: none;
+}
+
+#primal-combat-carousel .pc-done.pc-hover .pc-face {
+  opacity: 0.6;
+}
+
+#primal-combat-carousel .pc-busy {
+  pointer-events: none;
+}
+
+/* Defeated. */
+#primal-combat-carousel .pc-defeated .pc-portrait img {
+  filter: grayscale(1) brightness(0.5);
+}
+
+#primal-combat-carousel .pc-framed.pc-defeated .pc-frame {
+  opacity: 0.35;
+  animation: none;
+}
+
+/* Hidden from players (the GM still sees it). */
+#primal-combat-carousel .pc-hidden .pc-portrait {
+  border-style: dashed;
+  opacity: 0.7;
+}
+
+/* ---------- Marks and badges ---------- */
+
+#primal-combat-carousel .pc-mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--pc-p) * 0.42);
+  pointer-events: none;
+  text-shadow: 0 0 4px #000, 0 0 8px #000;
+}
+
+#primal-combat-carousel .pc-mark-done {
+  color: #9ee86a;
+}
+
+#primal-combat-carousel .pc-mark-defeated {
+  color: #ff5a4c;
+  font-size: calc(var(--pc-p) * 0.36);
+}
+
+/* A faint tick on your own portrait when you hover it, to show that clicking marks you done. */
+#primal-combat-carousel .pc-mark-hint {
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#primal-combat-carousel .pc-can-toggle.pc-hover .pc-mark-hint {
+  opacity: 0.55;
+}
+
+#primal-combat-carousel .pc-corner {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ddd;
+  font-size: 9px;
+  pointer-events: none;
+}
+
+#primal-combat-carousel .pc-badge {
+  position: absolute;
+  top: 1px;
+  right: -3px;
+  min-width: 20px;
+  height: 17px;
+  margin: 0;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  border: 1px solid var(--pc-panel-border);
+  background: rgba(10, 9, 14, 0.9);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  color: #f3e6cf;
+  font-family: var(--font-sans, inherit);
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#primal-combat-carousel button.pc-badge.pc-roll {
+  width: auto;
+  min-height: 0;
+  color: var(--pc-accent);
+  border-color: var(--pc-accent);
+  cursor: var(--cursor-pointer, pointer);
+  animation: pc-roll-pulse 1.6s ease-in-out infinite;
+}
+
+#primal-combat-carousel button.pc-badge.pc-roll:hover {
+  background: var(--pc-accent);
+  color: #1b1208;
+  animation: none;
+}
+
+@keyframes pc-roll-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 178, 94, 0.6); }
+  50% { box-shadow: 0 0 0 4px rgba(255, 178, 94, 0); }
+}
+
+#primal-combat-carousel .pc-hp {
+  position: absolute;
+  left: 50%;
+  bottom: calc(((var(--pc-frame-size) - var(--pc-p)) / 2) - 3px);
+  width: calc(var(--pc-p) * 0.8);
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#primal-combat-carousel .pc-hp.pc-hp-temp {
+  border-color: #5ab0ff;
+}
+
+#primal-combat-carousel .pc-hp-fill {
+  height: 100%;
+}
+
+/* ---------- Side labels and the round divider ---------- */
+
+#primal-combat-carousel .pc-label {
+  --pc-label-color: var(--pc-neutral);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 26px;
+  height: calc(var(--pc-small) * 0.9);
+  padding: 0 5px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--pc-label-color) 55%, transparent);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--pc-label-color);
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+#primal-combat-carousel .pc-label-party { --pc-label-color: var(--pc-party); }
+#primal-combat-carousel .pc-label-enemies { --pc-label-color: var(--pc-enemies); }
+#primal-combat-carousel .pc-label-event { --pc-label-color: var(--pc-event); }
+
+#primal-combat-carousel .pc-label.pc-label-acting {
+  opacity: 1;
+  border-color: var(--pc-label-color);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--pc-label-color) 60%, transparent);
+}
+
+/* Party members who beat the enemies: their round 1 opening turn. */
+#primal-combat-carousel .pc-label.pc-label-opening {
+  --pc-label-color: var(--pc-accent);
+}
+
+#primal-combat-carousel .pc-label-roll {
+  color: #f3e6cf;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#primal-combat-carousel .pc-divider {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 2px;
+  color: var(--pc-text);
+  font-size: 10px;
+  font-weight: bold;
+  opacity: 0.75;
+}
+
+#primal-combat-carousel .pc-divider::before {
+  content: "";
+  width: 2px;
+  height: calc(var(--pc-small) * 0.6);
+  border-radius: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.55), transparent);
+}
+
+/* ---------- Buttons ---------- */
+
+#primal-combat-carousel .pc-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 30px;
+  height: 30px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--pc-panel-border);
+  background: var(--pc-panel-bg);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  color: var(--pc-text);
+  font-size: 13px;
+  line-height: 1;
+  cursor: var(--cursor-pointer, pointer);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+#primal-combat-carousel .pc-button:hover,
+#primal-combat-carousel .pc-button:focus-visible {
+  border-color: var(--pc-accent);
+  background: var(--control-hover-bg-color, rgba(40, 30, 20, 0.85));
+  color: #fff;
+}
+
+#primal-combat-carousel .pc-button.pc-primary {
+  width: auto;
+  padding: 0 12px;
+  border-radius: 15px;
+  border-color: var(--pc-accent);
+  color: var(--pc-accent);
+  font-weight: bold;
+}
+
+#primal-combat-carousel .pc-button.pc-primary:hover {
+  background: var(--pc-accent);
+  color: #1b1208;
+}
+
+#primal-combat-carousel .pc-button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- Status line ---------- */
+
+#primal-combat-carousel .pc-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+  max-width: 100%;
+  padding: 2px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--pc-panel-border);
+  background: var(--pc-panel-bg);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  color: var(--pc-text);
+  font-size: var(--font-size-12, 12px);
+  line-height: 18px;
+  pointer-events: auto;
+}
+
+#primal-combat-carousel .pc-status:not(:has(> *)) {
+  display: none;
+}
+
+#primal-combat-carousel .pc-status-round {
+  color: #fff;
+}
+
+/* Turn timer. */
+#primal-combat-carousel .pc-status-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pc-text);
+  font-variant-numeric: tabular-nums;
+}
+
+#primal-combat-carousel .pc-status-timer i {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+#primal-combat-carousel .pc-status-timer.pc-timer-paused {
+  opacity: 0.6;
+}
+
+#primal-combat-carousel .pc-status-timer.pc-timer-restart {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#primal-combat-carousel .pc-status-timer.pc-timer-restart:hover {
+  color: var(--pc-accent);
+}
+
+#primal-combat-carousel .pc-status-party { color: var(--pc-party); }
+#primal-combat-carousel .pc-status-enemies { color: var(--pc-enemies); }
+#primal-combat-carousel .pc-status-event { color: var(--pc-event); }
+
+#primal-combat-carousel .pc-status-detail {
+  opacity: 0.8;
+}
+
+#primal-combat-carousel .pc-status-hint {
+  color: var(--pc-accent);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #primal-combat-carousel .pc-framed .pc-frame,
+  #primal-combat-carousel button.pc-badge.pc-roll {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------- */
+/* Primal Combat: side initiative chat card */
+/* ---------------------------------------- */
+
+.primal-combat-side-message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.primal-combat-side-message p {
+  margin: 0;
+}
+
+.primal-combat-side-message .unrolled {
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* ---------------------------------------- */
+/* Primal Combat: events                    */
+/* ---------------------------------------- */
+
+.primal-combat-event-message h3 {
+  margin: 0 0 2px;
+  border: none;
+}
+
+.primal-combat-event-message p {
+  margin: 0 0 4px;
+}
+
+.primal-combat-event-message .pc-event-count {
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.primal-combat-event-message ul {
+  margin: 0;
+  padding-inline-start: 1.2em;
+}
+
+.primal-combat-event-dialog textarea {
+  min-height: 5em;
+  resize: vertical;
+}

@@ -1,0 +1,48 @@
+{
+  "id": "primal-shops",
+  "title": "Primal Shops",
+  "description": "Shops players can walk up to: double-click a shopkeeper's token and a storefront opens, with what it sells grouped by kind, prices in the system's coins, a cart, and the character's purse. Players buy (paying in coins and getting change), and sell their things back for half price (or the shop's own rate), sent to the GM to approve, who can haggle the price. Each shop sells from shop lists the GM fills quickly from any compendium (homebrew and third-party too), by pasting names from a book or spreadsheet, or by importing JSON, with starter lists from the Player's Handbook. A shop level leaves out items above a rarity, and a shop can have a random pick of stock, rolled stock (1d4), a markup, a range, and the shopkeeper's own items and coins. Shops can also be pins on the map (a town map with no tokens) or ribbons hanging from the top of the screen, in each shop's colors, hidden until the GM reveals them, with a Shops here list. New shop makes a shop in two clicks, with no shopkeeper, and any token can be linked to open it. Made with AI: written with Claude (Anthropic).",
+  "version": "1.3.1",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "reason": "Lets players double-click a shop's token alongside other modules that change token clicks."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-shops.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true
+}

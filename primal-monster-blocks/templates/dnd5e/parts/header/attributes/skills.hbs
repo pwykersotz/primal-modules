@@ -1,0 +1,26 @@
+<figure class="menu simple-menu skills-menu">
+	<h4 class="attribute-name menu-toggle" data-menu-id="skill-roller"
+		{{#if skillsCompact}}data-tooltip="MOBLOKS5E.skills.expand"{{/if}}>
+		{{~localize "MOBLOKS5E.SkillS"~}}
+		{{~#if skillsCompact}}<i class="fas fa-caret-down skills-caret"></i>{{/if~}}
+	</h4>
+	<div class="overflow-fix">
+		<ul>
+		{{#each skills as |skill s|}}
+			<li class="skill {{#if skill.value}}proficient{{/if}}" title="{{skill.ability}}" data-skill="{{s}}">
+				<span class="skill-title">{{skill.label}}</span>
+				<span class="skill-mod">{{skill.totalLabel}}</span>{{~" "~}}
+			</li>
+		{{/each}}
+		</ul>
+	</div>
+</figure>
+<ul class="inline-list">
+{{#each skillList as |skill|}}
+	<li class="skill {{#if skill.value}}proficient{{/if}}" title="{{skill.ability}}" data-skill="{{skill.id}}">
+		<span class="skill-title">{{skill.label}}</span>
+		<span class="skill-mod">{{skill.totalLabel}}</span>{{~" "~}}
+	</li>
+{{/each}}
+{{#unless skillsAny}}<li>&mdash;</li>{{/unless}}
+</ul>

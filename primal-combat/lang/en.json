@@ -1,0 +1,210 @@
+{
+  "PRIMAL_COMBAT": {
+    "Sides": {
+      "party": "Party",
+      "enemies": "Enemies",
+      "event": "Events"
+    },
+    "Controls": {
+      "RollInitiative": "Roll initiative",
+      "Start": "Begin combat",
+      "Menu": "Combat options",
+      "EndTurn": "End your turn",
+      "EndTurnShort": "End turn",
+      "NextTurn": "Next turn",
+      "PreviousTurn": "Previous turn",
+      "NextSide": "End this side's turn",
+      "PreviousSide": "Back to the previous side's turn",
+      "RollNPCs": "Roll initiative for the GM's creatures",
+      "RollPartyNPCs": "Roll initiative for the GM's creatures on the party's side"
+    },
+    "Carousel": {
+      "RoundShort": "R{round}",
+      "NextRound": "These creatures have already acted. They go again in round {round}.",
+      "NextSideRound": "Round {round} starts here.",
+      "EnemiesAct": "Enemies: they all act on initiative {value}, their best static initiative.",
+      "EnemiesFrom": "(From {name}.)",
+      "Opening": "Beat the enemies' {value}, so they act first in round 1, then again with the whole party.",
+      "Events": "Lair actions and other events"
+    },
+    "Tooltip": {
+      "Initiative": "Initiative {value}",
+      "NoInitiative": "No initiative yet",
+      "HP": "HP {hp}",
+      "Defeated": "Defeated",
+      "Done": "Done for this turn",
+      "Hidden": "Hidden from players",
+      "ClickDone": "Click when you're done",
+      "ClickUndo": "Click to undo",
+      "EnemyInitiative": "Acts on the enemies' initiative, {value}",
+      "ClickEndTurn": "Click to end your turn",
+      "EventCount": "Happens on initiative {value}",
+      "EventPlacement": {
+        "before": "In side initiative: just before the enemies' turn, since it beats their {value}",
+        "after": "In side initiative: just after the enemies' turn",
+        "top": "In side initiative: at the start of each round (there are no enemies)"
+      },
+      "DoubleClickEdit": "Double-click to edit",
+      "RightClickEdit": "Right-click to edit"
+    },
+    "Status": {
+      "NotStarted": "Combat hasn't started",
+      "Rolled": "{rolled} of {total} have rolled initiative",
+      "RollHint": "Click the d20 on your portrait to roll",
+      "ReadyToStart": "Press play to begin",
+      "Round": "Round {round}",
+      "Turn": "{name}'s turn",
+      "SideTurn": {
+        "opening": "Party's turn: those who beat the enemies",
+        "party": "Party's turn",
+        "enemies": "Enemies' turn",
+        "event": "Now: {names}"
+      },
+      "DoneCount": "{done} of {total} done",
+      "ClickWhenDone": "Click your portrait when you're done",
+      "WaitingForSide": "Waiting for the rest of your side",
+      "EnemiesAct": "Enemies act on {value}",
+      "PartyRolled": "{rolled} of {total} in the party have rolled",
+      "AfterEnemies": "You act after the enemies",
+      "YourTurnClick": "Your turn. Click your portrait when you're done",
+      "EventTurn": "{name} (initiative {value})",
+      "GMMoment": "Waiting on the GM",
+      "EventHint": "Click its portrait or ▶ when it's done"
+    },
+    "Menu": {
+      "EditEvent": "Edit event…",
+      "PanTo": "Go to token",
+      "Ping": "Ping token",
+      "OpenSheet": "Open sheet",
+      "MarkDone": "Mark done",
+      "MarkNotDone": "Mark not done",
+      "RollInitiative": "Roll initiative",
+      "MoveToParty": "Move to the party's side",
+      "MoveToEnemies": "Move to the enemies' side",
+      "FinishesWith": "Finishes its turn with…",
+      "ToggleHidden": "Hide / reveal",
+      "ToggleDefeated": "Mark defeated / not defeated",
+      "Remove": "Remove from combat",
+      "RollNPCs": "Roll for the GM's creatures",
+      "RollAll": "Roll for everyone not yet rolled",
+      "RollPartyNPCs": "Roll for the GM's creatures on the party's side",
+      "RollParty": "Roll for everyone in the party not yet rolled",
+      "ResetInitiative": "Reset initiative",
+      "ResetParty": "Reset the party's initiative",
+      "AddEvent": "Add a lair action or event…",
+      "UseSide": "Switch to side initiative",
+      "UseStandard": "Switch to individual initiative",
+      "EndCombat": "End combat"
+    },
+    "Chat": {
+      "Speaker": "Side Initiative",
+      "EnemiesAct": "The enemies act on initiative <strong>{value}</strong>.",
+      "FirstUp": "Beat them, so they go first: {names}. Then the enemies, then the whole party.",
+      "EnemiesFirst": "Nobody beat them, so the enemies go first, then the whole party.",
+      "NotRolled": "Not rolled yet: {names}. They act with the rest of the party.",
+      "EventSpeaker": "Initiative Event",
+      "EventCount": "Initiative {count}",
+      "LairActions": "Lair actions:"
+    },
+    "Notify": {
+      "DoneFailed": "Primal Combat couldn't mark that combatant done. The console (F12) has the details.",
+      "EndTurnFailed": "Primal Combat couldn't end your turn. The console (F12) has the details.",
+      "EventFailed": "Primal Combat couldn't save that event. The console (F12) has the details."
+    },
+    "Settings": {
+      "defaultMode": {
+        "Name": "Initiative for new combats",
+        "Hint": "Individual: everyone rolls and acts in order. Side: the party rolls as usual and the enemies all act on their best static initiative. In round 1 the party members who beat the enemies go first, then the enemies, then the whole party, and the two sides alternate from then on. Each player clicks their portrait when they're done. The GM can switch any combat from the carousel's ⋮ menu.",
+        "Standard": "Individual initiative",
+        "Side": "Side initiative"
+      },
+      "autoAdvance": {
+        "Name": "Move on when a side is done",
+        "Hint": "In side initiative, once everyone acting has clicked done (defeated creatures don't count), the other side's turn starts by itself. Turn off to always move on with the GM's next button."
+      },
+      "sideTurnMarkers": {
+        "Name": "Turn markers on the whole acting side",
+        "Hint": "In side initiative, every token on the acting side shows Foundry's turn marker until its player clicks done. Turn off to leave turn markers to Foundry, which shows one at a time."
+      },
+      "frameImage": {
+        "Name": "Turn frame image",
+        "Hint": "The art around the portrait of whoever is acting. The default is Foundry's orange turn marker."
+      },
+      "hpBars": {
+        "Name": "HP bars on portraits",
+        "Hint": "Who sees a hit point bar under each portrait.",
+        "None": "Nobody",
+        "Owner": "The GM and each creature's owners",
+        "All": "Everyone"
+      },
+      "turnTimer": {
+        "Name": "Turn timer",
+        "Hint": "Show how long the current turn has taken in the bar under the carousel. In side initiative it times the whole side's turn. It stops while the game is paused, and the GM can click it to start again from zero.",
+        "All": "Everyone",
+        "GM": "Only the GM",
+        "None": "Nobody"
+      },
+      "endCombatPrompt": {
+        "Name": "Offer to end combat when the hostiles are down",
+        "Hint": "Once every hostile creature in a running combat is at 0 HP (or marked defeated), ask the GM whether to end the combat. If you keep fighting, you're asked again only after a hostile gets back up or a new one joins and they all go down again."
+      },
+      "autoLairActions": {
+        "Name": "Add lair actions automatically",
+        "Hint": "When a creature with lair actions joins combat, add a Lair Action event for it: on its lair action initiative from the dnd5e sheet, or on 20 if it has lair action items but no count. The event leaves with the creature. Turn off to add events yourself from the ⋮ menu."
+      },
+      "showCarousel": {
+        "Name": "Show the combat carousel",
+        "Hint": "Show the turn order across the top of the screen during combat (this browser only)."
+      },
+      "portraitSize": {
+        "Name": "Carousel portrait size",
+        "Hint": "Size in pixels of the acting creature's portrait. Everyone else is a little smaller (this browser only)."
+      },
+      "portraitSource": {
+        "Name": "Carousel portrait image",
+        "Hint": "Token art matches what you see on the map, which makes it easier to tell creatures apart. Actor portraits use the character art instead (this browser only).",
+        "Token": "Token art",
+        "Actor": "Actor portrait"
+      },
+      "topOffset": {
+        "Name": "Extra space above the carousel",
+        "Hint": "The carousel already sits below dnd5e's calendar and anything else in the top-centre of the screen. Add pixels here if something drawn on top of the screen still overlaps it (this browser only)."
+      }
+    },
+    "Event": {
+      "DefaultName": "Lair Action",
+      "LairName": "Lair Action ({name})",
+      "AddTitle": "Add a lair action or event",
+      "EditTitle": "Edit event",
+      "Name": "Name",
+      "Count": "Initiative count",
+      "CountHint": "Individual initiative: it happens on this count and loses ties. Side initiative: just before the enemies' turn if it beats their number, otherwise just after it.",
+      "Image": "Image",
+      "Notes": "Notes (GM only)",
+      "NotesPlaceholder": "What happens. Shown in the GM's reminder.",
+      "Remind": "Whisper the GM a reminder",
+      "Hidden": "Hidden from players",
+      "Add": "Add",
+      "Save": "Save"
+    },
+    "Timer": {
+      "Turn": "How long this turn has taken",
+      "SideTurn": "How long this side's turn has taken",
+      "Paused": "Stopped while the game is paused",
+      "ClickRestart": "Click to start again from zero"
+    },
+    "EndPrompt": {
+      "Title": "All hostile creatures are down",
+      "Content": "Every hostile creature in this combat is at 0 hit points. End the combat?",
+      "End": "End combat",
+      "Keep": "Keep fighting"
+    },
+    "Companion": {
+      "Title": "{name}: finishes its turn with",
+      "Hint": "In side initiative, when the creature you choose is marked done, {name} is marked done too. A controlled mount already does this with its rider, through Primal Mounts.",
+      "Label": "Finishes with",
+      "Nobody": "Nobody (marked done on its own)",
+      "Save": "Save"
+    }
+  }
+}

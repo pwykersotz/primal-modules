@@ -1,0 +1,42 @@
+<div class="pa-chat-card">
+  <header class="pa-chat-header">
+    <img src="{{img}}" alt="">
+    <div>
+      <h3>{{auraName}}</h3>
+      {{#if effectName}}<span class="pa-chat-sub">{{effectName}}</span>{{/if}}
+    </div>
+  </header>
+  <p class="pa-chat-target"><strong>{{targetName}}</strong> <span class="pa-chat-trigger">{{trigger}}</span></p>
+  {{#if save}}
+  <p class="pa-chat-line pa-save {{#if save.success}}is-success{{else}}is-failure{{/if}}">
+    <i class="fa-solid {{#if save.success}}fa-shield-halved{{else}}fa-heart-crack{{/if}}"></i>
+    {{save.label}} {{localize "PRIMAL_AURAS.Chat.Save"}} {{localize "PRIMAL_AURAS.Chat.DC"}} {{save.dc}}:
+    <strong>{{save.total}}</strong> — {{#if save.success}}{{localize "PRIMAL_AURAS.Chat.Success"}}{{else}}{{localize "PRIMAL_AURAS.Chat.Failure"}}{{/if}}
+  </p>
+  {{/if}}
+  {{#if damage}}
+  <p class="pa-chat-line pa-damage"><i class="fa-solid fa-burst"></i>
+    {{localize "PRIMAL_AURAS.Chat.Damage" amount=damage.amount type=damage.type}}
+    {{#if damage.halved}}<span class="pa-chat-note">({{localize "PRIMAL_AURAS.Chat.Halved" rolled=damage.rolled}})</span>{{/if}}
+  </p>
+  {{/if}}
+  {{#if healing}}
+  <p class="pa-chat-line pa-healing"><i class="fa-solid fa-heart-pulse"></i>
+    {{#if healing.temp}}{{localize "PRIMAL_AURAS.Chat.TempHP" amount=healing.amount}}{{else}}{{localize "PRIMAL_AURAS.Chat.Healing" amount=healing.amount}}{{/if}}
+  </p>
+  {{/if}}
+  {{#if statuses.length}}
+  <p class="pa-chat-line pa-statuses"><i class="fa-solid fa-circle-exclamation"></i>
+    {{#each statuses}}<span class="pa-tag">{{this}}</span>{{/each}}
+    {{#if duration}}<span class="pa-chat-note">({{duration}})</span>{{/if}}
+  </p>
+  {{/if}}
+  {{#if modifiers}}
+  <p class="pa-chat-line pa-modifiers"><i class="fa-solid fa-sliders"></i> {{localize "PRIMAL_AURAS.Chat.Modifiers" name=modifiers}}
+    {{#if duration}}<span class="pa-chat-note">({{duration}})</span>{{/if}}
+  </p>
+  {{/if}}
+  {{#if negated}}
+  <p class="pa-chat-line pa-negated"><i class="fa-solid fa-ban"></i> {{localize "PRIMAL_AURAS.Chat.Negated"}}</p>
+  {{/if}}
+</div>

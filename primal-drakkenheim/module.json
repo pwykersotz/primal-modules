@@ -1,0 +1,57 @@
+{
+  "id": "primal-drakkenheim",
+  "title": "Primal Drakkenheim Automation",
+  "description": "Rules glue for the automated Monsters of Drakkenheim pack: contamination levels, fail-by-5 riders, life drain, regeneration suppression, Frozen breaking on fire or bludgeoning damage, thorns damage, Epic Boss hit points, Epic Actions and initiative 20. Also automates Ignacious, the Sword of Burning Truth: Zone of Truth and firelight while it is drawn in combat. Made with AI: written with Claude (Anthropic).",
+  "version": "1.1.2",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "midi-qol",
+        "type": "module"
+      },
+      {
+        "id": "dae",
+        "type": "module"
+      }
+    ],
+    "recommends": [
+      {
+        "id": "primal-status",
+        "type": "module"
+      },
+      {
+        "id": "primal-auras",
+        "type": "module"
+      }
+    ]
+  }
+}

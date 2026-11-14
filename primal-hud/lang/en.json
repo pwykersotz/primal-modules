@@ -1,0 +1,91 @@
+{
+  "PRIMAL_HUD": {
+    "HP": {
+      "Damage": "Lose {amount} HP (temporary HP first)",
+      "Heal": "Gain {amount} HP",
+      "Readout": "Hit points",
+      "Failed": "Primal HUD could not change hit points. The console (F12) has the details."
+    },
+    "Buttons": {
+      "Title": "Token HUD Buttons",
+      "Intro": "Untick a button to hide it from your Token HUD. These choices only change your own HUD, and every player can make their own. Buttons from other modules join this list the first time they appear on a Token HUD you open, so if one is missing, open the HUD on a token that shows it.",
+      "CoreGroup": "Foundry VTT",
+      "OtherGroup": "Other modules",
+      "HpButtons": "HP buttons (-10, -1, +1, +10)",
+      "Sidebar": "Favorites, spells, saves and skills panel (left of the HUD)",
+      "Unnamed": "Unnamed button",
+      "Forget": "Remove from this list (it comes back if the button appears again)",
+      "ShowAll": "Show all",
+      "Core": {
+        "Elevation": "Elevation",
+        "Levels": "Change level",
+        "Sort": "Bring to front / send to back",
+        "Locked": "Lock / unlock",
+        "Config": "Token configuration",
+        "Visibility": "Show / hide token",
+        "Effects": "Status effects",
+        "MovementActions": "Movement action",
+        "Target": "Target",
+        "Combat": "Add to / remove from combat"
+      },
+      "Arrange": "Arrange..."
+    },
+    "Layout": {
+      "Title": "Arrange Token HUD Buttons",
+      "Intro": "Drag a button to move it, or use its arrows to move it up, down or to the other side of the HUD. This only changes your own Token HUD, and every player can arrange their own. Buttons from other modules appear here once they've shown on a Token HUD you opened. Reset puts everything back where Foundry and the modules put it.",
+      "Left": "Left side",
+      "Right": "Right side",
+      "Up": "Move up",
+      "Down": "Move down",
+      "ToRight": "Move to the right side",
+      "ToLeft": "Move to the left side",
+      "Hidden": "hidden",
+      "Empty": "Drop buttons here",
+      "Reset": "Reset"
+    },
+    "Sidebar": {
+      "Favorites": "Favorites",
+      "Spells": "Spells",
+      "Checks": "Saves & Skills",
+      "Saves": "Saving Throws",
+      "Skills": "Skills",
+      "Tools": "Tools",
+      "Collapse": "Fold the panel away",
+      "Expand": "Show the panel",
+      "SlotTooltip": "{label}: {value} of {max} left",
+      "SpellPoints": "Spell points",
+      "SpellPointsShort": "SP",
+      "HighLevel": "{level}, once per long rest",
+      "Concentration": "Concentration",
+      "ConcentrationShort": "C",
+      "Ritual": "Ritual",
+      "RitualShort": "R",
+      "UseFailed": "Primal HUD could not use {name}. The console (F12) has the details.",
+      "RollFailed": "Primal HUD could not make that roll. The console (F12) has the details."
+    },
+    "Settings": {
+      "buttonsMenu": {
+        "Name": "Token HUD buttons",
+        "Label": "Choose buttons",
+        "Hint": "Pick which buttons appear on your Token HUD, including the ones other modules add. Each player chooses for themselves."
+      },
+      "layoutMenu": {
+        "Name": "Token HUD button layout",
+        "Label": "Arrange buttons",
+        "Hint": "Move Token HUD buttons between the left and right sides and change their order, including buttons from other modules. Each player arranges their own."
+      },
+      "hpCombineDelay": {
+        "Name": "Combine quick HP clicks (milliseconds)",
+        "Hint": "HP button clicks made within this long of each other are saved as one change, so clicking -10 and then -1 deals 11 damage at once. The HP box shows the result straight away. Set to 0 to save every click on its own."
+      },
+      "disableConfigDoubleClick": {
+        "Name": "Double right-click doesn't open Token Config",
+        "Hint": "When ticked, double right-clicking a token no longer opens its Token Config, so a quick second right-click just leaves the Token HUD open. The gear button on the Token HUD still opens Token Config. Double right-click still targets tokens you can't configure. Each player chooses for themselves."
+      },
+      "sidebarSize": {
+        "Name": "Favorites and spells panel size (%)",
+        "Hint": "How big the panel beside the Token HUD is. 100 is the normal size; lower shrinks it and higher grows it. It stays this size on screen whatever the canvas zoom."
+      }
+    }
+  }
+}

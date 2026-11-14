@@ -1,0 +1,29 @@
+{
+  "id": "primal-auras",
+  "title": "Primal Auras",
+  "description": "Token auras you can switch on and off from the Token HUD, with circle, grid and donut shapes, configurable colours and range. Auras can automate saving throws, conditions, buffs, debuffs, damage and healing, be saved to a preset library, and be attached to items and abilities. Made with AI: written with Claude (Anthropic).",
+  "version": "1.2.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/primal-auras.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true
+}

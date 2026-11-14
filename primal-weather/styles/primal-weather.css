@@ -1,0 +1,282 @@
+/* ---------------------------------------- */
+/* Primal Weather: the bar                  */
+/* ---------------------------------------- */
+
+/*
+ * The bar sits in Foundry's #ui-top column, the same column dnd5e's calendar HUD uses, styled like the calendar.
+ * Its `order` puts it right under the calendar (order 0) and above Primal Combat's carousel (order 100), whichever
+ * was added first.
+ */
+#primal-weather {
+  --pw-gap: 0.5rem;
+  --pw-sun: #ffd76a;
+  --pw-moon: #dfe6ff;
+  --pw-cloud: #c3cad8;
+  --pw-rain: #7cc4ff;
+  --pw-snow: #e8f6ff;
+  --pw-storm: #c9a8ff;
+  --pw-ice: #9fe7ff;
+  --pw-dust: #e2b97a;
+  --pw-warning: #ffb25e;
+
+  position: relative;
+  z-index: 1;
+  order: 50;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  max-width: calc(100% - 32px);
+  margin-block-start: 6px;
+  margin-inline: 16px;
+  color: var(--control-icon-color);
+  font-size: var(--font-size-12, 12px);
+  pointer-events: none;
+}
+
+/* Without the calendar (turned off, or another system), leave the same space at the top the calendar would. */
+#ui-top:not(:has(> #calendar-hud)) > #primal-weather {
+  margin-block-start: 16px;
+}
+
+#primal-weather:not(.pw-shown) {
+  display: none;
+}
+
+/* dnd5e's calendar drop-downs open over the weather, not under it. */
+#ui-top > #calendar-hud {
+  position: relative;
+  z-index: 2;
+}
+
+#primal-weather .pw-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--pw-gap);
+  max-width: 100%;
+  pointer-events: all;
+}
+
+#primal-weather .pw-core,
+#primal-weather .pw-button {
+  background: var(--control-bg-color);
+  border: 1px solid var(--control-border-color);
+  border-radius: 4px;
+}
+
+#primal-weather .pw-button {
+  flex: none;
+  block-size: 24px;
+  inline-size: 24px;
+}
+
+#primal-weather .pw-button button {
+  display: grid;
+  place-items: center;
+  block-size: 100%;
+  inline-size: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: var(--font-size-12, 12px);
+  line-height: 1;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#primal-weather .pw-button:hover,
+#primal-weather .pw-button:focus-within {
+  border-color: var(--control-hover-border-color, var(--control-border-color));
+  background: var(--control-hover-bg-color, var(--control-bg-color));
+  color: var(--control-hover-icon-color, #fff);
+}
+
+#primal-weather .pw-button button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#primal-weather .pw-core {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 26px;
+  padding: 2px 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#primal-weather .pw-core.pw-clickable {
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#primal-weather .pw-core.pw-clickable:hover,
+#primal-weather .pw-core.pw-clickable:focus-visible {
+  border-color: var(--control-hover-border-color, var(--control-border-color));
+  color: var(--control-hover-icon-color, #fff);
+}
+
+#primal-weather .pw-core > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* A faint dot between the pieces: Light rain · 54°F · Windy */
+#primal-weather .pw-core > span:not(.pw-condition, .pw-flag)::before {
+  content: "·";
+  margin-inline-end: 7px;
+  opacity: 0.5;
+}
+
+#primal-weather .pw-temp {
+  font-variant-numeric: tabular-nums;
+}
+
+#primal-weather .pw-wind i {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+#primal-weather .pw-wind-strong,
+#primal-weather .pw-wind-gale,
+#primal-weather .pw-warning {
+  color: var(--pw-warning);
+}
+
+#primal-weather .pw-flag {
+  flex: none;
+  font-size: 0.95em;
+}
+
+#primal-weather .pw-gm-only {
+  opacity: 0.6;
+}
+
+#primal-weather .pw-stale {
+  opacity: 0.7;
+}
+
+#primal-weather .pw-empty {
+  font-style: italic;
+}
+
+/* The weather icon, coloured by the kind of weather. */
+#primal-weather .pw-icon {
+  flex: none;
+  width: 1.25em;
+  text-align: center;
+  color: var(--pw-cloud);
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.6));
+}
+
+#primal-weather .pw-cond-clear .pw-icon,
+#primal-weather .pw-cond-partlyCloudy .pw-icon {
+  color: var(--pw-sun);
+}
+
+#primal-weather .pw-night:is(.pw-cond-clear, .pw-cond-partlyCloudy) .pw-icon {
+  color: var(--pw-moon);
+}
+
+#primal-weather :is(.pw-cond-drizzle, .pw-cond-rain, .pw-cond-heavyRain) .pw-icon {
+  color: var(--pw-rain);
+}
+
+#primal-weather .pw-cond-thunderstorm .pw-icon {
+  color: var(--pw-storm);
+}
+
+#primal-weather :is(.pw-cond-lightSnow, .pw-cond-snow, .pw-cond-heavySnow, .pw-cond-blizzard) .pw-icon {
+  color: var(--pw-snow);
+}
+
+#primal-weather :is(.pw-cond-sleet, .pw-cond-iceStorm) .pw-icon {
+  color: var(--pw-ice);
+}
+
+#primal-weather .pw-cond-duststorm .pw-icon {
+  color: var(--pw-dust);
+}
+
+/* ---------------------------------------- */
+/* Primal Weather: tooltip                  */
+/* ---------------------------------------- */
+
+.primal-weather-tooltip {
+  max-width: 340px;
+  text-align: start;
+  line-height: 1.4;
+}
+
+.primal-weather-tooltip .pw-tip-note,
+.primal-weather-tooltip .pw-tip-where {
+  opacity: 0.75;
+}
+
+.primal-weather-tooltip .pw-tip-hint {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.primal-weather-tooltip .pw-tip-rules {
+  margin: 4px 0;
+  padding-inline-start: 1.1em;
+}
+
+.primal-weather-tooltip .pw-tip-rules li {
+  margin: 2px 0;
+}
+
+.primal-weather-tooltip .pw-tip-forecast {
+  color: #9fd3ff;
+}
+
+/* ---------------------------------------- */
+/* Primal Weather: chat card and window     */
+/* ---------------------------------------- */
+
+.primal-weather-card header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.15em;
+}
+
+.primal-weather-card p {
+  margin: 4px 0;
+}
+
+.primal-weather-card .pw-card-hint {
+  font-style: italic;
+}
+
+.primal-weather-card .pw-card-where {
+  opacity: 0.75;
+}
+
+.primal-weather-card ul {
+  margin: 4px 0 0;
+  padding-inline-start: 1.2em;
+}
+
+.primal-weather-dialog fieldset {
+  margin-block-start: 6px;
+}
+
+.primal-weather-dialog .form-fields input[type="number"] {
+  width: 5em;
+  flex: none;
+}
+
+.primal-weather-dialog .pw-dialog-sep {
+  flex: none;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #primal-weather * {
+    transition: none !important;
+  }
+}

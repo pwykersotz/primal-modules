@@ -1,0 +1,37 @@
+{
+  "id": "primal-status",
+  "title": "Primal Status",
+  "description": "Status effects with animated token visuals: Mighty Guard, Haste and Slow (2024 rules), fog for cover and hiding, Z's for sleeping and unconscious, hearts for charmed, blood splatters for bloodied, dust and chevrons for prone, dripping blood for bleeding, toxic bubbles for poisoned, a fiery aura for burning, rope for restrained, circling stars for stunned, cracked stone for petrified, electric arcs for paralyzed, sores for diseased, a drained, fading look for incapacitated, a dark swirl for cursed, crosshairs for marked, afterimages for dodging, a big red skull for dead and a faintly pulsing one for dying (0 HP), shadow tendrils for frightened, rune rings for concentration, a clawed hand for grappled, an octarine swirl and level gem for Contamination (Monsters of Drakkenheim, with levels), fourteen Monsters of Drakkenheim conditions (statuses, rules, roll automation and animations, including a creature turned to ice inside a glowing ring of ice that shatters for Frozen and thorny vines that grow and snap for Entangled; Contamination 4 and 5 give Weakened and Dazed, Weakened halves weapon and spell damage, Jinxed and Valor add their dice, Burning deals its fire damage at the start of each turn, and a box in the status pane sets the X of Jinxed, Valor and Burning) and Contamination's rest rules, bloodshot cracks and a level drop for exhaustion, a whirl of air for Invisible creatures and a ghostly shimmer for Ethereal ones (gone entirely when also Hiding), and grey vision limited to 60 ft for Ethereal creatures. Animations can be turned off per token, the GM can give every player the same choices, and statuses Token Magic FX or Sequencer already animate are left to them. Also applies the Advantage and Disadvantage that conditions give (attacks against Dodging, Prone, Invisible creatures and more), automatic Str/Dex save failures and close-range critical hits, ends Dodging at the start of the creature's next turn, removes effects of 1 minute or less that end on a save when the combat ends, marks creatures Dead at three failed death saves, offers optional sound cues, adds a pane beside the token HUD's status palette with the full text, time left and a remove button for every active status, a status palette search (with the three Covers named so they sit together), hideable statuses and a Guidance checkbox on ability checks. Made with AI: written with Claude (Anthropic).",
+  "version": "4.9.0",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "12",
+    "verified": "14"
+  },
+  "relationships": {
+    "recommends": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "reason": "Lets Primal Status share Foundry's token, vision and roll code cleanly with other modules (for example vision modules) instead of replacing it."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/primal-status.js"
+  ],
+  "styles": [
+    "styles/primal-status.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{{!-- The compendiums, their folders and their entries are drawn into this list as they are needed
+      (scripts/pack-view.mjs), between the note at its top and the notes at its end. --}}
+<ol class="directory-list plain">
+    <li class="pcs-reading" hidden>
+        <i class="fa-solid fa-spinner fa-spin" inert></i>
+        <span>{{ localize "PRIMAL_COMPENDIUMS.Filter.Loading" }}</span>
+    </li>
+    {{#unless hasPacks}}
+    <li class="pcs-empty">
+        <p>{{ emptyText }}</p>
+        <button type="button" data-action="choose">
+            <i class="fa-solid fa-list-check" inert></i>
+            <span>{{ localize "PRIMAL_COMPENDIUMS.View.Choose" }}</span>
+        </button>
+    </li>
+    {{/unless}}
+    <li class="pcs-no-match" hidden>{{ localize "PRIMAL_COMPENDIUMS.View.NoMatch" }}</li>
+</ol>

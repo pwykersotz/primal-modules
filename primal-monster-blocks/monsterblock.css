@@ -1,0 +1,2518 @@
+
+.monsterblock .window-header,
+.dnd5e.npc .window-header {
+	padding-left: 30px;
+}
+.monsterblock.window-app .window-header {
+	padding-right: 8ch;
+}
+.monsterblock .window-header a.close {
+	position: absolute;
+	right: 9px;
+	height: 30px !important;	/* Prevents other modules that might try 100% from messing this up now that it's an absolute element. */
+}
+.switches, .monsterblock {
+	--column-width: 52ch;
+}
+.monsterblock {
+	width: 100%;
+	font-size: 14px;
+	--window-padding: 8px;
+	--heading-color: rgb(89 23 13);
+	--roll-hover-color: hsl(8 70% 14% / 1);
+	--divider-color: rgba(140, 42, 42, 1);
+	--divider-color-end: rgba(140, 42, 42, 0);
+	--background-image: url(../../ui/parchment.jpg);
+	--background-filter: hsl(39deg 100% 60% / 80%);
+	--background-blend: hard-light;
+	--menu-background: #f7e2ac;
+	--main-text-color: black;
+	--inline-link-color: #ff6400;
+	--faded-text: #80808080;
+	--shadow-color: var(--main-text-color);
+	--column-gap: 3ch;
+}
+.monsterblock.dark-theme {
+	--menu-background: #1d1f24;
+	font-size: 14px;
+	color: white;
+	--heading-color: #a9b2c2;
+	--roll-hover-color: hsl(199deg 30% 75%);
+	--divider-color: rgb(46 68 130);
+	--background-filter: hsl(0deg 0% 0% / 87%);
+	--background-blend: darken;
+	--main-text-color: #aaa;
+	--inline-link-color: #879ba9;
+	--shadow-color: var(--divider-color);
+}
+.monsterblock.srd-theme {
+	--menu-background: #ffffff;
+	font-size: 14px;
+	color: white;
+	--heading-color: rgb(0 0 0);
+	--roll-hover-color: #828282;
+	--divider-color: rgb(0 0 0);
+	--background-filter: white;
+	--background-blend: color;
+	--main-text-color: #000;
+	--inline-link-color: #808080;
+	--shadow-color: var(--main-text-color);
+}
+.monsterblock.system-theme {
+	--menu-background: #f4f1ea;
+	font-size: 14px;
+	--heading-color: rgb(0 0 0);
+	--roll-hover-color: #828282;
+	--divider-color: rgb(0 0 0);
+	--background-filter: none;
+	--background-blend: none;
+	--main-text-color: #000;
+	--inline-link-color: #ff6400;
+	--shadow-color: var(--main-text-color);
+	--roll-hover-color: rgb(153, 26, 26);
+}
+.monsterblock.cool-theme {
+	--menu-background: #dff1f4;
+	--heading-color: rgb(0 37 93);
+	--roll-hover-color: hsl(202deg 39% 38%);
+	--divider-color: rgb(37 120 169);
+	--background-filter: hsl(180deg 100% 66% / 54%);
+	--background-blend: hard-light;
+	--main-text-color: #000000;
+	--inline-link-color: #246094;
+	--shadow-color: var(--main-text-color);
+}
+.monsterblock.hot-theme {
+	--menu-background: #1e0b08;
+	--heading-color: #e0703f;
+	--roll-hover-color: #ffa077;
+	--divider-color: rgb(150 32 0);
+	--background-filter: hsl(0deg 96% 2% / 87%);
+	--background-blend: darken;
+	--main-text-color: #d9cfcc;
+	--inline-link-color: #f08a5d;
+	--shadow-color: var(--divider-color);
+}
+.monsterblock.foundry-theme {
+	--menu-background: #2a2a2b;
+	font-size: 14px;
+	color: white;
+	--heading-color: #ff6400;
+	--roll-hover-color: #ff2000;
+	--divider-color: red;
+	--background-image: url(../../ui/denim075.png);
+	--background-filter: rgba(0,0,0,0);
+	--inline-link-color: #ff8000;
+	--shadow-color: #444;
+	--main-text-color: #d2d2d2;
+}
+
+.monsterblock * {
+	user-select: text;
+	overflow-wrap: break-word;
+}
+.monsterblock main {
+	display: block;
+	break-inside: auto;
+	position: relative;
+}
+.monsterblock a[href] {
+	color: var(--inline-link-color);
+}
+.monsterblock a[href]:hover {
+	text-shadow: 0 0 8px var(--inline-link-color);
+}
+.monsterblock .window-content {
+	position: static;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: var(--window-padding);
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	color: var(--main-text-color);
+	background-position: 0px 130px;
+	display: block;
+}
+:is(.window-app, .application) .switches {
+	/* background: red; */
+	width: 29px;
+	padding-left: 6px;
+	height: 24px;
+	position: absolute;
+	top: 7px;
+	left: 2px;
+	color: #aaa;
+}
+:is(.window-app, .application).dnd5e .switches {
+	--background-image: url(../../ui/parchment.jpg);
+	--background-filter: rgba(0, 0, 0, 0);
+	--background-blend: none;
+	--heading-color: black;
+	--divider-color: gray;
+}
+:is(.window-app, .application) .switches a {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+}
+:is(.window-app, .application) .switches a.nochild {
+	width: initial;
+}
+:is(.window-app, .application) .switches ul {
+	margin: 0;
+	top: 0;
+	display: none;
+	position: absolute;
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	color: var(--heading-color);
+	padding: 0;
+	left: 100%;
+	z-index: 100;
+	box-shadow: -1px 1px 5px 0px var(--shadow-color);
+}
+:is(.window-app, .application) .switches > ul {
+	margin-top: 6px;
+	margin-left: -8px;
+	top: unset;
+	left: unset;
+	position: fixed;
+	flex-direction: column;
+}
+:is(.window-app, .application) .switches:hover > ul {
+	display: flex;
+}
+:is(.window-app, .application) .switches li a:not(:only-child):after {
+	display: block;
+	content: '>';
+	position: absolute;
+	right: .2em;
+	top: 0;
+}
+:is(.window-app, .application) .switches li a.nochild:not(:only-child):after {
+	content: "";
+}
+:is(.window-app, .application) .switches li:hover > ul {
+	display: block;
+}
+:is(.window-app, .application) .switches li {
+	margin: 0;
+	width: calc(var(--column-width) / 2);
+	position: relative;
+	display: inline-block;
+	padding: 2px;
+	padding-right: 14px;
+	padding-left: 8px;
+	border-left: 3px solid var(--divider-color);
+	border-bottom: 1px dashed gray;
+}
+
+.monsterblock .switches .selected:after {
+	content: " \2713";
+	font-size: .7em;
+	font-weight: bold;
+}
+.monsterblock .switches .switch-input {
+	width: 60%;
+}
+.monsterblock .inline-secrets .secret {
+	display: inline;
+	border: none;
+	background: none;
+	padding: 0;
+}
+.monsterblock .hidden-secrets .secret {
+	display: none;
+}
+/* Rolls, damage and rule links written into descriptions ([[/r]], [[/damage]], &Reference[...]).
+   dnd5e only styles these inside its own sheets (.dnd5e, .dnd5e2), so the stat block gets Foundry's
+   defaults, which don't sit well in running text. */
+.monsterblock enriched-content {
+	display: inline;	/* Foundry's inline-block can't wrap, so "13 (2d6 + 6 Piercing)" jumped lines as one piece */
+}
+.monsterblock a.inline-roll {
+	border: none;
+	background: none;
+	padding: 0;
+	color: inherit;		/* Foundry's dark UI colour for these is near white, so "+11" or "1d20" vanished */
+}
+.monsterblock .roll-link {
+	white-space: nowrap;	/* keep the dice icon with its formula */
+}
+.monsterblock :is(a.inline-roll, .roll-link) > i.fa-dice-d20 {
+	display: inline;	/* not a block of its own, so a line can't break between "(" and the icon */
+	margin: 0 .2em 0 .1em;	/* the d20 fills its whole width, so without this it touches the text on both sides */
+	font-size: .85em;
+	color: var(--main-text-color);
+}
+.monsterblock .inline-secrets
+.secret > :first-child {
+	display: inline;
+}
+
+.monsterblock input.hp-input {
+	width: 4ch;
+	height: 1em;
+	padding: 0;
+}
+.monsterblock .item-attackRoll:hover,
+.monsterblock .item-damageRoll:hover,
+.monsterblock .ability:hover, 
+.monsterblock .saving-throw:hover, 
+.monsterblock .skill:hover, 
+.monsterblock .item-name:hover, 
+.monsterblock .spell:hover, 
+.monsterblock a.inline-roll:hover, 
+.monsterblock [data-roll-formula]:hover, 
+.monsterblock .window-content a:hover, 
+.monsterblock .tweak-menu ul label:hover,
+.monsterblock .menu .menu-toggle:hover {
+	text-shadow: 0px 0px .05em var(--roll-hover-color);
+	cursor: pointer;
+	color: var(--roll-hover-color);
+}
+
+.monsterblock .hover-only,
+.monsterblock .hover-only.select-field {
+	display: none;
+}
+.monsterblock *:hover > .hover-only {
+	display: initial;
+}
+.monsterblock *:hover > .hover-only.select-field {
+	display: inline-block;
+}
+.monsterblock .nocaps {
+	text-transform: lowercase;
+}
+.monsterblock .no-break {
+	white-space: nowrap;
+}
+.monsterblock .toggle-button {
+	/* display: inline-block; */
+	/* width: 20px; */
+	/* height: 20px; */
+	/* border: 1px solid red; */
+	text-indent: initial;
+	cursor: pointer;
+}
+
+.monsterblock .flexcol {
+    display: block;
+    height: 100%;
+    /* width: var(--column-width); */
+    column-width: var(--column-width);
+    column-gap: var(--column-gap);
+    column-fill: balance;
+    /* border: 1px solid red; */
+}
+
+.monsterblock .monster-attributes2 {
+	position: relative;
+}
+.monsterblock .no-caps {
+	text-transform: lowercase;
+}
+.monsterblock .sheet-header {
+	display: block;
+	position: relative;
+}
+.monsterblock .sheet-header section:not(:first-of-type), .monsterblock main {
+	margin-top: .5em;
+}
+.monsterblock .sheet-header section:not(:first-of-type)::before,
+.monsterblock main::before {
+	margin-bottom: .5em;
+	display: block;
+	content: "";
+	border: none;
+	border-top: .2em solid transparent;
+	border-bottom: .2em solid transparent;
+	border-left: var(--column-width) solid var(--divider-color);
+	--mask-image: linear-gradient(to right, black 30%, #000000b8 80%, transparent);
+	-webkit-mask-image: var(--mask-image);
+	mask-image: var(--mask-image);
+}
+.monsterblock .editing main.bio-box:hover::before {
+	border-left: var(--column-width) solid var(--divider-color);
+}
+.monsterblock .editing .sheet-header section.monster-attributes2:hover::before,
+.monsterblock .editing .sheet-header section.monster-attributes2.menu-active::before,
+.monsterblock .editing main:hover::before,
+.monsterblock .editing main.menu-active::before {
+	border-left: calc(var(--column-width) - 2.5ch) solid var(--divider-color);
+}
+.monsterblock .tweak-menu {
+	display: block;
+	width: 1em;
+	height: 1em;
+	position: absolute;
+	right: 0.2em;
+	top: -0.4em;
+	margin: 0;
+	text-align: center;
+	visibility: hidden;
+	cursor: pointer;
+}
+.monsterblock .simple-menu {
+	display: inline;
+	margin: 0;
+}
+.monsterblock .menu .overflow-fix {
+	position: fixed;
+	margin: 0;
+	z-index: 10;
+}
+.monsterblock .tweak-menu > label {
+	color: var(--divider-color);
+}
+.monsterblock .tweak-menu .overflow-fix > ul > li {
+	padding-left: 2ch;
+}
+.monsterblock .tweak-menu li > ul {
+	right: 100%;
+	top: calc(-.5em - 66px);
+	top: 0px;
+	transform: translateY(-40%);
+}
+
+.monsterblock .tweak-menu ul {
+	padding: 0;
+	box-shadow: 1px 1px 5px 0px var(--shadow-color);
+	width: calc(var(--column-width) / 2);
+	color: var(--heading-color);
+}
+.monsterblock .tweak-menu .overflow-fix > ul {
+	right: -8px;
+	top: -.4em;
+}
+.monsterblock .tweak-menu li {
+	position: relative;
+	margin: 0;
+	width: calc(var(--column-width) / 2);
+	position: relative;
+	display: inline-block;
+	padding: 2px;
+	padding-left: 2ch;
+	padding-right: 1ch;
+	border-right: 3px solid var(--divider-color);
+	border-bottom: 1px dashed gray;
+}
+.monsterblock .menu label,
+.monsterblock .menu h4 {
+	cursor: pointer;
+	user-select: none;
+}
+.monsterblock .menu label {
+	display: inline-block;
+	width: 100%;
+}
+.monsterblock .tweak-menu li label:not(:only-child):before {
+	display: block;
+	position: absolute;
+	left: .2em;
+	content: '<';
+	top: 1px;
+}
+.monsterblock .tweak-menu li.custom-trait {
+	padding: 4px;
+}
+.monsterblock .custom-trait input {
+	width: 100%;
+	color: var(--main-text-color);
+}
+.monsterblock .custom-trait .trait-sel-label {
+	font-size: .8em;
+}
+.monsterblock .tweak-menu .custom-trait > label:hover {
+	color: currentColor;
+	text-shadow: none;
+}
+.monsterblock .tweak-menu.menu-open > label,
+.monsterblock .menu.menu-open .overflow-fix > ul,
+.monsterblock .menu li.menu-open > ul {
+	visibility: visible;
+}
+.monsterblock .menu-open > label {
+	font-weight: bold;
+}
+.monsterblock .menu li a {
+	display: inline-block;
+	width: 100%;
+}
+.monsterblock main:hover .tweak-menu,
+.monsterblock .monster-attributes2:hover .tweak-menu {
+	visibility: visible;
+}
+
+.monsterblock .menu-hint {
+	text-align: right;
+	font-style: italic;
+}
+
+.monsterblock .delete-item {
+	/* display: none; */
+	visibility: hidden;
+	font-size: .75em;
+	position: fixed;
+	/* border: red 1px solid; */
+	/* width: 3em; */
+	/* height: 2em; */
+	padding-right: 5px;
+}
+.monsterblock .delete-item:before {
+	position: absolute;
+	width: 2em;
+	height: 2em;
+	/* border: 1px solid green; */
+	content: ' ';
+	left: -2em;
+	top: -2px;
+}
+.monsterblock .delete-item i {
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	box-shadow: 0px 0px 5px 0px var(
+	--shadow-color);
+	width: 1.5em;
+	position: absolute;
+	left: -20px;
+	top: 1px;
+	height: 1.5em;
+	text-align: center;
+	padding-top: .25em;
+	border-radius: .75em;
+	text-indent: 0;
+}
+.monsterblock *:hover > .delete-item {
+	visibility: visible;
+	/* display: inline; */
+}
+.monsterblock .skill-ability {
+	text-transform: capitalize;
+	text-align: center;
+	color: var(--main-text-color);
+	justify-self: start;
+	flex: 3.5ch;
+}
+
+.monsterblock .proficiency-toggle {
+	display: flex;
+	flex-direction: row;
+	gap: .75ch;
+}
+
+.monsterblock .proficiency-toggle .config-button {
+	flex: 1em;
+}
+.monsterblock .proficiency-toggle .skill-label {
+	flex: 100%;
+	flex-grow: 1;
+	white-space: nowrap;
+}
+
+.monsterblock .menu-item-icon {
+	position: relative;
+	display: inline-block;
+	width: 3.5ch;
+	top: 1px;
+}
+.monsterblock .charname {
+	font-size: 2em;
+	color: var(--heading-color);
+	font-family: serif;
+	font-variant: small-caps;
+	font-weight: bold;
+}
+.monsterblock .chartype {
+	font-style: italic;
+	margin: 0;
+	text-transform: capitalize;
+}
+.monsterblock .chartype .select-field {
+	text-transform: capitalize;
+}
+.monsterblock .image-enabled .charname,
+.monsterblock .image-enabled .chartype,
+.monsterblock .image-enabled .monster-attributes1 .attributes {
+	width: 65%;
+}
+.monsterblock .profile-image {
+	border: none;
+	position: absolute;
+	height: 17ch;
+	width: 17ch;
+	right: 0;
+	top: 0;
+	margin: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+.monsterblock header .profile-image img {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+	border: none;
+	margin-right: 0;
+}
+.monsterblock.compact-layout .profile-image:hover,
+.monsterblock .profile-image:hover {
+	width: calc(var(--column-width) * 0.7);
+	height: calc(var(--column-width) * 0.7);
+	z-index: 75;
+}
+
+.monsterblock .ac-type {
+	text-transform: lowercase;
+}
+
+.monsterblock .paren {
+	font-size: .88em;
+}
+
+.monsterblock .attributes, .monsterblock .ability-scores {
+	list-style: none;
+	color: var(--heading-color);
+	padding: 0;
+	margin: 0;
+}
+
+.monsterblock .ability-scores .ability {
+	text-align: center;
+	position: relative;
+}
+.monsterblock .ability-scores .ability .config-button {
+	position: absolute;
+	right: 0;
+	top: .25em;
+	font-size: .75em;
+}
+.monsterblock .ability-scores .ability .config-button:hover {
+	text-shadow: 0 0 1px var(--shadow-color);
+}
+.monsterblock .attributes .attribute {
+	margin: 0;
+	padding-left: 2ch;
+	text-indent: -2ch;
+	position: relative;
+}
+.monsterblock .monster-attributes2 .attributes .attribute:last-of-type {
+	display: flex;
+	justify-content: space-between;
+}
+.monsterblock .attributes .attribute .prof-bonus {
+	margin-right: 2ch;
+}
+.monsterblock .attributes .attribute .select-field {
+	text-indent: initial;
+}
+.monsterblock .attribute-name {
+	display: inline;
+	font-weight: bold;
+}
+.monsterblock .ability-title {
+	display: block;
+	font-weight: bold;
+	margin: 0;
+	text-transform: uppercase;
+}
+.monsterblock .monster-saves .ability-title {
+	display: inline;
+	font-weight: normal;
+	margin: 0;
+	text-transform: capitalize;
+}
+
+.monsterblock input {
+	border: none;
+}
+.monsterblock .inline-list {
+	display: inline;
+	list-style: none;
+	padding: 0;
+}
+.monsterblock .inline-list li {
+	display: inline;
+}
+.monsterblock .inline-list li:after {
+    content: var(--list-seperator) ' ';
+    text-shadow: none;
+	color: var(--main-text-color);
+}
+.monsterblock header .inline-list li:after {
+	color: var(--heading-color);
+}
+
+.monsterblock .inline-list li:last-of-type:after {
+    content: '';
+}
+.monsterblock .spell-list {
+	list-style: none;
+	margin-top: 1em;
+	padding: 0;
+	padding-left: 2ch;
+	text-indent: -2ch;
+}
+.monsterblock .at-will-spells {
+	display: inline;
+	list-style: none;
+	padding: 0;
+}
+.monsterblock .at-will-spells li {
+	display: inline;
+}
+.monsterblock .at-will-spells li:after {
+	content: var(--list-seperator) ' ';
+	text-shadow: none;
+	color: var(--main-text-color);
+}
+.monsterblock .at-will-spells 
+li:not(:first-of-type):nth-last-of-type(2):after {
+	content: var(--list-seperator) ' ' var(--list-conjuntion) ' ';
+}
+.monsterblock .at-will-spells 
+li:nth-last-of-type(2):after {
+	content: ' ' var(--list-conjuntion) '  ';
+}
+.monsterblock .at-will-spells li:last-of-type:after {
+	content: '';
+}
+.monsterblock .spell-name {
+	font-style: italic;
+}
+.monsterblock .monster-saves .ability {
+	display: inline;
+}
+.monsterblock .section-header {
+	break-before: auto;
+	break-after: avoid;
+	break-inside: avoid;
+	margin-top: 0.5em;
+	margin-bottom: -.4em;
+	line-height: 1em;
+	font-size: 1.5em;
+	color: var(--heading-color);
+	font-variant: small-caps;
+	border-bottom: 1px solid var(--heading-color);
+	display: flex;
+	gap: 1ch;
+}
+.monsterblock .section-header .title {
+	flex-grow: 1;
+}
+.monsterblock .header-resource {
+	font-size: .7em;
+}
+.monsterblock .collapse-switch {
+	visibility: hidden;
+}
+.monsterblock .section-header:hover > .collapse-switch {
+	visibility: visible;
+}
+.monsterblock .hidden {
+	display: none;
+}
+.monsterblock .item {
+	margin-top: 1em;
+	/* display: inline-flex; */
+}
+.monsterblock .item-name,
+.monsterblock .name-extension {
+	font-weight: bold;
+	font-style: italic;
+}
+.monsterblock .spell .name-extension {
+	font-weight: initial;
+}
+.monsterblock .legendary-actions .feature-description {
+	padding-left: 2ch;
+	text-indent: -2ch;
+}
+.monsterblock .legendary-actions .feature-description .fas {
+	text-indent: 0ch;
+}
+.monsterblock .legendary-actions .item-name,
+.monsterblock .legendary-actions .name-extension {
+	font-weight: bold;
+	font-style: normal;
+}
+.monsterblock .legendary-actions,
+.monsterblock .lair-actions {
+	margin: 0;
+}
+.monsterblock .legendary-description {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.monsterblock .lair-description {
+	margin-top: 1em;
+}
+
+.monsterblock .attack-type {
+	font-style: italic;
+}
+.monsterblock .hit-label {
+	font-style: italic;
+}
+.monsterblock .inline-children 
+.description p:first-of-type,
+.monsterblock .inline-children 
+.description div:first-of-type:not(.select-field) {
+	display: inline;
+}
+.monsterblock .description {
+	line-height: 1.3em;
+}
+
+.monsterblock *:hover > [contenteditable=true]:empty::after,
+.monsterblock *:hover > .editable-wrapper > [contenteditable=true]:empty::after,
+.monsterblock [contenteditable=true]:focus:empty::after {
+	text-shadow: none;
+	content: attr(placeholder);
+	color: var(--faded-text);
+}
+.monsterblock .optional-comma:not(:empty):before {
+	content: var(--list-seperator) ' ';
+}
+.monsterblock .editing *:hover > .optional-comma:empty:before {
+	content: var(--list-seperator) ' ';
+	color: var(--faded-text);
+}
+.monsterblock .optional-space:not(:empty):before,
+.monsterblock .editing *:hover > .optional-space:empty:before {
+	content: '\00a0';
+}
+.monsterblock [contenteditable=true]:empty {
+	display: inline-block;
+	text-indent: 0;
+	/* line-height: 1.1em; */
+	height: .9em;
+}
+.monsterblock [contenteditable=true]:active,
+.monsterblock [contenteditable=true]:focus, 
+.monsterblock [contenteditable=true]:hover {
+	outline: none;
+	text-decoration: dotted underline;
+}
+.monsterblock .select-field:hover .select-label,
+.monsterblock .select-list li:hover {
+	text-decoration: dotted underline;
+}
+
+.monsterblock .select-field {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+.monsterblock .select-label {
+	cursor: pointer;
+}
+.monsterblock .select-list,
+.monsterblock .hover-list,
+.monsterblock .simple-menu ul {
+	padding-left: .3em;
+	padding-right: .4em;
+	box-shadow: 0px 0px 1px 0px var(--shadow-color);
+}
+.monsterblock .select-list,
+.monsterblock .hover-list,
+.monsterblock .menu ul {
+	visibility: hidden;
+	display: block;
+	position: absolute;
+	list-style: none;
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	z-index: 1;
+}
+.monsterblock .menu ul {
+	text-align: left;
+}
+.monsterblock .select-list {
+	position: fixed;
+	margin-top: 0;
+	margin-left: -.5ch;
+}
+.monsterblock .select-list li {
+	cursor: pointer;
+}
+.monsterblock .select-field:hover .select-list {
+	visibility: visible;
+}
+
+.monsterblock .config-button {
+	display: none;
+}
+.monsterblock .attribute .config-button {
+	padding-left: 2ch;
+}
+.monsterblock *:hover > .config-button {
+	display: inline;
+}
+
+.monsterblock .editor {
+	height: 100%;
+}
+.monsterblock .bio-box h2 {
+	margin-top: 2.5em;
+}
+.monsterblock .biography {
+	margin-top: 2em;
+	--min-height: 30em;
+	max-height: var(--column-width);
+	margin-top: .5em;
+	height: fit-content;
+	min-height: var(--min-height);
+	overflow-y: auto;
+	align-content: flex-start;
+	display: block;
+	break-inside: auto;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+.monsterblock .biography .editor-content {
+	min-height: var(--min-height);
+}
+.monsterblock .biography .tox-tbtn--select.tox-tbtn--bespoke {
+	font-size: .7em;
+	width: 10ch;
+}
+.monsterblock .biography .editor-content img {
+	cursor: pointer;
+}
+
+.monsterblock .hover-list,
+.monsterblock .simple-menu ul {
+	text-indent: 0;
+	width: fit-content;
+	top: -7px;
+	left: -1.3em;
+	white-space: nowrap;
+}
+.monsterblock *:hover > .position-wrapper > .hover-list {
+	visibility: visible;
+}
+.monsterblock .position-wrapper {
+	width: 0px;
+	height: 0px;
+	position: fixed;
+	margin: 0;
+	z-index: 1;
+}
+
+/* Mini Blocks */
+
+.monsterblock.compact-layout,
+.grid-cell .monsterblock .switches > i,
+.monsterblock.compact-window .switches > i {
+	visibility: hidden;
+}
+.monsterblock.compact-layout,
+.grid-cell .monsterblock .switches:hover i,
+.monsterblock.compact-window .switches:hover > i {
+	visibility: visible;
+}
+.monsterblock.compact-window {
+	overflow: hidden;
+	border-radius: 1em;
+}
+.monsterblock.compact-window .window-header {
+	width: 100%;
+	position: absolute;
+	height: 1.5em;
+	border: none;
+	color: var(--main-text-color);
+	padding-top: .3em;
+	line-height: 1em;
+	padding-right: 1.5ch;
+	z-index: 2;
+}
+.monsterblock.compact-window.minimized .window-header {
+	height: 100%;
+	font-size: 1.25em;
+	padding-top: .55em;
+	color: white;
+}
+.monsterblock.compact-window .window-header * {
+	visibility: hidden;
+}
+.monsterblock.compact-window .window-header:hover *,
+.monsterblock.compact-window.minimized .window-header * {
+	visibility: visible;
+}
+.grid-cell .monsterblock .switches,
+.monsterblock.compact-window .switches {
+	top: 4px;
+	left: 0px;
+	width: calc(var(--column-width) / 2);
+	height: 1.5em;
+	z-index: 3;
+}
+.grid-cell .monsterblock .switches > ul,
+.monsterblock.compact-window .switches > ul {
+	margin-top: 2px;
+	margin-left: -4px;
+}
+.monsterblock.compact-window .window-header .window-title {
+	visibility: hidden;
+}
+.monsterblock.compact-window .window-header a {
+	font-size: 0px;
+}
+.monsterblock.compact-window .window-header a:hover {
+	text-shadow: 0px 0px 1px var(--roll-hover-color);
+}
+.monsterblock.compact-window .window-header a > i {
+	font-size: 12px; 
+}
+.monsterblock.compact-window .window-header .header-button.close {
+	position: initial;
+	right: initial;
+	height: initial;
+}
+
+.monsterblock.compact-window.minimized .window-header .window-title {
+	visibility: visible;
+}
+
+.monsterblock.compact-window .window-content {
+	cursor: text;
+	/* padding-top: 0.5em; */
+	box-shadow: inset 0px 0px 4px 4px #00000038;
+}
+
+.monsterblock.compact-layout .charname {
+	line-height: 1em;
+}
+.monsterblock.compact-layout .profile-image {
+	height: 14ch;
+	width: 14ch;
+}
+.monsterblock.compact-layout .image-enabled .charname,
+.monsterblock.compact-layout .image-enabled .chartype,
+.monsterblock.compact-layout .image-enabled .monster-attributes1 .attributes {
+	width: 72%;
+}
+
+.monsterblock.compact-layout .sheet-header section:before {
+	margin-bottom: .3em;
+}
+
+.monsterblock.compact-layout .sheet-header section {
+	margin-top: .3em;
+}
+.monsterblock.compact-layout .sheet-header .monster-identity {
+	margin-top: 0em;
+}
+
+.monsterblock.compact-layout .monster-attributes1,
+.monsterblock.compact-layout .monster-abilities,
+.monsterblock.compact-layout .monster-attributes2 {
+	line-height: 1.1em;
+}
+
+.monsterblock.compact-layout .attribute {
+	height: 1.1em;
+	width: var(--column-width);
+	position: relative;
+}
+
+.monsterblock.compact-layout .monster-attributes2 .attributes .attribute:last-of-type {
+	display: block;
+}
+
+.monsterblock.compact-layout .attribute .attribute-wrapper {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: var(--column-width);
+	height: 1.1em;
+	position: absolute;
+	padding-left: 2ch;
+}
+.monsterblock.compact-layout .attribute .attribute-wrapper.prof-bonus {
+	right: -18em;
+}
+.monsterblock.compact-layout .attribute:hover .attribute-wrapper {
+	white-space: normal;
+	overflow: visible;
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	z-index: 1;
+	height: auto;
+}
+
+.monsterblock.compact-layout .section-header {
+	margin-bottom: -.1em;
+}
+.monsterblock.compact-layout .item {
+	margin-top: .2em;
+}
+.monsterblock.compact-feats .item {
+	cursor: pointer;
+}
+.monsterblock.compact-feats .item.compact {
+	position: relative;
+	height: 2.6em;
+}
+.monsterblock.compact-feats .compact .feature-description,
+.monsterblock.compact-feats .compact .attack-description {
+	height: 2.6em; /* Line height is 1.3em */
+	overflow: hidden;
+	position: absolute;
+	width: var(--column-width);
+	--mask-image: linear-gradient(to bottom, black 1.3em, transparent 2.4em);
+	-webkit-mask-image: var(--mask-image);
+	mask-image: var(--mask-image);
+	transition: box-shadow .2s;
+}
+.monsterblock.compact-feats .item:hover .feature-description,
+.monsterblock.compact-feats .item:hover .attack-description {
+	box-shadow: 0 0 2px 1px #00000030;
+}
+.monsterblock.compact-feats .item.compact:hover .feature-description,
+.monsterblock.compact-feats .item.compact:hover .attack-description {
+	height: auto;
+	background: var(--background-image), var(--background-filter);
+	background-repeat: repeat;
+	background-blend-mode: var(--background-blend);
+	-webkit-mask-image: none;
+	mask-image: none;
+	position: fixed;
+	z-index: 1;
+	box-shadow: 0px 3px 2px 2px #00000030;
+	padding: 1ch;
+	width: calc(var(--column-width) + 2ch);
+	margin-left: -1ch;
+	margin-top: -1ch;
+	border-radius: 0 0 .2em .2em;
+}
+.monsterblock.compact-feats .item.compact.legendary-actions:hover .feature-description {
+	padding-left: 3ch;
+}
+.monsterblock.compact-feats .item.compact:before {
+	display: block;
+	position: relative;
+}
+
+/* GM Screen By Calego#0914 Compatability */
+
+.gm-screen-grid-cell .monsterblock {
+	--background-filter: none;
+}
+
+.gm-screen-grid-cell .monsterblock .flexcol {
+	--column-width: calc(var(--grid-cell-width) - 8px);
+	column-width: unset;
+	column-count: var(--column-span-count);
+	height: unset;
+}
+
+.gm-screen-grid-cell .monsterblock header .profile-image img {
+	margin-right: 0px;
+}
+
+.gm-screen-grid-cell .monsterblock.compact-feats .compact .feature-description,
+.gm-screen-grid-cell .monsterblock.compact-feats .compact .attack-description {
+	position: absolute;
+	width: inherit;
+}
+.gm-screen-grid-cell .monsterblock.compact-feats .item.compact:hover .feature-description,
+.gm-screen-grid-cell .monsterblock.compact-feats .item.compact:hover .attack-description {
+	padding: 0;
+	width: calc(var(--grid-cell-width) - 1ch);
+	margin-left: 0;
+	margin-top: 0;
+}
+.gm-screen-grid-cell .monsterblock.compact-feats .item.compact.legendary-actions:hover .feature-description {
+	padding-left: 2ch;
+}
+
+.monsterblock .flavor-text:empty {
+	display: none;
+}
+.monsterblock .flavor-text {
+	font-style: italic;
+}
+.monsterblock .flavor-text > p {
+	padding: 0 1ch;
+}
+
+/* ------------------------------------------------------------------ */
+/* Foundry VTT v14 / ApplicationV2 window adjustments                  */
+/* ------------------------------------------------------------------ */
+
+.monsterblock.application {
+	--background: transparent;
+	min-width: unset;
+	background-color: #f7e2ac;
+}
+.monsterblock.application .window-header {
+	position: relative;
+}
+.monsterblock.application .window-header .window-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.monsterblock .monsterblock-body {
+	position: static;
+}
+.monsterblock .monsterblock-body [contenteditable="true"]:focus {
+	outline: 1px dotted var(--divider-color);
+	box-shadow: none;
+}
+.monsterblock .config-button {
+	cursor: pointer;
+}
+.monsterblock .biography prose-mirror {
+	min-height: 10em;
+	color: var(--main-text-color);
+}
+.monsterblock.compact-window.application .window-header button.header-control {
+	font-size: 12px;
+	width: 1.5em;
+	height: 1.5em;
+	padding: 0;
+	border: none;
+	background: none;
+	color: var(--main-text-color);
+}
+.monsterblock .item-name.draggable,
+.monsterblock .spell.draggable {
+	cursor: pointer;
+}
+
+/* Hit point controls */
+.monsterblock .hp-temp {
+	white-space: nowrap;
+}
+.monsterblock .attribute .hp-controls {
+	display: inline-flex;
+	align-items: center;
+	gap: .4em;
+	margin-left: .5em;
+	padding-left: .5em;
+	border-left: 1px solid var(--faded-text);
+	text-indent: 0;
+	white-space: nowrap;
+	vertical-align: baseline;
+	line-height: 1;
+}
+.monsterblock .attribute .hp-controls > a,
+.monsterblock .attribute .hp-controls > a.config-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 1.4em;
+	height: 1.4em;
+	margin: 0;
+	padding: 0;
+	position: static;
+	text-indent: 0;
+	font-size: .85em;
+	opacity: .65;
+	cursor: pointer;
+}
+.monsterblock .attribute .hp-controls > a:hover {
+	opacity: 1;
+}
+.monsterblock .attribute .hp-controls > a > i {
+	display: inline-block;
+	position: static;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	text-indent: 0;
+	pointer-events: none;
+}
+
+/* Delete buttons: shown on hover while editing, or always with the "show-delete" toggle */
+.monsterblock section.item {
+	position: relative;
+}
+.monsterblock section.item > div > .delete-item {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: auto;
+	z-index: 2;
+	padding: 0;
+}
+.monsterblock section.item > div > .delete-item:before {
+	display: none;
+}
+.monsterblock section.item > div > .delete-item i {
+	position: static;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-indent: 0;
+}
+.monsterblock .show-delete .delete-item {
+	visibility: visible;
+}
+
+/* Global attack modifiers */
+.monsterblock .attack-modifiers {
+	position: relative;
+	margin: .7em 0 .5em;
+	font-size: .9em;
+	opacity: .8;
+}
+.monsterblock .attack-modifiers-label {
+	font-weight: bold;
+	font-style: italic;
+}
+.monsterblock .attack-modifiers [contenteditable="true"]:empty {
+	min-width: 1.5em;
+}
+.monsterblock .attack-modifiers [contenteditable="true"]:empty::after {
+	content: attr(placeholder);
+	color: var(--faded-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Monster Manual (2024) theme                                          */
+/* ------------------------------------------------------------------ */
+
+.monsterblock.modern-theme {
+	font-size: 14px;
+	--heading-color: #7a200d;
+	--label-color: #2d1a12;
+	--main-text-color: #1f1e1e;
+	--muted-text-color: #5f574f;
+	--divider-color: #87332c;
+	--roll-hover-color: #a8301c;
+	--inline-link-color: #8a2a14;
+	--background-image: none;
+	--background-filter: #f7f0e1;
+	--background-blend: normal;
+	--menu-background: #f3e9d6;
+	--shadow-color: rgb(0 0 0 / .35);
+	--faded-text: rgb(31 30 30 / .4);
+	--physical-label: #eee3d3;
+	--physical-cell: #dccab6;
+	--mental-label: #e8e0e3;
+	--mental-cell: #d5c8d1;
+	--modern-serif: Georgia, "Amiri", "Times New Roman", serif;
+	--modern-sans: var(--dnd5e-font-roboto, Roboto), "Signika", "Segoe UI", sans-serif;
+}
+.monsterblock.modern-theme .window-content {
+	font-family: var(--modern-sans);
+	color: var(--main-text-color);
+	box-shadow: inset 0 0 0 1px rgb(78 76 74 / .45), inset 0 0 0 4px var(--background-filter), inset 0 0 0 5px rgb(78 76 74 / .25);
+}
+
+/* Name and type line */
+.monsterblock.modern-theme .charname {
+	font-family: var(--modern-serif);
+	font-variant: small-caps;
+	font-weight: bold;
+	font-size: 1.75em;
+	line-height: 1.1;
+	color: var(--heading-color);
+	letter-spacing: .01em;
+}
+.monsterblock.modern-theme .chartype {
+	color: var(--muted-text-color);
+	font-style: italic;
+}
+
+/* No tapered red rules between header blocks */
+.monsterblock.modern-theme .sheet-header section:not(:first-of-type)::before,
+.monsterblock.modern-theme main::before {
+	display: none;
+}
+.monsterblock.modern-theme .sheet-header section:not(:first-of-type),
+.monsterblock.modern-theme main {
+	margin-top: .45em;
+}
+
+/* Attribute lines: dark bold labels, plain values, normal capitalization */
+.monsterblock.modern-theme .attributes {
+	color: var(--main-text-color);
+}
+.monsterblock.modern-theme .attribute-name,
+.monsterblock.modern-theme .box-title {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: bold;
+	text-transform: none;
+	color: var(--label-color);
+	border: none;
+	margin: 0;
+}
+.monsterblock.modern-theme header .inline-list li:after {
+	color: var(--main-text-color);
+}
+.monsterblock.modern-theme .no-caps,
+.monsterblock.modern-theme .ac-type {
+	text-transform: none;
+}
+.monsterblock.modern-theme .attributes .modern-split {
+	display: flex;
+	gap: 1ch;
+}
+.monsterblock.modern-theme .attributes .modern-split > .attribute-wrapper {
+	flex: 1 1 50%;
+}
+
+/* Ability score tables */
+.monsterblock.modern-theme .modern-abilities {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 6px;
+	break-inside: avoid;
+}
+.monsterblock.modern-theme .ability-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0;
+	background: none;
+	border: none;
+}
+.monsterblock.modern-theme .ability-table thead th {
+	background: none;
+	border: none;
+	padding: 0 .2em;
+	font-size: .62em;
+	font-weight: normal;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--muted-text-color);
+}
+.monsterblock.modern-theme .ability-table tbody tr {
+	border-block: 1px solid #fff;
+}
+.monsterblock.modern-theme .ability-table tbody th,
+.monsterblock.modern-theme .ability-table tbody td {
+	padding: .15em .3em;
+	border: none;
+	text-indent: 0;
+}
+.monsterblock.modern-theme .ability-table tbody th {
+	position: relative;
+	text-align: left;
+	font-weight: bold;
+	text-transform: capitalize;
+	color: var(--label-color);
+}
+.monsterblock.modern-theme .ability-table tbody td {
+	text-align: center;
+}
+.monsterblock.modern-theme .ability-table tr.physical th,
+.monsterblock.modern-theme .ability-table tr.physical .score {
+	background: var(--physical-label);
+}
+.monsterblock.modern-theme .ability-table tr.physical td:not(.score) {
+	background: var(--physical-cell);
+}
+.monsterblock.modern-theme .ability-table tr.mental th,
+.monsterblock.modern-theme .ability-table tr.mental .score {
+	background: var(--mental-label);
+}
+.monsterblock.modern-theme .ability-table tr.mental td:not(.score) {
+	background: var(--mental-cell);
+}
+.monsterblock.modern-theme .ability-table .config-button {
+	position: absolute;
+	right: .15em;
+	top: .2em;
+	padding: 0;
+	font-size: .75em;
+}
+
+/* Section headings: Traits, Actions, Reactions... */
+.monsterblock.modern-theme .section-header,
+.monsterblock.modern-theme .section-header .title {
+	font-family: var(--modern-serif);
+	font-variant: small-caps;
+	font-weight: bold;
+	color: var(--heading-color);
+}
+.monsterblock.modern-theme .section-header {
+	font-size: 1.3em;
+	line-height: 1.15;
+	margin-top: .55em;
+	margin-bottom: .25em;
+	border-bottom: 1px solid var(--divider-color);
+	text-shadow: none;
+}
+.monsterblock.modern-theme .section-header.hidden {
+	display: none;
+}
+
+/* Features and attacks */
+.monsterblock.modern-theme .item {
+	margin-top: .5em;
+}
+.monsterblock.modern-theme .item-name,
+.monsterblock.modern-theme .name-extension {
+	color: var(--label-color);
+}
+.monsterblock.modern-theme .generated-text.modern .attack-type,
+.monsterblock.modern-theme .generated-text.modern .hit-label {
+	font-style: italic;
+}
+.monsterblock.modern-theme .legendary-description,
+.monsterblock.modern-theme .lair-description {
+	font-style: italic;
+}
+
+/* Compact skills */
+.monsterblock .skills-caret {
+	font-size: .75em;
+	margin-left: .3em;
+	opacity: .6;
+	text-indent: 0;
+}
+
+/* Portrait: float top right so the header text wraps around it and the ability table starts below it */
+.monsterblock.modern-theme .image-enabled .charname,
+.monsterblock.modern-theme .image-enabled .chartype,
+.monsterblock.modern-theme .image-enabled .monster-attributes1 .attributes {
+	width: auto;
+}
+.monsterblock.modern-theme .profile-image,
+.monsterblock.modern-theme.compact-layout .profile-image {
+	position: relative;
+	float: right;
+	width: 15ch;
+	height: 15ch;
+	margin: 0 0 .4em 1ch;
+}
+.monsterblock.modern-theme .profile-image:hover,
+.monsterblock.modern-theme.compact-layout .profile-image:hover {
+	width: 15ch;
+	height: 15ch;
+}
+.monsterblock.modern-theme .monster-abilities {
+	clear: right;
+}
+
+/* Pop-up menus and lists get a solid backing colour so the stat block doesn't show through */
+.monsterblock .menu ul,
+.monsterblock .select-list,
+.monsterblock .hover-list,
+.monsterblock .switches ul,
+:is(.window-app, .application) .switches ul {
+	background-color: var(--menu-background, #f7e2ac);
+	background-blend-mode: normal;
+}
+.monsterblock .menu .overflow-fix {
+	z-index: 20;
+}
+.monsterblock .simple-menu ul {
+	padding: .25em .6em;
+	box-shadow: 1px 1px 6px 0 var(--shadow-color);
+	line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ */
+/* Keep Foundry's UI theme (light text, dark table headers) out of the  */
+/* stat block: headings and tables use the sheet theme's own colours.   */
+/* ------------------------------------------------------------------ */
+.monsterblock.application .window-content {
+	--color-text-primary: var(--main-text-color);
+	--color-text-secondary: var(--main-text-color);
+	--color-text-emphatic: var(--heading-color);
+}
+.monsterblock.monsterblock.application .window-content.window-content :is(h1, h2, h3, h4, h5, h6) {
+	color: var(--heading-color);
+	text-shadow: none;
+}
+.monsterblock.monsterblock.application .window-content.window-content :is(h1, h2, h3, h4, h5, h6) a:not(:hover) {
+	color: inherit;
+}
+.monsterblock.monsterblock.modern-theme.application .window-content.window-content .attribute-name,
+.monsterblock.monsterblock.modern-theme.application .window-content.window-content .box-title {
+	color: var(--label-color);
+}
+
+/* 2024 ability tables: no Foundry header bar, stripes or borders */
+.monsterblock.application .window-content .ability-table,
+.monsterblock.application .window-content .ability-table :is(thead, tbody, tr, thead th) {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	text-shadow: none;
+}
+.monsterblock.application .window-content .ability-table thead th {
+	color: var(--muted-text-color, var(--main-text-color));
+	font-weight: normal;
+}
+.monsterblock.application .window-content .ability-table tbody tr {
+	border-block: 1px solid #fff;
+}
+.monsterblock.application .window-content .ability-table tbody th {
+	color: var(--label-color, var(--heading-color));
+}
+.monsterblock.application .window-content .ability-table tbody td {
+	color: var(--main-text-color);
+}
+
+/* The cog menu sits at the top level of the window, above the title bar, whether or not the window is compact */
+.monsterblock.application > .switches,
+.monsterblock.compact-window.application > .switches {
+	z-index: 5;
+}
+.monsterblock.application.minimized > .switches {
+	display: none;
+}
+
+/* Stat block pane for the selected token: docked to the side of the screen, full height */
+.monsterblock.monsterblock-pane {
+	border-radius: 0;
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+.monsterblock.monsterblock-pane.compact-window {
+	border-radius: 0;
+}
+
+/* The stat block pane: fixed to the screen edge for its full height, like the 5e.tools Panel.
+   Foundry's interface is moved over by its width, so nothing is underneath it. */
+#monsterblock-panel {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	box-sizing: content-box;	/* the border sits outside the stat block's width */
+	z-index: 90;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 12px rgba(0, 0, 0, 0.55);
+}
+#monsterblock-panel[data-side="right"] {
+	right: 0;
+	border-left: 1px solid #000;
+}
+#monsterblock-panel[data-side="left"] {
+	border-right: 1px solid #000;
+}
+#monsterblock-panel > .application.monsterblock-pane {
+	box-sizing: border-box;
+	position: relative;
+	inset: auto;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	min-width: 0;
+	/* Foundry caps windows at 100% of what they're in, which here is the panel: that kept the panel
+	   from ever getting wider than the last sheet in it, and squeezed a wider stat block's columns. */
+	max-width: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+/* Foundry's hotbar, hidden by the "Hide the hotbar" setting: always, or while the panel is open */
+body.pmb-hotbar-always #hotbar,
+body.pmb-hotbar-panel.monsterblock-panel-open #hotbar {
+	display: none !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* Party sheet: one card per player's assigned character               */
+/* ------------------------------------------------------------------ */
+
+.monsterblock.monsterblock-party {
+	--party-card: rgb(255 255 255 / .5);
+	--party-card-edge: color-mix(in srgb, var(--divider-color) 30%, transparent);
+	--party-tile: color-mix(in srgb, var(--heading-color) 7%, rgb(255 255 255 / .55));
+	--party-tile-edge: color-mix(in srgb, var(--divider-color) 22%, transparent);
+	--party-muted: var(--muted-text-color, color-mix(in srgb, var(--main-text-color) 68%, transparent));
+	--party-on-heading: var(--menu-background, #fff);
+	--party-good: #2e8a45;
+	--party-good-light: #5cc270;
+	--party-warn: #c4861a;
+	--party-warn-light: #ecb64e;
+	--party-bad: #b3342a;
+	--party-bad-light: #e0594c;
+	--party-calm: #2f78b7;
+	--party-temp: #3d8fd6;
+	--party-gold: #c18f0e;
+	--party-shadow: 0 1px 2px rgb(0 0 0 / .16), 0 3px 10px rgb(0 0 0 / .08);
+	--party-shadow-hover: 0 2px 4px rgb(0 0 0 / .2), 0 6px 18px rgb(0 0 0 / .14);
+	/* Narrower columns than a stat block, so two columns of cards fit beside the interface on a 1080p screen */
+	--column-width: 41ch;
+}
+.monsterblock.monsterblock-party:is(.dark-theme, .hot-theme, .foundry-theme) {
+	--party-card: rgb(255 255 255 / .045);
+	--party-tile: rgb(255 255 255 / .06);
+	--party-tile-edge: rgb(255 255 255 / .1);
+	--party-good: #3fa65a;
+	--party-bad: #d24b3e;
+	--party-bad-light: #f07467;
+	--party-calm: #4a95d6;
+	--party-gold: #e2b23a;
+	--party-shadow: 0 1px 3px rgb(0 0 0 / .55);
+	--party-shadow-hover: 0 2px 10px rgb(0 0 0 / .7);
+}
+
+/* The card */
+.monsterblock.monsterblock-party .party-member {
+	--player: var(--player-color, var(--divider-color));
+	position: relative;
+	break-inside: avoid;
+	margin: 0 0 10px;
+	padding: 8px 9px 9px 13px;
+	border: 1px solid var(--party-card-edge);
+	border-radius: 8px;
+	background:
+		linear-gradient(115deg, color-mix(in srgb, var(--player) 18%, transparent), transparent 42%),
+		var(--party-card);
+	box-shadow: var(--party-shadow);
+	color: var(--main-text-color);
+	overflow: hidden;
+	transition: box-shadow .15s ease;
+}
+.monsterblock.monsterblock-party .party-member::before {
+	content: "";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 4px;
+	background: linear-gradient(var(--player), color-mix(in srgb, var(--player) 35%, transparent));
+}
+.monsterblock.monsterblock-party .party-member:hover {
+	box-shadow: var(--party-shadow-hover);
+}
+.monsterblock.monsterblock-party .party-member.party-down {
+	border-color: color-mix(in srgb, var(--party-bad) 55%, transparent);
+	background:
+		linear-gradient(115deg, color-mix(in srgb, var(--party-bad) 20%, transparent), transparent 55%),
+		var(--party-card);
+}
+
+/* Portrait, name, class and player */
+.monsterblock.monsterblock-party .party-member-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.monsterblock.monsterblock-party .party-portrait {
+	position: relative;
+	flex: 0 0 auto;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.monsterblock.monsterblock-party .party-portrait img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+	border: 2px solid var(--player);
+	border-radius: 50%;
+	background: rgb(0 0 0 / .15);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--player) 22%, transparent), 0 2px 6px rgb(0 0 0 / .35);
+	transition: transform .15s ease;
+}
+.monsterblock.monsterblock-party .party-portrait:hover img {
+	transform: scale(1.05);
+}
+.monsterblock.monsterblock-party .party-dead .party-portrait img,
+.monsterblock.monsterblock-party .party-down .party-portrait img {
+	filter: grayscale(.85) brightness(.85);
+}
+.monsterblock.monsterblock-party .party-level {
+	position: absolute;
+	right: -5px;
+	bottom: -3px;
+	min-width: 21px;
+	height: 21px;
+	padding: 0 4px;
+	box-sizing: border-box;
+	border: 2px solid var(--party-on-heading);
+	border-radius: 11px;
+	background: var(--heading-color);
+	color: var(--party-on-heading);
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 17px;
+	text-align: center;
+	box-shadow: 0 1px 3px rgb(0 0 0 / .4);
+}
+.monsterblock.monsterblock-party .party-identity {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+.monsterblock.monsterblock-party .party-name {
+	margin: 0;
+	border: none;
+	font-family: var(--modern-serif, inherit);
+	font-variant: small-caps;
+	font-weight: bold;
+	font-size: 1.45em;
+	line-height: 1.05;
+	letter-spacing: .01em;
+	color: var(--heading-color);
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.monsterblock.monsterblock-party .party-subline {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	margin-top: 1px;
+}
+.monsterblock.monsterblock-party .party-details {
+	flex: 0 1 auto;
+	min-width: 0;
+	font-size: .88em;
+	font-style: italic;
+	color: var(--party-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.monsterblock.monsterblock-party .party-player {
+	flex: 0 0 auto;
+	padding: 0 7px;
+	border: 1px solid color-mix(in srgb, var(--player) 55%, transparent);
+	border-radius: 9px;
+	background: color-mix(in srgb, var(--player) 20%, transparent);
+	font-size: .7em;
+	font-weight: bold;
+	line-height: 15px;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	color: var(--main-text-color);
+}
+.monsterblock.monsterblock-party .party-inspiration {
+	align-self: flex-start;
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: radial-gradient(circle, color-mix(in srgb, var(--party-gold) 30%, transparent), transparent 70%);
+	color: var(--party-gold);
+	font-size: 1.3em;
+	text-shadow: 0 0 6px color-mix(in srgb, var(--party-gold) 65%, transparent);
+	animation: monsterblock-party-glow 2.6s ease-in-out infinite;
+}
+@keyframes monsterblock-party-glow {
+	50% { text-shadow: 0 0 12px var(--party-gold); transform: rotate(10deg) scale(1.06); }
+}
+
+/* Hit points */
+.monsterblock.monsterblock-party .party-hp {
+	position: relative;
+	height: 21px;
+	margin: 8px 0 6px;
+	border-radius: 6px;
+	overflow: hidden;
+	background: color-mix(in srgb, var(--main-text-color) 16%, transparent);
+	box-shadow: inset 0 1px 3px rgb(0 0 0 / .35);
+}
+.monsterblock.monsterblock-party .party-hp-fill {
+	position: absolute;
+	inset: 0 auto 0 0;
+	background: linear-gradient(var(--party-good-light), var(--party-good));
+	box-shadow: 1px 0 0 rgb(0 0 0 / .25);
+	transition: width .4s ease;
+}
+.monsterblock.monsterblock-party .party-hp-fill::after {
+	content: "";
+	position: absolute;
+	inset: 0 0 55% 0;
+	background: linear-gradient(rgb(255 255 255 / .35), rgb(255 255 255 / 0));
+}
+.monsterblock.monsterblock-party .party-bloodied .party-hp-fill {
+	background: linear-gradient(var(--party-warn-light), var(--party-warn));
+}
+.monsterblock.monsterblock-party .party-down .party-hp-fill {
+	background: linear-gradient(var(--party-bad-light), var(--party-bad));
+}
+.monsterblock.monsterblock-party .party-down .party-hp {
+	animation: monsterblock-party-pulse 1.8s ease-in-out infinite;
+}
+@keyframes monsterblock-party-pulse {
+	50% { box-shadow: inset 0 1px 3px rgb(0 0 0 / .35), 0 0 0 2px color-mix(in srgb, var(--party-bad) 60%, transparent); }
+}
+.monsterblock.monsterblock-party .party-hp-temp-fill {
+	position: absolute;
+	inset: 0 auto auto 0;
+	height: 5px;
+	background: var(--party-temp);
+	box-shadow: 0 0 5px var(--party-temp);
+}
+.monsterblock.monsterblock-party .party-hp-text {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 100%;
+	font-weight: bold;
+	font-variant-numeric: tabular-nums;
+	color: #fff;
+	text-shadow: 0 1px 2px rgb(0 0 0 / .9), 0 0 3px rgb(0 0 0 / .6);
+}
+.monsterblock.monsterblock-party .party-hp-text > i {
+	font-size: .85em;
+}
+.monsterblock.monsterblock-party .party-hp-max {
+	font-weight: normal;
+	opacity: .9;
+}
+.monsterblock.monsterblock-party .party-hp-temp {
+	padding: 0 6px;
+	border-radius: 8px;
+	background: var(--party-temp);
+	font-size: .8em;
+	line-height: 15px;
+	text-shadow: none;
+	box-shadow: 0 0 0 1px rgb(0 0 0 / .25);
+}
+
+/* Death saves and exhaustion */
+.monsterblock.monsterblock-party .party-death {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0 0 7px;
+	padding: 3px 8px;
+	border: 1px dashed color-mix(in srgb, var(--party-bad) 50%, transparent);
+	border-radius: 6px;
+	background: color-mix(in srgb, var(--party-bad) 9%, transparent);
+}
+.monsterblock.monsterblock-party .party-death-label {
+	flex: 1;
+	font-size: .75em;
+	font-weight: bold;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	color: var(--party-bad);
+}
+.monsterblock.monsterblock-party .party-pips {
+	display: inline-flex;
+	gap: 3px;
+}
+.monsterblock.monsterblock-party .party-pip {
+	width: 11px;
+	height: 11px;
+	box-sizing: border-box;
+	border: 1.5px solid currentColor;
+	border-radius: 50%;
+	opacity: .45;
+}
+.monsterblock.monsterblock-party .party-pip.filled {
+	background: currentColor;
+	opacity: 1;
+	box-shadow: 0 0 4px currentColor;
+}
+.monsterblock.monsterblock-party .party-pips.success { color: var(--party-good); }
+.monsterblock.monsterblock-party .party-pips.failure { color: var(--party-bad); }
+.monsterblock.monsterblock-party .party-exhaustion {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 6px;
+	font-size: .85em;
+}
+.monsterblock.monsterblock-party .party-exhaustion-label {
+	font-weight: bold;
+	color: var(--party-warn);
+}
+.monsterblock.monsterblock-party .party-exhaustion .party-pips {
+	color: var(--party-warn);
+}
+.monsterblock.monsterblock-party .party-exhaustion .party-pip {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	transform: rotate(45deg);
+}
+
+/* AC, initiative, speed and spell DC */
+.monsterblock.monsterblock-party .party-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+	gap: 4px;
+	margin: 0 0 5px;
+}
+.monsterblock.monsterblock-party .party-stat {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 3px 4px 2px;
+	border: 1px solid var(--party-tile-edge);
+	border-radius: 6px;
+	background: var(--party-tile);
+	line-height: 1.1;
+}
+.monsterblock.monsterblock-party .party-stat > i {
+	position: absolute;
+	right: -4px;
+	bottom: -6px;
+	font-size: 28px;
+	color: var(--heading-color);
+	opacity: .13;
+	pointer-events: none;
+}
+.monsterblock.monsterblock-party .party-stat-value {
+	font-family: var(--modern-serif, inherit);
+	font-size: 1.2em;
+	font-weight: bold;
+	font-variant-numeric: tabular-nums;
+	color: var(--heading-color);
+	white-space: nowrap;
+}
+.monsterblock.monsterblock-party .party-stat-label {
+	font-size: .66em;
+	font-weight: bold;
+	letter-spacing: .09em;
+	text-transform: uppercase;
+	color: var(--party-muted);
+	white-space: nowrap;
+}
+
+/* Passive scores and other movement */
+.monsterblock.monsterblock-party .party-senses,
+.monsterblock.monsterblock-party .party-movement {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 2px 9px;
+	font-size: .82em;
+}
+.monsterblock.monsterblock-party .party-senses {
+	gap: 2px 8px;
+	white-space: nowrap;
+}
+.monsterblock.monsterblock-party .party-movement {
+	margin-top: 3px;
+	color: var(--party-muted);
+}
+.monsterblock.monsterblock-party :is(.party-sense, .party-move) > i {
+	margin-right: 3px;
+	color: var(--heading-color);
+	opacity: .75;
+}
+.monsterblock.monsterblock-party .party-sense b {
+	font-variant-numeric: tabular-nums;
+	color: var(--heading-color);
+}
+
+/* Conditions and effects */
+.monsterblock.monsterblock-party .party-status-area {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-top: 7px;
+	padding-top: 6px;
+	border-top: 1px solid;
+	border-image: linear-gradient(90deg, var(--divider-color), transparent 85%) 1;
+}
+.monsterblock.monsterblock-party .party-conditions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+.monsterblock.monsterblock-party .party-condition {
+	--tone: var(--party-bad);
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 2px 9px 2px 2px;
+	border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--tone) 13%, transparent);
+	font-size: .82em;
+	font-weight: bold;
+	line-height: 18px;
+	color: var(--main-text-color);
+}
+.monsterblock.monsterblock-party .party-condition.tone-neutral {
+	--tone: var(--party-calm);
+}
+.monsterblock.monsterblock-party .party-condition.tone-severe {
+	border-color: var(--party-bad);
+	background: linear-gradient(var(--party-bad-light), var(--party-bad));
+	color: #fff;
+	text-shadow: 0 1px 1px rgb(0 0 0 / .4);
+}
+.monsterblock.monsterblock-party .party-condition-icon {
+	display: grid;
+	place-items: center;
+	flex: 0 0 auto;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--tone);
+	overflow: hidden;
+}
+.monsterblock.monsterblock-party .tone-severe .party-condition-icon {
+	background: rgb(0 0 0 / .3);
+}
+.monsterblock.monsterblock-party .party-condition-icon img {
+	width: 13px;
+	height: 13px;
+	border: none;
+}
+/* Pictures that aren't icons fill the circle */
+.monsterblock.monsterblock-party .party-condition-icon img:not(.svg) {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.monsterblock.monsterblock-party .party-condition-duration {
+	font-weight: normal;
+	font-size: .9em;
+	opacity: .8;
+}
+.monsterblock.monsterblock-party .party-effects {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.monsterblock.monsterblock-party .party-effect {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	margin: 0;
+	padding: 2px 7px 2px 3px;
+	border: 1px solid var(--party-tile-edge);
+	border-radius: 6px;
+	background: var(--party-tile);
+	cursor: pointer;
+	transition: border-color .15s ease, background-color .15s ease;
+}
+.monsterblock.monsterblock-party .party-effect:hover {
+	border-color: color-mix(in srgb, var(--heading-color) 55%, transparent);
+}
+.monsterblock.monsterblock-party .party-effect.temporary {
+	box-shadow: inset 3px 0 0 var(--heading-color);
+}
+.monsterblock.monsterblock-party .party-effect.concentration {
+	box-shadow: inset 3px 0 0 var(--party-calm);
+}
+.monsterblock.monsterblock-party .party-effect-img {
+	flex: 0 0 auto;
+	width: 26px;
+	height: 26px;
+	margin-left: 2px;
+	border: 1px solid rgb(0 0 0 / .35);
+	border-radius: 5px;
+	object-fit: cover;
+	background: #2a2622;
+}
+/* Foundry's white icons sit on a dark coloured tile */
+.monsterblock.monsterblock-party .party-effect-img.svg {
+	padding: 4px;
+	box-sizing: border-box;
+	background: var(--divider-color);
+}
+.monsterblock.monsterblock-party .party-effect.concentration .party-effect-img.svg {
+	background: var(--party-calm);
+}
+.monsterblock.monsterblock-party .party-effect-text {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-width: 0;
+	line-height: 1.15;
+}
+.monsterblock.monsterblock-party .party-effect-name {
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.monsterblock.monsterblock-party .party-effect-count {
+	margin-left: 5px;
+	padding: 0 5px;
+	border-radius: 7px;
+	background: var(--heading-color);
+	color: var(--party-on-heading);
+	font-size: .75em;
+	vertical-align: 1px;
+}
+.monsterblock.monsterblock-party .party-effect-source {
+	font-size: .8em;
+	font-style: italic;
+	color: var(--party-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.monsterblock.monsterblock-party .party-effect-imposes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+	margin-top: 2px;
+}
+.monsterblock.monsterblock-party .party-effect-tag {
+	padding: 0 6px;
+	border: 1px solid color-mix(in srgb, var(--party-bad) 55%, transparent);
+	border-radius: 8px;
+	background: color-mix(in srgb, var(--party-bad) 13%, transparent);
+	font-size: .72em;
+	font-weight: bold;
+	line-height: 14px;
+}
+.monsterblock.monsterblock-party .party-effect-duration {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	flex: 0 1 auto;
+	max-width: 42%;
+	padding: 1px 8px;
+	border-radius: 9px;
+	background: color-mix(in srgb, var(--heading-color) 13%, transparent);
+	font-size: .78em;
+	font-weight: bold;
+	color: var(--heading-color);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.monsterblock.monsterblock-party .party-effect-duration > i {
+	flex: 0 0 auto;
+	font-size: .9em;
+}
+
+/* Passive effects from features and items, folded away */
+.monsterblock.monsterblock-party .party-passive > summary {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 1px 0;
+	font-size: .74em;
+	font-weight: bold;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--party-muted);
+	cursor: pointer;
+	list-style: none;
+}
+.monsterblock.monsterblock-party .party-passive > summary::-webkit-details-marker {
+	display: none;
+}
+.monsterblock.monsterblock-party .party-passive > summary > i {
+	font-size: .9em;
+	transition: transform .15s ease;
+}
+.monsterblock.monsterblock-party .party-passive[open] > summary > i {
+	transform: rotate(90deg);
+}
+.monsterblock.monsterblock-party .party-passive > summary:hover {
+	color: var(--heading-color);
+}
+.monsterblock.monsterblock-party .party-passive-count {
+	padding: 0 6px;
+	border-radius: 8px;
+	background: color-mix(in srgb, var(--main-text-color) 14%, transparent);
+	letter-spacing: 0;
+}
+.monsterblock.monsterblock-party .party-passive .party-effects {
+	margin-top: 4px;
+}
+.monsterblock.monsterblock-party .party-passive .party-effect {
+	opacity: .88;
+}
+
+.monsterblock.monsterblock-party .party-empty {
+	font-style: italic;
+}
+
+/* The character sheet banner background: dnd5e's own banner art, turned grey and blended over the
+   chosen color under a light gradient, the way the Tidy 5e sheets color their headers. It covers the
+   whole panel and stays put while the cards scroll. The art is dnd5e's, used from the system rather
+   than copied into this module. */
+.monsterblock.monsterblock-party.party-banner {
+	--party-banner-color: #741b2b;
+	--party-card: color-mix(in srgb, var(--party-banner-color) 8%, rgb(255 255 255 / .74));
+	--party-shadow: 0 1px 3px rgb(0 0 0 / .35), 0 4px 12px rgb(0 0 0 / .25);
+	--party-shadow-hover: 0 2px 6px rgb(0 0 0 / .45), 0 8px 20px rgb(0 0 0 / .3);
+	isolation: isolate;
+	background:
+		linear-gradient(to bottom, rgb(159 146 117 / .5), rgb(132 119 90 / .66)),
+		var(--party-banner-color);
+	background-blend-mode: color-burn, normal;
+}
+.monsterblock.monsterblock-party.party-banner:is(.dark-theme, .hot-theme, .foundry-theme) {
+	--party-card: color-mix(in srgb, var(--party-banner-color) 10%, rgb(16 14 18 / .74));
+}
+.monsterblock.monsterblock-party.party-banner::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: url("../../systems/dnd5e/ui/official/banner-character-dark.webp") no-repeat center top / cover;
+	filter: grayscale(100%);
+	mix-blend-mode: luminosity;
+	opacity: .4;
+	pointer-events: none;
+}
+.monsterblock.monsterblock-party.party-banner .window-content {
+	background: transparent;
+}
+
+/* The GM's button to take a creature out of the party: in the card's corner, shown on hover */
+.monsterblock.monsterblock-party .party-remove {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	box-shadow: none;
+	color: var(--party-muted);
+	font-size: .85em;
+	line-height: 1;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity .15s ease, background-color .15s ease, color .15s ease;
+}
+.monsterblock.monsterblock-party .party-member:hover .party-remove,
+.monsterblock.monsterblock-party .party-remove:focus-visible {
+	opacity: 1;
+}
+.monsterblock.monsterblock-party .party-remove:hover,
+.monsterblock.monsterblock-party .party-remove:focus-visible {
+	background: color-mix(in srgb, var(--party-bad) 16%, transparent);
+	color: var(--party-bad);
+}
+@media (hover: none) {
+	.monsterblock.monsterblock-party .party-remove { opacity: .7; }
+}
+/* Keep Heroic Inspiration clear of the remove button */
+.monsterblock.monsterblock-party .party-member-header:has(.party-remove) .party-inspiration {
+	margin-right: 18px;
+}
+
+/* An actor being dragged over the party sheet, to add it */
+.monsterblock.monsterblock-party.party-drop-target .window-content {
+	outline: 2px dashed var(--divider-color);
+	outline-offset: -6px;
+	background-color: color-mix(in srgb, var(--divider-color) 8%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.monsterblock.monsterblock-party .party-inspiration,
+	.monsterblock.monsterblock-party .party-down .party-hp {
+		animation: none;
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Settings window: every setting, grouped into tabs and sections      */
+/* ------------------------------------------------------------------ */
+
+.monsterblock-settings {
+	--mbs-accent: var(--color-warm-2, #c9593f);
+	--mbs-line: color-mix(in srgb, currentColor 16%, transparent);
+	--mbs-faint: color-mix(in srgb, currentColor 7%, transparent);
+}
+.monsterblock-settings .window-content {
+	padding: 0;
+	overflow: hidden;
+}
+.monsterblock-settings .mbs-root {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	width: 100%;
+}
+.monsterblock-settings .mbs-layout {
+	display: grid;
+	grid-template-columns: 158px minmax(0, 1fr);
+	min-height: 420px;
+}
+.monsterblock-settings .mbs-tabs {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 10px 6px;
+	border-right: 1px solid var(--mbs-line);
+	background: var(--mbs-faint);
+}
+.monsterblock-settings .mbs-tab {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 9px;
+	width: 100%;
+	min-height: 34px;
+	margin: 0;
+	padding: 6px 10px;
+	border: none;
+	border-radius: 6px;
+	background: none;
+	box-shadow: none;
+	color: inherit;
+	font-size: 13px;
+	line-height: 1.2;
+	text-align: left;
+	cursor: pointer;
+}
+.monsterblock-settings .mbs-tab > i {
+	flex: 0 0 16px;
+	margin: 0;
+	text-align: center;
+	opacity: .75;
+}
+.monsterblock-settings .mbs-tab:hover {
+	background: color-mix(in srgb, currentColor 9%, transparent);
+}
+.monsterblock-settings .mbs-tab:focus-visible {
+	outline: 2px solid var(--mbs-accent);
+	outline-offset: -2px;
+}
+.monsterblock-settings .mbs-tab.active {
+	background: color-mix(in srgb, var(--mbs-accent) 20%, transparent);
+	box-shadow: inset 3px 0 0 var(--mbs-accent);
+	font-weight: bold;
+}
+.monsterblock-settings .mbs-tab.active > i {
+	color: var(--mbs-accent);
+	opacity: 1;
+}
+.monsterblock-settings .mbs-panels {
+	min-height: 0;
+	max-height: min(78vh, 760px);
+	padding: 10px 14px 12px;
+	overflow-y: auto;
+}
+.monsterblock-settings .mbs-panel {
+	display: none;
+}
+.monsterblock-settings .mbs-panel.active {
+	display: block;
+}
+.monsterblock-settings .mbs-scope {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 10px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	background: var(--mbs-faint);
+	font-size: 12px;
+	line-height: 1.3;
+}
+.monsterblock-settings .mbs-scope > i {
+	flex: 0 0 auto;
+	color: var(--mbs-accent);
+}
+.monsterblock-settings .mbs-group {
+	margin: 0 0 10px;
+	padding: 2px 12px 4px;
+	border: 1px solid var(--mbs-line);
+	border-radius: 8px;
+}
+.monsterblock-settings .mbs-group > legend {
+	padding: 0 6px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+	opacity: .85;
+}
+.monsterblock-settings .mbs-field {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(140px, 42%);
+	align-items: center;
+	gap: 3px 12px;
+	padding: 7px 0;
+}
+.monsterblock-settings .mbs-field + .mbs-field {
+	border-top: 1px solid var(--mbs-line);
+}
+.monsterblock-settings .mbs-field.mbs-checkbox {
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 2px 8px;
+}
+.monsterblock-settings .mbs-field > label {
+	margin: 0;
+	font-weight: 600;
+	line-height: 1.25;
+	cursor: pointer;
+}
+.monsterblock-settings .mbs-field input[type="checkbox"] {
+	margin: 0;
+	cursor: pointer;
+}
+.monsterblock-settings .mbs-control :is(select, input) {
+	width: 100%;
+	margin: 0;
+}
+.monsterblock-settings .mbs-control input[type="color"] {
+	display: block;
+	width: 72px;
+	height: 28px;
+	margin-inline-start: auto;
+	padding: 2px;
+	cursor: pointer;
+}
+.monsterblock-settings .mbs-hint {
+	grid-column: 1 / -1;
+	margin: 0;
+	font-size: 12px;
+	line-height: 1.3;
+	opacity: .72;
+}
+.monsterblock-settings .mbs-checkbox .mbs-hint {
+	grid-column: 2;
+}
+.monsterblock-settings .mbs-field.disabled {
+	opacity: .55;
+}
+.monsterblock-settings .mbs-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin-left: 6px;
+	padding: 0 7px;
+	border: 1px solid color-mix(in srgb, var(--mbs-accent) 55%, transparent);
+	border-radius: 9px;
+	background: color-mix(in srgb, var(--mbs-accent) 14%, transparent);
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: .05em;
+	line-height: 16px;
+	text-transform: uppercase;
+	vertical-align: 1px;
+	white-space: nowrap;
+}
+.monsterblock-settings .mbs-note {
+	font-style: italic;
+}
+.monsterblock-settings .mbs-footer {
+	display: flex;
+	gap: 8px;
+	padding: 8px 10px;
+	border-top: 1px solid var(--mbs-line);
+}
+.monsterblock-settings .mbs-footer > button {
+	flex: 1;
+	margin: 0;
+}
+.monsterblock-settings .mbs-footer > button[type="submit"] {
+	flex: 2;
+}

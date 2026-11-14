@@ -1,0 +1,72 @@
+{
+	"id": "primal-monster-blocks",
+	"title": "Primal Monster Blocks",
+	"description": "An NPC sheet that looks like a printed 5e monster stat block. A port of zeel's Monster Blocks to Foundry V14 and dnd5e 6.x. Made with AI: the port was written with Claude (Anthropic).",
+	"authors": [
+		{
+			"name": "zeel",
+			"email": "zeel02@gmail.com",
+			"url": "https://github.com/zeel01",
+			"discord": "zeel#4200"
+		},
+		{
+			"name": "Pwykersotz"
+		}
+	],
+	"version": "4.0.3",
+	"compatibility": {
+		"minimum": "14",
+		"verified": "14.369"
+	},
+	"relationships": {
+		"systems": [
+			{
+				"id": "dnd5e",
+				"type": "system",
+				"compatibility": {
+					"minimum": "6.0.0",
+					"verified": "6.0.6"
+				}
+			}
+		]
+	},
+	"esmodules": [
+		"monsterblock.js"
+	],
+	"styles": [
+		"monsterblock.css"
+	],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "lang/en.json"
+		},
+		{
+			"lang": "ja",
+			"name": "日本語",
+			"path": "lang/ja.json"
+		},
+		{
+			"lang": "fr",
+			"name": "Français",
+			"path": "lang/fr.json"
+		},
+		{
+			"lang": "pt-BR",
+			"name": "Português (Brasil)",
+			"path": "lang/pt-BR.json"
+		}
+	],
+	"url": "https://github.com/zeel01/MonsterBlocks",
+	"media": [
+		{
+			"type": "cover",
+			"url": "https://raw.githubusercontent.com/zeel01/MonsterBlocks/master/examples/ancientRedDragon_5.png"
+		},
+		{
+			"type": "icon",
+			"url": "https://avatars2.githubusercontent.com/u/1721836"
+		}
+	]
+}

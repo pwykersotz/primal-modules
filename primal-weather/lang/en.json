@@ -1,0 +1,252 @@
+{
+  "PRIMAL_WEATHER": {
+    "Bar": {
+      "Roll": "Roll new weather for today",
+      "Menu": "Weather options",
+      "Empty": "No weather yet. Click to roll it",
+      "HiddenFromPlayers": "Hidden from players"
+    },
+    "Tooltip": {
+      "Manual": "(set by the GM)",
+      "Temperature": "Now {now} · High {high} · Low {low}",
+      "Wind": "Wind: {wind}",
+      "Stale": "Today's weather hasn't been rolled yet. It will be once a GM is online.",
+      "StaleGM": "Today's weather hasn't been rolled yet.",
+      "Forecast": "Tomorrow (only you see this): {condition}, high {high}, low {low}, {wind}",
+      "ClickEdit": "Click to change the weather"
+    },
+    "Condition": {
+      "clear": {
+        "Name": "Clear",
+        "Hint": "Not a cloud in the sky."
+      },
+      "partlyCloudy": {
+        "Name": "Partly cloudy",
+        "Hint": "Sun and cloud by turns."
+      },
+      "overcast": {
+        "Name": "Overcast",
+        "Hint": "A grey lid of cloud, but dry."
+      },
+      "fog": {
+        "Name": "Fog",
+        "Hint": "Thick, clinging fog."
+      },
+      "drizzle": {
+        "Name": "Drizzle",
+        "Hint": "A thin, steady drizzle."
+      },
+      "rain": {
+        "Name": "Rain",
+        "Hint": "Steady rain."
+      },
+      "heavyRain": {
+        "Name": "Heavy rain",
+        "Hint": "A downpour. Roads turn to mud."
+      },
+      "thunderstorm": {
+        "Name": "Thunderstorm",
+        "Hint": "Lashing rain, thunder and lightning."
+      },
+      "sleet": {
+        "Name": "Sleet",
+        "Hint": "Half-frozen rain that stings and soaks."
+      },
+      "iceStorm": {
+        "Name": "Ice storm",
+        "Hint": "Freezing rain that glazes everything in ice."
+      },
+      "lightSnow": {
+        "Name": "Light snow",
+        "Hint": "A few flakes drifting down."
+      },
+      "snow": {
+        "Name": "Snow",
+        "Hint": "Steady snowfall."
+      },
+      "heavySnow": {
+        "Name": "Heavy snow",
+        "Hint": "Thick snow, piling up fast."
+      },
+      "blizzard": {
+        "Name": "Blizzard",
+        "Hint": "Driving snow and a howling wind."
+      },
+      "duststorm": {
+        "Name": "Dust storm",
+        "Hint": "A wall of blowing sand and dust."
+      }
+    },
+    "Wind": {
+      "calm": {
+        "Short": "Calm",
+        "Long": "Calm"
+      },
+      "light": {
+        "Short": "Breezy",
+        "Long": "Light breeze"
+      },
+      "moderate": {
+        "Short": "Windy",
+        "Long": "Moderate wind"
+      },
+      "strong": {
+        "Short": "Strong wind",
+        "Long": "Strong wind"
+      },
+      "gale": {
+        "Short": "Gale",
+        "Long": "Gale"
+      }
+    },
+    "Season": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Autumn",
+      "winter": "Winter"
+    },
+    "Climate": {
+      "temperate": {
+        "Name": "Temperate"
+      },
+      "coastal": {
+        "Name": "Coastal"
+      },
+      "mountain": {
+        "Name": "Mountain"
+      },
+      "arctic": {
+        "Name": "Arctic"
+      },
+      "desert": {
+        "Name": "Desert"
+      },
+      "tropical": {
+        "Name": "Tropical"
+      }
+    },
+    "Rules": {
+      "fog": {
+        "Name": "Fog",
+        "Text": "The area is lightly obscured, and the thickest patches are heavily obscured."
+      },
+      "heavyPrecipitation": {
+        "Name": "Heavy precipitation",
+        "Text": "Everything in it is lightly obscured, and creatures have disadvantage on Wisdom (Perception) checks that rely on sight."
+      },
+      "heavyRain": {
+        "Name": "Heavy rain",
+        "Text": "Puts out open flames, and gives disadvantage on Wisdom (Perception) checks that rely on hearing."
+      },
+      "slipperyIce": {
+        "Name": "Ice",
+        "Text": "Iced-over ground is difficult terrain. A creature moving onto it for the first time on a turn makes a DC 10 Dexterity (Acrobatics) check or falls prone."
+      },
+      "dust": {
+        "Name": "Blowing sand",
+        "Text": "The area is lightly obscured, and creatures have disadvantage on Wisdom (Perception) checks that rely on sight."
+      },
+      "strongWind": {
+        "Name": "Strong wind",
+        "Text": "Disadvantage on ranged weapon attack rolls and on Wisdom (Perception) checks that rely on hearing. It puts out open flames and disperses fog. Flying without magic is nearly impossible: a flying creature must land at the end of its turn or fall."
+      },
+      "extremeHeat": {
+        "Name": "Extreme heat",
+        "Text": "At 100°F (38°C) or more, a creature without drinkable water makes a Constitution saving throw at the end of each hour, DC 5 for the first hour and 1 higher for each hour after, gaining a level of exhaustion on a failure. Medium or heavy armor or heavy clothing gives disadvantage. Resistance or immunity to fire damage, or being adapted to hot climates, means it succeeds automatically."
+      },
+      "extremeCold": {
+        "Name": "Extreme cold",
+        "Text": "At 0°F (-18°C) or less, a creature exposed to it makes a DC 10 Constitution saving throw at the end of each hour, gaining a level of exhaustion on a failure. Cold weather gear, resistance or immunity to cold damage, or being adapted to cold climates means it succeeds automatically."
+      }
+    },
+    "Menu": {
+      "Roll": "Roll new weather for today",
+      "Edit": "Change the weather…",
+      "ShowOnScene": "Show the weather on this scene's map",
+      "HideOnScene": "Stop showing the weather on this scene's map",
+      "PostChat": "Post the weather to chat",
+      "WhisperChat": "Whisper the weather to the GMs",
+      "HideFromPlayers": "Hide the weather from players",
+      "ShowToPlayers": "Show the weather to players"
+    },
+    "Dialog": {
+      "Title": "Weather",
+      "Intro": "The climate and season decide what weather is likely. Rolls follow on from the day before, so warm spells and wet weeks carry on for a while.",
+      "Climate": "Climate",
+      "Season": "Season",
+      "SeasonCalendar": "From the calendar (now {season})",
+      "Today": "Today's weather",
+      "Condition": "Weather",
+      "HighLow": "High / low ({unit})",
+      "High": "High",
+      "Low": "Low",
+      "Wind": "Wind",
+      "TodayHint": "Roll new weather replaces today's weather with a roll for the climate and season above. Save keeps what's set here as today's weather, if you changed it. Either way tomorrow's weather follows on from today's.",
+      "Roll": "Roll new weather",
+      "Save": "Save"
+    },
+    "Chat": {
+      "Speaker": "Weather",
+      "Temperature": "High {high} · Low {low}"
+    },
+    "Notify": {
+      "Failed": "Primal Weather couldn't save the weather. The console (F12) has the details."
+    },
+    "Settings": {
+      "climate": {
+        "Name": "Climate",
+        "Hint": "Where the party is. Temperate: four seasons, rain all year, snow in winter. Coastal: mild, foggy and windy. Mountain: cold, windy and snowy, with summer storms. Arctic: bitter cold and long winters. Desert: scorching days, cold nights, dust storms and rare rain. Tropical: hot all year, with a wet summer and a dry winter. Changing it rolls tomorrow's forecast again; today's weather stays until you roll it again."
+      },
+      "season": {
+        "Name": "Season",
+        "Hint": "Read from dnd5e's calendar by default (Gregorian, Greyhawk, Harptos or Khorvaire), changing gradually through the year. Pick a season to fix it instead, for a calendar without seasons or a different hemisphere.",
+        "Calendar": "From the calendar"
+      },
+      "autoRoll": {
+        "Name": "Roll new weather each day",
+        "Hint": "When the calendar reaches a new day, the GM's client rolls that day's weather, following on from the day before. Jumping ahead several days rolls each of them, and going back in time shows the weather those days had. Turn off to keep the weather until you roll it yourself."
+      },
+      "visibility": {
+        "Name": "Who sees the weather",
+        "Hint": "Everyone sees the weather bar under the calendar, or only the GM.",
+        "All": "Everyone",
+        "GM": "Only the GM"
+      },
+      "sceneEffects": {
+        "Name": "Weather on the map",
+        "Hint": "Show the weather with Foundry's own effects (rain, rain storm, fog, snow, blizzard) on scene maps. Mark a scene as outdoors from the weather bar's ⋮ menu. A scene with its own weather set in Scene Config keeps it, and Suppress Weather regions still work.",
+        "Off": "Never",
+        "Marked": "Scenes marked as outdoors",
+        "All": "Every scene, unless turned off for it"
+      },
+      "announce": {
+        "Name": "Announce new weather in chat",
+        "Hint": "Post a card in chat when the weather changes: each new day, and whenever the GM rolls or sets it.",
+        "Off": "No",
+        "GM": "Whisper to the GMs",
+        "All": "Everyone"
+      },
+      "showBar": {
+        "Name": "Show the weather bar",
+        "Hint": "Show today's weather under the calendar (this browser only)."
+      },
+      "units": {
+        "Name": "Temperature units",
+        "Hint": "How temperatures are shown (this browser only).",
+        "F": "Fahrenheit (°F)",
+        "C": "Celsius (°C)",
+        "Both": "Both"
+      },
+      "rollRules": {
+        "Name": "Weather rules apply to rolls",
+        "Hint": "On outdoor scenes (the ones showing the weather: the weather bar's ⋮ menu → Show the weather on this scene's map, or every scene when Weather on the map is set to Every scene): with Primal Status on, heavy rain, heavy snow, fog, blowing sand and strong wind give Disadvantage on Wisdom (Perception) checks, and strong wind on ranged weapon attacks, with the reason shown so a player can roll normally when the check doesn't rely on that sense. In extreme heat or cold the GM gets a whispered reminder each hour that saving throws are due."
+      }
+    },
+    "RollRules": {
+      "sight": "{rule} (if it relies on sight)",
+      "hearing": "{rule} (if it relies on hearing)",
+      "HourPassed": "An hour has passed outdoors on {scene}.",
+      "HoursPassed": "{hours} hours have passed outdoors on {scene}."
+    }
+  }
+}

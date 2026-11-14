@@ -1,0 +1,93 @@
+<section class="item monster-action{{#unless item.flags.monsterblock.expanded}} compact{{/unless}}" title="{{#if @root.flags.editing}}{{localize "MOBLOKS5E.EditHint"}}{{/if}}">
+	<div class="attack-description inline-children">
+		{{#if @root.canDelete}}
+			<a class="delete-item" data-tooltip="MOBLOKS5E.delete.tooltip" data-item-id="{{item._id}}">
+				<i class="fa fa-trash"></i>
+			</a>
+		{{/if}}
+		<span class="item-name draggable" data-item-id="{{item._id}}">{{item.name}}</span>
+		{{~#if item.hasresource~}}
+			{{> "modules/primal-monster-blocks/templates/dnd5e/parts/resource.hbs" resource=item.resource}}
+		{{~/if~}}
+		{{localize "MOBLOKS5E.NameDescriptionSep"}}
+		{{#if (and @root.flags.attack-descriptions @root.modern)}}
+			<span class="generated-text modern">
+				<span class="item-attackRoll" data-item-id="{{item._id}}">
+					<span class="attack-type">
+						{{~item.description.attackTypeModern~}}
+						{{localize "MOBLOKS5E.Colon"}}
+					</span>
+					{{item.description.bonus~}}
+				</span>{{localize "MOBLOKS5E.Comma"}}
+				<span>{{item.description.range}}</span>
+				{{#if item.description.damage.length}}
+					<span class="hit-label">
+						{{localize "MOBLOKS5E.AttackHitLabel"}}
+					</span>
+					{{#each item.description.damage as |part|}}
+						{{#unless @first}}
+							{{localize "MOBLOKS5E.MultiDamageAttackConjunctionPlus"}}
+						{{/unless}}
+						{{> "modules/primal-monster-blocks/templates/dnd5e/parts/damageRoll.hbs" id=../item._id text=part.textModern}}
+						{{localize "MOBLOKS5E.damage"}}
+						{{~#if (and @first ../item.description.versatile)~}}
+							{{localize "MOBLOKS5E.Comma"}}
+							{{> "modules/primal-monster-blocks/templates/dnd5e/parts/damageRoll.hbs"
+								id=../item._id
+								versatile=true
+								text=(	localize "MOBLOKS5E.AttackVersatile"
+										damage=../item.description.versatile.textModern
+								)
+							}}
+							{{~#unless @last}}{{localize "MOBLOKS5E.Comma"}} {{/unless~}}
+						{{~/if~}}
+					{{~/each~}}
+				{{~/if~}}
+				{{~#unless item.continuousDescription~}}
+					{{localize "MOBLOKS5E.FullStop"}}
+				{{/unless~}}
+			</span>
+		{{else if @root.flags.attack-descriptions}}
+			<span class="generated-text">
+				<span class="item-attackRoll" data-item-id="{{item._id}}">
+					<span class="attack-type">
+						{{~item.description.attackType~}}
+						{{localize "MOBLOKS5E.Colon"}}
+					</span>
+					{{item.description.tohit~}}
+				</span>{{localize "MOBLOKS5E.Comma"}}
+				<span>
+					{{item.description.range}}{{localize "MOBLOKS5E.Comma"}}
+					{{item.description.target}}{{localize "MOBLOKS5E.FullStop"}}
+				</span>
+				{{#if item.description.damage.length}}
+					<span class="hit-label">
+						{{localize "MOBLOKS5E.AttackHitLabel"}}
+					</span>
+					{{#each item.description.damage as |part|}}
+						{{#unless @first}}
+							{{localize "MOBLOKS5E.MultiDamageAttackConjunctionPlus"}}
+						{{/unless}}
+						{{> "modules/primal-monster-blocks/templates/dnd5e/parts/damageRoll.hbs" id=../item._id text=part.text}}
+						{{localize "MOBLOKS5E.damage"}}
+						{{~#if (and @first ../item.description.versatile)~}}
+							{{localize "MOBLOKS5E.Comma"}}
+							{{> "modules/primal-monster-blocks/templates/dnd5e/parts/damageRoll.hbs"
+								id=../item._id
+								versatile=true
+								text=(	localize "MOBLOKS5E.AttackVersatile"
+										damage=../item.description.versatile.text
+								)
+							}}
+							{{~#unless @last}}{{localize "MOBLOKS5E.Comma"}} {{/unless~}}
+						{{~/if~}}
+					{{~/each~}}
+				{{~/if~}}
+				{{~#unless item.continuousDescription~}}
+					{{localize "MOBLOKS5E.FullStop"}}
+				{{/unless~}}
+			</span>
+		{{~/if~}}
+		<span class="description">{{{item.enrichedValue}}}</span>
+	</div>
+</section>

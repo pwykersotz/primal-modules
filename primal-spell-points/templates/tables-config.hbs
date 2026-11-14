@@ -1,0 +1,28 @@
+<div class="primal-sp-tables">
+    <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Tables.Intro"}}</p>
+
+    <fieldset>
+        <legend>{{localize "PRIMAL_SPELL_POINTS.Tables.Cost"}}</legend>
+        <div class="primal-sp-grid">
+            {{#each cost}}
+            <label class="primal-sp-cell">
+                <span>{{label}}</span>
+                <input type="number" name="cost.{{level}}" value="{{value}}" min="0" step="1">
+            </label>
+            {{/each}}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "PRIMAL_SPELL_POINTS.Tables.Points"}}</legend>
+        <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Tables.PointsHint"}}</p>
+        <div class="primal-sp-grid points">
+            {{#each points}}
+            <label class="primal-sp-cell">
+                <span>{{localize "PRIMAL_SPELL_POINTS.Tables.Level" level=level}}</span>
+                <input type="number" name="points.{{index}}" value="{{value}}" min="0" step="1">
+            </label>
+            {{/each}}
+        </div>
+    </fieldset>
+</div>

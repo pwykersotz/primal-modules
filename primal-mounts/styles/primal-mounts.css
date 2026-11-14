@@ -1,0 +1,40 @@
+/* Token HUD: the Mount button pulses when a token has just been dropped onto a creature it can mount. */
+#token-hud .primal-mounts-control.pm-suggest {
+  animation: primal-mounts-pulse 1.6s ease-in-out infinite;
+}
+
+#token-hud .primal-mounts-control.primal-mounts-unmount i {
+  color: #f0c97a;
+}
+
+@keyframes primal-mounts-pulse {
+  0%, 100% { box-shadow: 0 0 3px 1px rgba(232, 163, 61, 0.55); }
+  50% { box-shadow: 0 0 10px 3px rgba(232, 163, 61, 1); }
+}
+
+/* Chat cards */
+.primal-mounts-card .pm-card-title {
+  font-weight: bold;
+  font-size: var(--font-size-14, 14px);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  margin-bottom: 4px;
+}
+
+.primal-mounts-card p {
+  margin: 0.25em 0;
+}
+
+.primal-mounts-card .pm-note {
+  font-size: var(--font-size-12, 12px);
+  opacity: 0.8;
+}
+
+.primal-mounts-card button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.primal-mounts-dialog .hint {
+  font-size: var(--font-size-12, 12px);
+}

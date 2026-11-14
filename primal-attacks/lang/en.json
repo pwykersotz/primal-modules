@@ -1,0 +1,77 @@
+{
+  "PRIMAL_ATTACKS": {
+    "Settings": {
+      "offerOnAttack": {
+        "Name": "Offer the number of attacks",
+        "Hint": "Adds an Attacks field to dnd5e's Attack Roll window (the one with Advantage, Normal and Disadvantage). Pick how many attacks, press a button, and every attack is rolled at once with that button. Hold Shift, Alt or Ctrl while clicking to make a single attack without the window. This is your own choice: each player sets it for themselves.",
+        "All": "For every creature",
+        "Characters": "Only for player characters",
+        "Monsters": "Only for monsters and NPCs",
+        "Never": "Never"
+      },
+      "damagePolicy": {
+        "Name": "Without Midi-QOL, roll damage",
+        "Hint": "Once the attack dice land, the damage of every hit is rolled together on one card (critical hits on a second card), ready to apply. Against several targets, or none, a hit can't be told, so every attack but a natural 1 counts. With Midi-QOL, damage follows Midi-QOL's own settings.",
+        "Hit": "For the attacks that hit",
+        "Always": "For every attack",
+        "None": "Never (use the damage button)"
+      },
+      "defeatedTarget": {
+        "Name": "With Midi-QOL, when the target goes down",
+        "Hint": "If every target of the attack is at 0 hit points or defeated before one of the other attacks is resolved, skip the remaining attacks or keep attacking it.",
+        "Skip": "Skip the remaining attacks",
+        "Keep": "Keep attacking it"
+      },
+      "summaryCard": {
+        "Name": "Post a summary",
+        "Hint": "After a set of attacks, post one chat card listing each attack, its target, hit or miss, and its damage. Players see hits, misses and AC only as dnd5e's attack roll visibility setting (or Midi-QOL's hit checks) allows."
+      },
+      "foldCards": {
+        "Name": "With Midi-QOL, fold each attack's cards into the summary",
+        "Hint": "Hide the chat cards Midi-QOL posts for each attack of a set (its attack card and its HP Updated card), so the set shows as its summary only. The cards are kept: the summary's Show cards button shows them again, for Midi-QOL's buttons and undo. Needs Post a summary."
+      },
+      "multiattackWindow": {
+        "Name": "Multiattack opens the routine window",
+        "Hint": "When you use a creature's Multiattack, a window lists its attacks with how many times to make each, then rolls them all in turn, each as a set of attacks. With Primal CR on, the numbers are read from the Multiattack's text. Characters are left alone."
+      }
+    },
+    "Dialog": {
+      "Attacks": "Attacks",
+      "Fewer": "One attack fewer",
+      "More": "One attack more"
+    },
+    "Summary": {
+      "Title": "{name}'s attacks",
+      "AC": "AC {ac}",
+      "Hit": "Hit",
+      "Miss": "Miss",
+      "CriticalHit": "Critical hit",
+      "Critical": "Critical",
+      "Fumble": "Miss (natural 1)",
+      "Used": "Used",
+      "Cancelled": "Cancelled",
+      "Error": "Failed (see the console)",
+      "Hits": "{hits} of {count} hit",
+      "Attacks": "{count} attacks",
+      "Damage": "{total} damage",
+      "AttackDice": "Attack",
+      "DamageDice": "Damage",
+      "Skipped": {
+        "Defeated": "Skipped: target down",
+        "NoUses": "Skipped: couldn't spend the uses",
+        "Missing": "Skipped: no longer on the creature",
+        "Other": "Skipped"
+      },
+      "ShowCards": "Show cards",
+      "HideCards": "Hide cards"
+    },
+    "Multiattack": {
+      "Title": "Multiattack",
+      "WindowTitle": "{name}: Multiattack",
+      "HintRead": "Read from the Multiattack's text. Change any number, then roll; each attack's roll window still comes up.",
+      "HintPick": "Pick how many times to make each attack, then roll; each attack's roll window still comes up. (With Primal CR on, these are read from the Multiattack's text.)",
+      "Roll": "Roll the attacks",
+      "NoAttacks": "{name} has no attacks to roll."
+    }
+  }
+}

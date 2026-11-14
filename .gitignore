@@ -1,0 +1,23 @@
+# Installed tools and build output
+node_modules/
+dist/
+*.zip
+*.tar.gz
+*.tgz
+
+# Foundry's compendium databases. The source is <module>/src/packs/ (one JSON file per entry);
+# tools/packs.mjs turns one into the other.
+*/packs/
+
+# Test and preview output
+**/tests/out/
+**/tests/browser/*.png
+**/tests/preview/out.html
+**/tests/preview/modules/
+
+# Editor and OS clutter
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

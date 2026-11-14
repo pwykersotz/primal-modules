@@ -1,0 +1,71 @@
+<div class="mbs-root">
+	<div class="mbs-layout">
+		<nav class="mbs-tabs" role="tablist" aria-orientation="vertical" aria-label="{{localize "MOBLOKS5E.config.title"}}">
+			{{#each categories}}
+			<button type="button" class="mbs-tab{{#if active}} active{{/if}}" role="tab" id="mbs-tab-{{id}}"
+				data-action="selectTab" data-tab="{{id}}" aria-controls="mbs-panel-{{id}}"
+				aria-selected="{{#if active}}true{{else}}false{{/if}}" tabindex="{{#if active}}0{{else}}-1{{/if}}">
+				<i class="{{icon}}" inert></i>
+				<span>{{label}}</span>
+			</button>
+			{{/each}}
+		</nav>
+
+		<div class="mbs-panels">
+			{{#each categories}}
+			<section class="mbs-panel{{#if active}} active{{/if}}" role="tabpanel" id="mbs-panel-{{id}}"
+				data-tab="{{id}}" aria-labelledby="mbs-tab-{{id}}">
+				<p class="mbs-scope{{#if personal}} personal{{/if}}"><i class="{{scopeIcon}}" inert></i>{{scopeNote}}</p>
+
+				{{#each groups}}
+				<fieldset class="mbs-group">
+					<legend>{{label}}</legend>
+					{{#each fields}}
+					<div class="mbs-field{{#if isCheckbox}} mbs-checkbox{{/if}}{{#unless editable}} disabled{{/unless}}">
+						{{#if isCheckbox}}
+						<input type="checkbox" id="{{id}}" name="{{key}}" {{#if value}}checked{{/if}} {{#unless editable}}disabled{{/unless}}
+							{{#if hint}}aria-describedby="{{id}}-hint"{{/if}}>
+						<label for="{{id}}">{{name}}{{#if badge}} <span class="mbs-badge"><i class="{{badgeIcon}}" inert></i>{{badge}}</span>{{/if}}</label>
+						{{else}}
+						<label for="{{id}}">{{name}}{{#if badge}} <span class="mbs-badge"><i class="{{badgeIcon}}" inert></i>{{badge}}</span>{{/if}}</label>
+						<div class="mbs-control">
+							{{#if isSelect}}
+							<select id="{{id}}" name="{{key}}" {{#unless editable}}disabled{{/unless}} {{#if hint}}aria-describedby="{{id}}-hint"{{/if}}>
+								{{#each choices}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+							</select>
+							{{/if}}
+							{{#if isNumber}}
+							<input type="number" id="{{id}}" name="{{key}}" value="{{value}}" data-dtype="Number"
+								{{#if min includeZero=true}}min="{{min}}"{{/if}} {{#if max}}max="{{max}}"{{/if}} {{#if step}}step="{{step}}"{{/if}}
+								{{#unless editable}}disabled{{/unless}} {{#if hint}}aria-describedby="{{id}}-hint"{{/if}}>
+							{{/if}}
+							{{#if isColor}}
+							<input type="color" id="{{id}}" name="{{key}}" value="{{value}}" {{#unless editable}}disabled{{/unless}}
+								{{#if hint}}aria-describedby="{{id}}-hint"{{/if}}>
+							{{/if}}
+							{{#if isText}}
+							<input type="text" id="{{id}}" name="{{key}}" value="{{value}}" {{#unless editable}}disabled{{/unless}}
+								{{#if hint}}aria-describedby="{{id}}-hint"{{/if}}>
+							{{/if}}
+						</div>
+						{{/if}}
+						{{#if hint}}<p class="mbs-hint" id="{{id}}-hint">{{hint}}</p>{{/if}}
+						{{#if note}}<p class="mbs-hint mbs-note"><i class="fa-solid fa-lock" inert></i> {{note}}</p>{{/if}}
+					</div>
+					{{/each}}
+				</fieldset>
+				{{/each}}
+			</section>
+			{{/each}}
+		</div>
+	</div>
+
+	<footer class="mbs-footer">
+		<button type="button" data-action="resetDefaults" data-tooltip="{{localize "MOBLOKS5E.config.resetHint"}}">
+			<i class="fa-solid fa-arrow-rotate-left" inert></i> {{localize "MOBLOKS5E.config.reset"}}
+		</button>
+		<button type="submit">
+			<i class="fa-solid fa-floppy-disk" inert></i> {{localize "MOBLOKS5E.config.save"}}
+		</button>
+	</footer>
+</div>

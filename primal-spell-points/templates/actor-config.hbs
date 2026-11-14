@@ -1,0 +1,56 @@
+<div class="primal-sp-config">
+    {{#if noSlots}}
+    <p class="notification warning">{{localize "PRIMAL_SPELL_POINTS.Config.NoSlots"}}</p>
+    {{/if}}
+
+    <div class="form-group">
+        <label>{{localize "PRIMAL_SPELL_POINTS.Config.Enabled"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="enabled" {{checked enabled}}>
+        </div>
+        <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Config.EnabledHint"}}</p>
+    </div>
+
+    <fieldset>
+        <legend>{{localize "PRIMAL_SPELL_POINTS.SpellPoints"}}</legend>
+
+        <div class="form-group">
+            <label>{{localize "PRIMAL_SPELL_POINTS.Config.Current"}}</label>
+            <div class="form-fields">
+                <input type="number" name="value" value="{{value}}" min="0" step="1">
+                <span class="primal-sp-config-max">/ {{max}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "PRIMAL_SPELL_POINTS.Config.Bonus"}}</label>
+            <div class="form-fields">
+                <input type="number" name="bonus" value="{{bonus}}" step="1">
+            </div>
+            <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Config.BonusHint" base=base level=casterLevel}}</p>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "PRIMAL_SPELL_POINTS.Config.Override"}}</label>
+            <div class="form-fields">
+                <input type="number" name="maxOverride" value="{{maxOverride}}" min="0" step="1" placeholder="—">
+            </div>
+            <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Config.OverrideHint"}}</p>
+        </div>
+    </fieldset>
+
+    {{#if high.length}}
+    <fieldset>
+        <legend>{{localize "PRIMAL_SPELL_POINTS.Config.HighLevel"}}</legend>
+        <p class="hint">{{localize "PRIMAL_SPELL_POINTS.Config.HighLevelHint"}}</p>
+        <div class="primal-sp-config-high">
+            {{#each high}}
+            <label class="checkbox">
+                <input type="checkbox" name="highUsed.{{level}}" {{checked used}}>
+                {{label}}
+            </label>
+            {{/each}}
+        </div>
+    </fieldset>
+    {{/if}}
+</div>

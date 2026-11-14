@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Primal Compendiums harness</title>
+  <link href="/css/foundry2.css" rel="stylesheet" type="text/css" media="all">
+  <style>
+    @import "/fonts/fontawesome/css/all.min.css" layer(variables);
+    @import "/modules/primal-compendiums/styles/primal-compendiums.css" layer(modules);
+  </style>
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  <script src="/lib/handlebars/dist/handlebars.min.js"></script>
+  <script src="/lib/handlebars-intl/dist/handlebars-intl.min.js"></script>
+  <script src="/lib/pixi.js/dist/pixi.min.js"></script>
+  <script src="/lib/@pixi/particle-emitter/dist/particle-emitter.min.js"></script>
+  <script src="/lib/@pixi/graphics-smooth/dist/pixi-graphics-smooth.js"></script>
+  <script src="/lib/showdown/dist/showdown.js"></script>
+  <script src="/lib/spark-md5/spark-md5.min.js"></script>
+  <script>
+    const SIGNED_EULA = true;
+    const ROUTE_PREFIX = "";
+    const MESSAGES = null;
+  </script>
+  <script type="module" src="/harness/harness.mjs"></script>
+</head>
+<body class="vtt game system-dnd5e theme-dark">
+  <div id="interface">
+    <section id="ui-left" class="flexrow"></section>
+    <section id="ui-middle"></section>
+    <section id="ui-right" class="flexrow">
+      <div id="ui-right-column-1" class="flexcol"></div>
+      <template id="sidebar"></template>
+    </section>
+  </div>
+  <aside id="tooltip" role="tooltip" popover="manual"></aside>
+</body>
+</html>

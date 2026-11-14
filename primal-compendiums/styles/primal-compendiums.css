@@ -1,0 +1,669 @@
+/* ------------------------------------------------------------------ */
+/*  Primal Compendiums                                                  */
+/*  The World / Compendiums switch, the Compendiums panel beside each   */
+/*  sidebar directory, and the Choose Compendiums window.               */
+/* ------------------------------------------------------------------ */
+
+/* The side that isn't showing. Both sides share the directory's sidebar tab. */
+.sidebar-tab.pcs-off {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------ */
+/*  World / Compendiums switch                                          */
+/* ------------------------------------------------------------------ */
+
+.pcs-switch {
+  flex: none;
+  display: flex;
+  gap: 4px;
+  margin: 8px 8px 0;
+  padding: 3px;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 25%);
+  border: 1px solid var(--color-border, #302831);
+}
+
+.sidebar-tab .pcs-switch .pcs-mode {
+  --button-size: 26px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  height: 26px;
+  margin: 0;
+  padding: 0 6px;
+  line-height: 24px;
+  font-size: var(--font-size-13);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  cursor: var(--cursor-pointer, pointer);
+  white-space: nowrap;
+}
+
+.pcs-switch .pcs-mode > * {
+  pointer-events: none;
+}
+
+.pcs-switch .pcs-mode span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-tab .pcs-switch .pcs-mode:hover {
+  color: var(--color-text-primary);
+  background: rgb(255 255 255 / 6%);
+}
+
+.sidebar-tab .pcs-switch .pcs-mode.active {
+  color: var(--color-light-1, #fff);
+  background: rgb(255 255 255 / 10%);
+  border-color: var(--color-warm-2, #c9593f);
+  text-shadow: 0 0 8px var(--color-shadow-primary, #ff6400);
+}
+
+/* Something is being dragged over a side: it switches in a moment. */
+.sidebar-tab .pcs-switch .pcs-mode.pcs-drag-hover {
+  border-color: var(--color-warm-2, #c9593f);
+  background: rgb(255 255 255 / 14%);
+  animation: pcs-drag-pulse 450ms ease-in-out;
+}
+
+@keyframes pcs-drag-pulse {
+  from { box-shadow: 0 0 0 0 var(--color-shadow-primary, #ff6400); }
+  to { box-shadow: 0 0 0 3px transparent; }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Compendiums panel                                                   */
+/* ------------------------------------------------------------------ */
+
+.primal-compendiums .pcs-search-icon {
+  flex: 0 0 1.5rem;
+  text-align: center;
+  color: var(--color-text-subtle);
+  pointer-events: none;
+}
+
+/* Entries without a picture show their type's icon, as in Foundry's compendium windows. */
+.primal-compendiums .directory-item.entry > i.pcs-entry-icon {
+  flex: none;
+  margin-left: 8px;
+  align-self: center;
+}
+
+/* A compendium, drawn as a folder with its banner behind the name. */
+.primal-compendiums li.pcs-pack > .pcs-pack-header {
+  --pcs-shade: linear-gradient(to right, rgb(0 0 0 / 88%) 0%, rgb(0 0 0 / 72%) 55%, rgb(0 0 0 / 55%) 100%);
+  background-color: var(--color-dark-1, #111);
+  background-image: var(--pcs-shade);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--color-light-1, #fff);
+  cursor: var(--cursor-pointer, pointer);
+  gap: 0;
+}
+
+.primal-compendiums li.pcs-pack > .pcs-pack-header .pcs-pack-icon {
+  flex: none;
+  margin-right: 8px;
+  opacity: 0.85;
+}
+
+.primal-compendiums li.pcs-pack > .pcs-pack-header .pcs-count {
+  flex: none;
+  margin-left: 6px;
+  padding: 0 6px;
+  line-height: 16px;
+  font-size: var(--font-size-11);
+  color: var(--color-light-3, #ccc);
+  background: rgb(0 0 0 / 45%);
+  border-radius: 8px;
+}
+
+.primal-compendiums li.pcs-pack > .pcs-pack-header .pcs-open {
+  flex: none;
+  margin-left: 6px;
+  opacity: 0.7;
+}
+
+.primal-compendiums li.pcs-pack > .pcs-pack-header .pcs-open:hover {
+  opacity: 1;
+}
+
+.primal-compendiums li.pcs-pack:not(.expanded) > .subdirectory {
+  display: none;
+}
+
+.primal-compendiums li.pcs-pack > .subdirectory {
+  border-left-color: rgb(0 0 0 / 55%);
+}
+
+/* Nothing chosen yet. */
+.primal-compendiums .pcs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.primal-compendiums .pcs-empty p {
+  margin: 0;
+}
+
+.primal-compendiums .pcs-empty button {
+  width: auto;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.primal-compendiums .pcs-no-match {
+  padding: 16px;
+  text-align: center;
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
+.primal-compendiums .pcs-no-match[hidden] {
+  display: none;
+}
+
+/* Shown at the top of the list while compendium details are read for the filters or a sort. */
+.primal-compendiums .pcs-reading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: var(--font-size-12);
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
+.primal-compendiums .pcs-reading[hidden] {
+  display: none;
+}
+
+/* Marks the end of what is drawn in a list that has more rows to draw (they are drawn as it scrolls into view).
+   It takes no room; it only has to be laid out so the panel can tell where it is. */
+.primal-compendiums .pcs-more {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  pointer-events: none;
+}
+
+/* A folder that is open but not drawn into yet holds only its marker: no border, as when it is empty. */
+.primal-compendiums .directory-item .subdirectory:has(> .pcs-more:only-child) {
+  border: none;
+}
+
+/* The Playlists sidebar styles every header in its list; keep folder headers like the other directories. */
+.playlists-sidebar.primal-compendiums .directory-list li.folder > .folder-header {
+  line-height: var(--sidebar-folder-height);
+  gap: 0;
+}
+
+.playlists-sidebar.primal-compendiums .directory-list .directory-item.entry {
+  padding-inline: 8px 0;
+  line-height: var(--sidebar-header-height);
+}
+
+.playlists-sidebar.primal-compendiums .directory-list .directory-item.entry .entry-name {
+  line-height: var(--sidebar-header-height);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Filter and sort bar (both sides)                                    */
+/* ------------------------------------------------------------------ */
+
+/* Entries, folders and compendiums the filters leave out. The directory's own search uses inline styles, so this
+   has to win over them. */
+.sidebar-tab .directory-list .directory-item.pcs-out {
+  display: none !important;
+}
+
+.pcs-filters {
+  --pcs-yes: #3b82d0;
+  --pcs-no: #c94a4c;
+  --pcs-line: var(--color-border, #302831);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pcs-filters .pcs-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sidebar-tab .pcs-filters .pcs-filter-row > button,
+.sidebar-tab .pcs-filters .pcs-filter-row > select {
+  height: 26px;
+  margin: 0;
+  font-size: var(--font-size-12);
+}
+
+/* Wide enough for its count of filters, so the row doesn't shift when the first one is set. */
+.sidebar-tab .pcs-filters .pcs-filter-toggle {
+  flex: none;
+  width: auto;
+  min-width: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0 8px;
+}
+
+.pcs-filters.pcs-filtering .pcs-filter-toggle {
+  border-color: var(--pcs-yes);
+}
+
+.pcs-filters .pcs-filter-toggle .pcs-caret {
+  margin-left: auto;
+  font-size: var(--font-size-10, 10px);
+  opacity: 0.7;
+  transition: transform 120ms ease;
+}
+
+.pcs-filters.pcs-open .pcs-filter-toggle .pcs-caret {
+  transform: rotate(180deg);
+}
+
+.pcs-filters .pcs-badge {
+  min-width: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  line-height: 16px;
+  font-size: var(--font-size-11);
+  text-align: center;
+  color: #fff;
+  background: var(--pcs-yes);
+}
+
+.sidebar-tab .pcs-filters .pcs-sort {
+  flex: 1;
+  min-width: 0;
+  padding: 0 4px;
+}
+
+.sidebar-tab .pcs-filters .pcs-sort-dir {
+  flex: none;
+  width: 26px;
+  padding: 0;
+  justify-content: center;
+}
+
+.sidebar-tab .pcs-filters .pcs-sort-dir:disabled {
+  opacity: 0.4;
+}
+
+.pcs-filters .pcs-filter-options {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.pcs-filters .pcs-flat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: var(--font-size-12);
+  line-height: 18px;
+  color: var(--color-text-secondary);
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.sidebar-tab .pcs-filters .pcs-flat input {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+
+.pcs-filters.pcs-is-flat .pcs-flat {
+  color: var(--color-text-primary);
+}
+
+.pcs-filters .pcs-filter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--pcs-line);
+  border-radius: 6px;
+  background: rgb(0 0 0 / 20%);
+  max-height: 45vh;
+  overflow: hidden auto;
+  text-align: start;
+  line-height: 1.3;
+}
+
+.pcs-filters .pcs-filter-body[hidden] {
+  display: none;
+}
+
+.pcs-filters .pcs-filter-hint,
+.pcs-filters .pcs-filter-note {
+  margin: 0;
+  font-size: var(--font-size-11);
+  color: var(--color-text-subtle);
+}
+
+.pcs-filters .pcs-filter-note {
+  font-size: var(--font-size-12);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.pcs-filters .pcs-facet {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pcs-filters .pcs-facet-label {
+  font-size: var(--font-size-11);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.pcs-filters .pcs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.sidebar-tab .pcs-filters .pcs-pill {
+  flex: none;
+  width: auto;
+  height: auto;
+  min-height: 20px;
+  margin: 0;
+  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-12);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid var(--pcs-line);
+  border-radius: 4px;
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.sidebar-tab .pcs-filters .pcs-pill:hover {
+  background: rgb(255 255 255 / 12%);
+}
+
+.sidebar-tab .pcs-filters .pcs-pill[data-state="yes"] {
+  color: #fff;
+  background: var(--pcs-yes);
+  border-color: var(--pcs-yes);
+}
+
+.sidebar-tab .pcs-filters .pcs-pill[data-state="no"] {
+  color: #fff;
+  background: var(--pcs-no);
+  border-color: var(--pcs-no);
+}
+
+/* Excluded tags are struck through and red: nothing is added to them, so they keep their size. */
+.pcs-filters .pcs-pill[data-state="no"] .pcs-pill-label {
+  text-decoration: line-through;
+}
+
+.pcs-filters .pcs-pill .pcs-pill-count {
+  font-size: var(--font-size-10, 10px);
+  opacity: 0.65;
+}
+
+.pcs-filters .pcs-pill > * {
+  pointer-events: none;
+}
+
+.pcs-filters .pcs-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-tab .pcs-filters .pcs-range select {
+  flex: 1;
+  min-width: 0;
+  height: 24px;
+  font-size: var(--font-size-12);
+}
+
+.pcs-filters .pcs-range-to {
+  flex: none;
+  font-size: var(--font-size-12);
+  color: var(--color-text-secondary);
+}
+
+.pcs-filters .pcs-filter-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-top: 4px;
+  border-top: 1px solid var(--pcs-line);
+}
+
+.pcs-filters .pcs-shown {
+  font-size: var(--font-size-12);
+  color: var(--color-text-secondary);
+}
+
+.sidebar-tab .pcs-filters .pcs-clear {
+  flex: none;
+  width: auto;
+  height: 22px;
+  margin: 0;
+  padding: 0 8px;
+  gap: 5px;
+  font-size: var(--font-size-12);
+}
+
+/* ------------------------------------------------------------------ */
+/*  CR and level badges on actors                                       */
+/* ------------------------------------------------------------------ */
+
+.sidebar-tab .directory-list .directory-item.entry > .pcs-cr {
+  flex: none;
+  align-self: center;
+  margin: 0 8px 0 6px;
+  padding: 0 6px;
+  min-width: 34px;
+  line-height: 16px;
+  font-size: var(--font-size-11);
+  text-align: center;
+  white-space: nowrap;
+  color: var(--color-light-2, #efe6d8);
+  background: rgb(0 0 0 / 35%);
+  border: 1px solid var(--color-warm-2, #c9593f);
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+.sidebar-tab .directory-list .directory-item.entry > .pcs-cr[data-kind="level"] {
+  border-color: #3b82d0;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Choose Compendiums window                                           */
+/* ------------------------------------------------------------------ */
+
+.primal-compendiums-chooser .window-content {
+  overflow: hidden;
+}
+
+.primal-compendiums-chooser .pcs-chooser {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+.primal-compendiums-chooser .pcs-chooser > .hint {
+  margin: 0;
+  flex: none;
+  color: var(--color-form-hint);
+  font-size: var(--font-size-13);
+}
+
+.primal-compendiums-chooser .pcs-chooser-search {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primal-compendiums-chooser .pcs-chooser-search input {
+  flex: 1;
+}
+
+.primal-compendiums-chooser .pcs-chooser-list {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden auto;
+  padding-right: 4px;
+}
+
+.primal-compendiums-chooser .pcs-section {
+  margin: 0 0 8px;
+  padding: 4px 8px 8px;
+}
+
+.primal-compendiums-chooser .pcs-section[hidden] {
+  display: none;
+}
+
+.primal-compendiums-chooser .pcs-section legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.primal-compendiums-chooser .pcs-tally {
+  font-weight: normal;
+  font-size: var(--font-size-12);
+  color: var(--color-text-subtle);
+}
+
+.primal-compendiums-chooser .pcs-section-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.primal-compendiums-chooser .pcs-section-buttons button {
+  flex: none;
+  width: auto;
+  height: 22px;
+  line-height: 20px;
+  padding: 0 8px;
+  font-size: var(--font-size-12);
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "box title count"
+    "box source count";
+  column-gap: 8px;
+  align-items: center;
+  padding: 3px 4px;
+  border-radius: 4px;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack[hidden] {
+  display: none;
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack:hover {
+  background: rgb(255 255 255 / 6%);
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack input {
+  grid-area: box;
+  margin: 0;
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack .pcs-title {
+  grid-area: title;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack .pcs-source {
+  grid-area: source;
+  font-size: var(--font-size-11);
+  color: var(--color-text-subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primal-compendiums-chooser .pcs-chooser-pack .pcs-count {
+  grid-area: count;
+  font-size: var(--font-size-12);
+  color: var(--color-text-subtle);
+}
+
+.primal-compendiums-chooser .pcs-no-match[hidden],
+.primal-compendiums-chooser .pcs-none[hidden] {
+  display: none;
+}
+
+.primal-compendiums-chooser .pcs-chooser-footer {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border, #302831);
+}
+
+.primal-compendiums-chooser .pcs-chooser-footer label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-13);
+}
+
+.primal-compendiums-chooser .pcs-chooser-footer button {
+  flex: none;
+  width: auto;
+  padding: 0 10px;
+  gap: 6px;
+}

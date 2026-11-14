@@ -1,0 +1,837 @@
+/* ---------------------------------------- */
+/* Primal HUD: HP buttons                   */
+/* ---------------------------------------- */
+
+#token-hud {
+  --primal-hud-damage: #ff8a7a;
+  --primal-hud-heal: #a6e36b;
+}
+
+body.theme-light #token-hud {
+  --primal-hud-damage: #b3261e;
+  --primal-hud-heal: #3d7a00;
+}
+
+/* The bar slot the buttons hang from. */
+#token-hud .primal-hud-hp-anchor {
+  position: relative;
+}
+
+/* The buttons: as wide as the token, on the far side of the HP box (below the bottom bar, above the top one). */
+#token-hud .primal-hud-hp-controls {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  pointer-events: none;
+}
+
+#token-hud .primal-hud-hp-controls.below {
+  top: calc(100% + 5px);
+}
+
+#token-hud .primal-hud-hp-controls.above {
+  bottom: calc(100% + 5px);
+}
+
+#token-hud .primal-hud-hp-controls.inside {
+  top: 0;
+}
+
+#token-hud .primal-hud-hp-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+}
+
+#token-hud .primal-hud-hp-gap {
+  flex: 0 1 4px;
+}
+
+#token-hud .primal-hud-hp-step {
+  flex: 0 1 20px;
+  width: auto;
+  min-width: 18px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--control-bg-color);
+  border: 1px solid var(--control-border-color);
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--color-shadow-dark);
+  font-family: var(--font-sans, inherit);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  pointer-events: all;
+  cursor: var(--cursor-pointer, pointer);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+/* The +-10 buttons have wider labels than the +-1 buttons. */
+#token-hud .primal-hud-hp-step[data-step="-10"],
+#token-hud .primal-hud-hp-step[data-step="10"] {
+  flex-basis: 27px;
+  min-width: 24px;
+}
+
+#token-hud .primal-hud-hp-step.damage {
+  color: var(--primal-hud-damage);
+}
+
+#token-hud .primal-hud-hp-step.heal {
+  color: var(--primal-hud-heal);
+}
+
+#token-hud .primal-hud-hp-step:hover {
+  background: var(--control-hover-bg-color);
+  box-shadow: 0 0 8px var(--color-shadow-dark);
+}
+
+#token-hud .primal-hud-hp-step.damage:hover {
+  border-color: var(--primal-hud-damage);
+}
+
+#token-hud .primal-hud-hp-step.heal:hover {
+  border-color: var(--primal-hud-heal);
+}
+
+#token-hud .primal-hud-hp-step:active {
+  transform: translateY(1px);
+}
+
+/* The waiting change ("-11"), on the HP box's edge nearest the token. Hidden when nothing is waiting. */
+#token-hud .primal-hud-hp-delta {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -65%);
+  padding: 0 5px;
+  background: var(--control-bg-color);
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  box-shadow: 0 0 6px var(--color-shadow-dark);
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+#token-hud .primal-hud-hp-delta.above {
+  top: auto;
+  bottom: 0;
+  transform: translate(-50%, 65%);
+}
+
+#token-hud .primal-hud-hp-delta:empty {
+  display: none;
+}
+
+#token-hud .primal-hud-hp-delta.damage,
+#token-hud .primal-hud-hp-readout.damage {
+  color: var(--primal-hud-damage);
+}
+
+#token-hud .primal-hud-hp-delta.heal,
+#token-hud .primal-hud-hp-readout.heal {
+  color: var(--primal-hud-heal);
+}
+
+/* HP readout, used only when neither token bar shows hit points. */
+#token-hud .primal-hud-hp-readout {
+  padding: 1px 8px;
+  background: var(--control-bg-color);
+  border: 1px solid #7cd000;
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--color-shadow-dark);
+  color: var(--control-icon-color);
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  pointer-events: all;
+}
+
+/* The HP box shows where HP will end up while a change is waiting to be saved. */
+#token-hud input.primal-hud-hp-preview.damage {
+  --input-text-color: var(--primal-hud-damage);
+  color: var(--primal-hud-damage);
+}
+
+#token-hud input.primal-hud-hp-preview.heal {
+  --input-text-color: var(--primal-hud-heal);
+  color: var(--primal-hud-heal);
+}
+
+/* ---------------------------------------- */
+/* Primal HUD: Token HUD Buttons window     */
+/* ---------------------------------------- */
+
+.primal-hud-buttons-config .primal-hud-button-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.primal-hud-buttons-config .primal-hud-button-groups .hint {
+  margin: 0;
+}
+
+.primal-hud-buttons-config fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+
+.primal-hud-buttons-config .primal-hud-button-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+}
+
+.primal-hud-buttons-config .primal-hud-button-row label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.primal-hud-buttons-config .primal-hud-button-row input[type="checkbox"] {
+  flex: none;
+  margin: 0;
+}
+
+.primal-hud-buttons-config .primal-hud-button-icon {
+  flex: 0 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.primal-hud-buttons-config .primal-hud-button-icon img {
+  width: 18px;
+  height: 18px;
+  border: none;
+}
+
+.primal-hud-buttons-config .primal-hud-button-label {
+  flex: 1;
+}
+
+.primal-hud-buttons-config .primal-hud-button-row button.icon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+/* ---------------------------------------- */
+/* Primal HUD: arrange buttons window       */
+/* ---------------------------------------- */
+
+.primal-hud-layout-config .primal-hud-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.primal-hud-layout-config .primal-hud-layout .hint {
+  margin: 0;
+}
+
+.primal-hud-layout-config .primal-hud-layout-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.primal-hud-layout-config .primal-hud-layout-column {
+  min-width: 0;
+}
+
+.primal-hud-layout-config .primal-hud-layout-column h3 {
+  margin: 0 0 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--color-border, #7a7971);
+  font-size: var(--font-size-14, 14px);
+}
+
+.primal-hud-layout-config .primal-hud-layout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 60px;
+  margin: 0;
+  padding: 2px;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  list-style: none;
+}
+
+.primal-hud-layout-config .primal-hud-layout-list.drop-after:not(:has(.primal-hud-layout-row)) {
+  border-color: var(--color-warm-2, #ee9b3a);
+}
+
+.primal-hud-layout-config .primal-hud-layout-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 1px 2px;
+  border: 1px solid var(--color-border, #7a7971);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--color-border, #7a7971) 12%, transparent);
+  cursor: grab;
+}
+
+.primal-hud-layout-config .primal-hud-layout-row.dragging {
+  opacity: 0.4;
+}
+
+.primal-hud-layout-config .primal-hud-layout-row.drop-before {
+  box-shadow: 0 -2px 0 var(--color-warm-2, #ee9b3a);
+}
+
+.primal-hud-layout-config .primal-hud-layout-row.drop-after {
+  box-shadow: 0 2px 0 var(--color-warm-2, #ee9b3a);
+}
+
+.primal-hud-layout-config .primal-hud-layout-row.is-hidden .primal-hud-button-icon,
+.primal-hud-layout-config .primal-hud-layout-row.is-hidden .primal-hud-layout-label > span {
+  opacity: 0.55;
+}
+
+.primal-hud-layout-config .primal-hud-layout-grip {
+  flex: none;
+  width: 10px;
+  opacity: 0.5;
+  font-size: 11px;
+}
+
+.primal-hud-layout-config .primal-hud-button-icon {
+  flex: 0 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.primal-hud-layout-config .primal-hud-button-icon img {
+  width: 18px;
+  height: 18px;
+  border: none;
+}
+
+.primal-hud-layout-config .primal-hud-layout-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.primal-hud-layout-config .primal-hud-layout-label > * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.primal-hud-layout-config .primal-hud-layout-label small {
+  opacity: 0.7;
+  font-size: var(--font-size-11, 11px);
+}
+
+.primal-hud-layout-config .primal-hud-layout-row button.icon {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  font-size: 11px;
+}
+
+.primal-hud-layout-config .primal-hud-layout-row button.icon:disabled {
+  opacity: 0.3;
+}
+
+.primal-hud-layout-config .primal-hud-layout-empty {
+  padding: 18px 4px;
+  opacity: 0.6;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ---------------------------------------- */
+/* Primal HUD: favorites and spells panel   */
+/* ---------------------------------------- */
+
+/*
+ * Sits to the left of the HUD's left column, level with its top. The whole HUD is scaled with the canvas zoom, so
+ * the panel undoes that scale and applies the "panel size" setting instead (--primal-hud-panel-scale, set by the
+ * script), staying the same size on screen. The sizes below are drawn at twice the default size and scaled down by
+ * half at 100%, so the panel stays sharp when grown. They're in px rather than rem so Foundry's font size setting
+ * doesn't blow the panel up; the panel size setting is the one knob.
+ */
+#token-hud .primal-hud-sidebar {
+  --phs-width: 180px;
+  --phs-text: var(--control-icon-color);
+  --phs-text-strong: var(--control-hover-icon-color);
+  --phs-muted: color-mix(in srgb, var(--control-icon-color) 70%, transparent);
+  --phs-row-hover: color-mix(in srgb, var(--control-hover-bg-color) 80%, transparent);
+  --phs-accent: var(--control-active-border-color);
+  --phs-pip: var(--control-active-border-color);
+  --phs-pip-empty: color-mix(in srgb, var(--control-icon-color) 30%, transparent);
+  --phs-pip-temp: #7ec8ff;
+  position: absolute;
+  top: -50px;
+  right: calc(100% + var(--column-width) + 16px);
+  width: var(--phs-width);
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  background: var(--control-bg-color);
+  border: 1px solid var(--control-border-color);
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--color-shadow-dark);
+  color: var(--phs-text);
+  font-size: 12px;
+  line-height: 1.15;
+  text-align: left;
+  pointer-events: all;
+  transform: scale(var(--primal-hud-panel-scale, 1));
+  transform-origin: top right;
+  overflow: hidden;
+}
+
+body.theme-light #token-hud .primal-hud-sidebar {
+  --phs-pip-temp: #1f6fb2;
+}
+
+#token-hud .primal-hud-sidebar.collapsed {
+  max-height: none;
+  width: auto;
+}
+
+/* A palette from the left column opens where the panel is, so the panel steps aside while it's open. */
+#token-hud:has(.col.left > .palette.active) .primal-hud-sidebar {
+  visibility: hidden;
+}
+
+/* Tabs */
+#token-hud .primal-hud-sidebar .phs-tabs {
+  flex: none;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border-bottom: 1px solid var(--control-border-color);
+}
+
+#token-hud .primal-hud-sidebar.collapsed .phs-tabs {
+  border-bottom: none;
+}
+
+#token-hud .primal-hud-sidebar .phs-tabs button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 19px;
+  padding: 0 5px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: var(--phs-muted);
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#token-hud .primal-hud-sidebar .phs-tab {
+  flex: 1;
+}
+
+/* With three tabs, the closed ones shrink to their icon. */
+#token-hud .primal-hud-sidebar .phs-tabs.compact .phs-tab:not(.active) {
+  flex: none;
+  width: 26px;
+  padding: 0;
+}
+
+#token-hud .primal-hud-sidebar .phs-tabs.compact .phs-tab:not(.active) span {
+  display: none;
+}
+
+#token-hud .primal-hud-sidebar .phs-tab span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#token-hud .primal-hud-sidebar .phs-tabs button:hover {
+  color: var(--phs-text-strong);
+  background: var(--phs-row-hover);
+}
+
+#token-hud .primal-hud-sidebar .phs-tab.active {
+  color: var(--phs-text-strong);
+  border-color: var(--phs-accent);
+}
+
+#token-hud .primal-hud-sidebar.collapsed .phs-tab.active {
+  border-color: transparent;
+}
+
+#token-hud .primal-hud-sidebar .phs-fold {
+  flex: none;
+  width: 19px;
+  padding: 0;
+}
+
+#token-hud .primal-hud-sidebar .phs-tabs i {
+  font-size: 10px;
+}
+
+#token-hud .primal-hud-sidebar .phs-fold i {
+  transition: transform 0.15s;
+}
+
+#token-hud .primal-hud-sidebar.collapsed .phs-fold i {
+  transform: rotate(180deg);
+}
+
+/* Lists */
+#token-hud .primal-hud-sidebar .phs-list {
+  display: none;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 2px;
+  overflow: hidden auto;
+  scrollbar-width: thin;
+  list-style: none;
+}
+
+#token-hud .primal-hud-sidebar[data-tab="favorites"] .phs-list[data-tab="favorites"],
+#token-hud .primal-hud-sidebar[data-tab="spells"] .phs-list[data-tab="spells"],
+#token-hud .primal-hud-sidebar[data-tab="checks"] .phs-list[data-tab="checks"] {
+  display: block;
+}
+
+#token-hud .primal-hud-sidebar.collapsed .phs-list {
+  display: none !important;
+}
+
+#token-hud .primal-hud-sidebar .phs-section-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#token-hud .primal-hud-sidebar .phs-section {
+  margin: 4px 3px 1px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid var(--control-border-color);
+  color: var(--phs-muted);
+  font-family: inherit;
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#token-hud .primal-hud-sidebar .phs-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 22px;
+  margin: 0;
+  padding: 1px 3px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+#token-hud .primal-hud-sidebar .phs-row.usable {
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#token-hud .primal-hud-sidebar .phs-row.usable:hover {
+  background: var(--phs-row-hover);
+  border-color: var(--control-hover-border-color);
+  color: var(--phs-text-strong);
+}
+
+#token-hud .primal-hud-sidebar .phs-row.disabled,
+#token-hud .primal-hud-sidebar .phs-row.suppressed {
+  opacity: 0.6;
+}
+
+#token-hud .primal-hud-sidebar .phs-img {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: none;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+#token-hud .primal-hud-sidebar .phs-img[src$=".svg"] {
+  filter: var(--hud-icon-filter, none);
+}
+
+#token-hud .primal-hud-sidebar .phs-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#token-hud .primal-hud-sidebar .phs-title,
+#token-hud .primal-hud-sidebar .phs-subtitle {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#token-hud .primal-hud-sidebar .phs-title {
+  color: var(--phs-text-strong);
+}
+
+#token-hud .primal-hud-sidebar .phs-subtitle {
+  color: var(--phs-muted);
+  font-size: 9.5px;
+}
+
+#token-hud .primal-hud-sidebar .phs-info {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+#token-hud .primal-hud-sidebar .phs-uses,
+#token-hud .primal-hud-sidebar .phs-mod,
+#token-hud .primal-hud-sidebar .phs-save,
+#token-hud .primal-hud-sidebar .phs-value,
+#token-hud .primal-hud-sidebar .phs-qty {
+  color: var(--phs-text-strong);
+  font-weight: bold;
+}
+
+#token-hud .primal-hud-sidebar .phs-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--phs-muted);
+  border-radius: 2px;
+  color: var(--phs-muted);
+  font-size: 8px;
+  font-weight: bold;
+}
+
+#token-hud .primal-hud-sidebar .phs-toggle {
+  font-size: 13px;
+}
+
+/* Spell slots: one chip per level, with a pip per slot */
+#token-hud .primal-hud-sidebar .phs-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 1px 1px 3px;
+}
+
+#token-hud .primal-hud-sidebar .phs-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 15px;
+  padding: 0 4px;
+  border: 1px solid var(--control-border-color);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--control-bg-color) 60%, transparent);
+}
+
+#token-hud .primal-hud-sidebar .phs-slot.empty {
+  opacity: 0.55;
+}
+
+#token-hud .primal-hud-sidebar .phs-slot-label {
+  color: var(--phs-text-strong);
+  font-size: 9.5px;
+  font-weight: bold;
+}
+
+#token-hud .primal-hud-sidebar .phs-slot-count {
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+#token-hud .primal-hud-sidebar .phs-pips {
+  display: inline-flex;
+  gap: 2px;
+}
+
+#token-hud .primal-hud-sidebar .phs-pip {
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--phs-pip);
+  border-radius: 50%;
+  background: var(--phs-pip-empty);
+}
+
+#token-hud .primal-hud-sidebar .phs-pip.filled {
+  background: var(--phs-pip);
+}
+
+#token-hud .primal-hud-sidebar .phs-pip.temp {
+  border-color: var(--phs-pip-temp);
+}
+
+#token-hud .primal-hud-sidebar .phs-pip.temp.filled {
+  background: var(--phs-pip-temp);
+}
+
+/* Saves & Skills: a grid of saving throws, then one-line skill and tool rows */
+#token-hud .primal-hud-sidebar .phs-saves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  padding: 1px 1px 2px;
+}
+
+#token-hud .primal-hud-sidebar .phs-save-cell {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  height: 20px;
+  padding: 0 3px;
+  border: 1px solid var(--control-border-color);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--control-bg-color) 60%, transparent);
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#token-hud .primal-hud-sidebar .phs-save-cell .phs-check-mod {
+  min-width: 0;
+}
+
+#token-hud .primal-hud-sidebar .phs-save-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--phs-muted);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#token-hud .primal-hud-sidebar .phs-check {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 18px;
+  margin: 0;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: var(--cursor-pointer, pointer);
+}
+
+#token-hud .primal-hud-sidebar .phs-check:hover,
+#token-hud .primal-hud-sidebar .phs-save-cell:hover {
+  background: var(--phs-row-hover);
+  border-color: var(--control-hover-border-color);
+  color: var(--phs-text-strong);
+}
+
+#token-hud .primal-hud-sidebar .phs-check-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--phs-text-strong);
+  font-size: 11px;
+}
+
+#token-hud .primal-hud-sidebar .phs-check-ability {
+  flex: none;
+  color: var(--phs-muted);
+  font-size: 9px;
+  font-weight: bold;
+}
+
+#token-hud .primal-hud-sidebar .phs-check-mod {
+  flex: none;
+  min-width: 20px;
+  color: var(--phs-text-strong);
+  font-size: 11px;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+#token-hud .primal-hud-sidebar .phs-check-passive {
+  flex: none;
+  min-width: 14px;
+  color: var(--phs-muted);
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* Proficiency: an empty ring, half filled, filled, or filled with a second ring for expertise */
+#token-hud .primal-hud-sidebar .phs-prof {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--phs-muted);
+  border-radius: 50%;
+}
+
+#token-hud .primal-hud-sidebar .phs-prof.half {
+  border-color: var(--phs-pip);
+  background: linear-gradient(90deg, var(--phs-pip) 50%, transparent 50%);
+}
+
+#token-hud .primal-hud-sidebar .phs-prof.full,
+#token-hud .primal-hud-sidebar .phs-prof.expert {
+  border-color: var(--phs-pip);
+  background: var(--phs-pip);
+}
+
+#token-hud .primal-hud-sidebar .phs-prof.expert {
+  box-shadow: 0 0 0 1px var(--control-bg-color), 0 0 0 2px var(--phs-pip);
+}

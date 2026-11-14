@@ -1,0 +1,41 @@
+{
+  "id": "primal-mounts",
+  "title": "Primal Mounts",
+  "description": "Mounted combat for D&D 5e. Drop a smaller creature's token onto a larger one and choose Mount from the Token HUD: the pair moves and displays as one united token, follows the mounted combat rules (control, initiative, falling off) and the Mounted Combatant feat, until Unmount is chosen. Overlapping tokens also stay visible and selectable. Made with AI: written with Claude (Anthropic).",
+  "version": "1.0.9",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-mounts.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true
+}

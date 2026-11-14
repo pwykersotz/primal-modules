@@ -1,0 +1,48 @@
+{
+  "id": "primal-harvesting",
+  "title": "Primal Harvesting",
+  "description": "Harvest beaten monsters with the rules of Heliana's Guide to Monster Hunting. A Harvest button (on the Token HUD, and on a chat card when a combat ends) opens a window with the creature's components: click them into a harvest list in carving order, with each one's DC added to the ones before it. The best assessor and carver are picked for you (with ritual carving and helpers by size); press Harvest and both checks are rolled with dnd5e and thrown together by Dice So Nice. One chat card shows what was harvested and what was lost, and the components go into a character's inventory. The GM fills in the harvest tables from the book (type, paste or import them) and can change the rules. Made with AI: written with Claude (Anthropic).",
+  "version": "1.2.0",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "reason": "Throws the assessment and carving dice together."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-harvesting.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true
+}

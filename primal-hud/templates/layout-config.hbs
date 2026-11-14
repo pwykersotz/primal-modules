@@ -1,0 +1,32 @@
+<div class="primal-hud-layout">
+    <p class="hint">{{localize "PRIMAL_HUD.Layout.Intro"}}</p>
+    <div class="primal-hud-layout-columns">
+        {{#each columns as |column|}}
+        <section class="primal-hud-layout-column">
+            <h3>{{column.title}}</h3>
+            <ol class="primal-hud-layout-list" data-side="{{column.side}}">
+                {{#each column.entries as |entry|}}
+                <li class="primal-hud-layout-row{{#if entry.hidden}} is-hidden{{/if}}" data-button-id="{{entry.id}}" draggable="true">
+                    <i class="primal-hud-layout-grip fa-solid fa-grip-vertical" inert></i>
+                    <span class="primal-hud-button-icon">
+                        {{#if entry.img}}<img src="{{entry.img}}" alt="">{{else if entry.icon}}<i class="{{entry.icon}}" inert></i>{{/if}}
+                    </span>
+                    <span class="primal-hud-layout-label">
+                        <span>{{entry.label}}</span>
+                        <small>{{entry.source}}{{#if entry.hidden}} &bull; {{../../labels.hidden}}{{/if}}</small>
+                    </span>
+                    <button type="button" class="icon fa-solid fa-arrow-up" data-action="moveUp" {{#if entry.first}}disabled{{/if}}
+                            data-tooltip aria-label="{{../../labels.up}}"></button>
+                    <button type="button" class="icon fa-solid fa-arrow-down" data-action="moveDown" {{#if entry.last}}disabled{{/if}}
+                            data-tooltip aria-label="{{../../labels.down}}"></button>
+                    <button type="button" class="icon {{column.moveIcon}}" data-action="moveSide"
+                            data-tooltip aria-label="{{column.moveLabel}}"></button>
+                </li>
+                {{else}}
+                <li class="primal-hud-layout-empty">{{../labels.empty}}</li>
+                {{/each}}
+            </ol>
+        </section>
+        {{/each}}
+    </div>
+</div>

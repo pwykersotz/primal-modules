@@ -1,0 +1,38 @@
+{{#if visible}}
+<div class="pw-bar">
+  {{#if isGM}}
+  <div class="pw-button">
+    <button type="button" data-action="roll" data-tooltip="{{labels.roll}}" data-tooltip-direction="LEFT"
+            aria-label="{{labels.roll}}"><i class="fa-solid fa-dice"></i></button>
+  </div>
+  {{/if}}
+
+  {{#if empty}}
+  <div class="pw-core pw-clickable pw-empty" data-action="roll" role="button" tabindex="0">
+    <i class="pw-icon fa-solid fa-cloud-sun"></i><span class="pw-condition">{{labels.empty}}</span>
+  </div>
+  {{else}}
+  <div class="pw-core pw-cond-{{weather.condition}}{{#if weather.night}} pw-night{{/if}}{{#if weather.stale}} pw-stale{{/if}}{{#if isGM}} pw-clickable{{/if}}"
+       {{#if isGM}}data-action="edit" role="button" tabindex="0"{{/if}}
+       data-tooltip-html="{{weather.tooltip}}" data-tooltip-direction="DOWN" aria-label="{{weather.label}}">
+    <i class="pw-icon {{weather.icon}}"></i>
+    <span class="pw-condition">{{weather.label}}</span>
+    <span class="pw-temp">{{weather.temperature}}</span>
+    <span class="pw-wind pw-wind-{{weather.wind}}">{{#if weather.windy}}<i class="fa-solid fa-wind"></i> {{/if}}{{weather.windLabel}}</span>
+    {{#if weather.warning}}
+    <span class="pw-flag pw-warning" aria-label="{{weather.warningLabel}}"><i class="fa-solid fa-triangle-exclamation"></i></span>
+    {{/if}}
+    {{#if hiddenFromPlayers}}
+    <span class="pw-flag pw-gm-only" aria-label="{{labels.hidden}}"><i class="fa-solid fa-eye-slash"></i></span>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  {{#if isGM}}
+  <div class="pw-button">
+    <button type="button" class="pw-menu" data-tooltip="{{labels.menu}}" data-tooltip-direction="RIGHT"
+            aria-label="{{labels.menu}}"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+  </div>
+  {{/if}}
+</div>
+{{/if}}

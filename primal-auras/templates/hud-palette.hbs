@@ -1,0 +1,70 @@
+<div class="pa-palette">
+  <header class="pa-palette-header">
+    <span class="pa-palette-title"><i class="pa-aura-icon"></i> {{localize "PRIMAL_AURAS.HUD.Title"}}</span>
+    <span class="pa-palette-tools">
+      {{#if hasActor}}
+      <button type="button" class="pa-icon" data-pa-action="items" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.ItemAuras'}}"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+      {{/if}}
+      {{#if isGM}}
+      <button type="button" class="pa-icon" data-pa-action="library" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Library'}}"><i class="fa-solid fa-book"></i></button>
+      {{/if}}
+    </span>
+  </header>
+
+  {{#if override}}
+  <p class="pa-override"><i class="fa-solid fa-lock"></i> {{localize "PRIMAL_AURAS.HUD.OverrideNotice" shape=override}}</p>
+  {{/if}}
+
+  {{#unless auras.length}}
+  <p class="pa-empty">{{localize "PRIMAL_AURAS.HUD.NoAuras"}}</p>
+  {{/unless}}
+
+  <ol class="pa-aura-list">
+    {{#each auras}}
+    <li class="pa-aura {{#if enabled}}is-on{{else}}is-off{{/if}}" data-key="{{key}}">
+      <div class="pa-aura-row">
+        <button type="button" class="pa-toggle" data-pa-action="toggle" {{#unless canEdit}}disabled{{/unless}}
+                data-tooltip="{{#if enabled}}{{localize 'PRIMAL_AURAS.HUD.TurnOff'}}{{else}}{{localize 'PRIMAL_AURAS.HUD.TurnOn'}}{{/if}}">
+          <i class="fa-solid {{#if enabled}}fa-toggle-on{{else}}fa-toggle-off{{/if}}"></i>
+        </button>
+        <span class="pa-aura-name" title="{{name}}">
+          {{#if isItem}}<img src="{{itemImg}}" alt="" data-tooltip="{{itemName}}">{{/if}}
+          {{name}}
+          {{#if effectCount}}<span class="pa-badge" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.EffectCount'}}">{{effectCount}}</span>{{/if}}
+        </span>
+        <button type="button" class="pa-icon" data-pa-action="shape" {{#unless canEdit}}disabled{{/unless}}
+                data-tooltip="{{localize 'PRIMAL_AURAS.HUD.SwapShape'}} ({{shapeLabel}})"><i class="fa-solid {{shapeIcon}}"></i></button>
+        {{#if canEdit}}
+        <button type="button" class="pa-icon" data-pa-action="edit" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Edit'}}"><i class="fa-solid fa-gear"></i></button>
+        {{/if}}
+        {{#if canDelete}}
+        <button type="button" class="pa-icon pa-danger" data-pa-action="delete" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Delete'}}"><i class="fa-solid fa-trash"></i></button>
+        {{/if}}
+      </div>
+      {{#if inactiveReason}}<p class="pa-note">{{inactiveReason}}</p>{{/if}}
+      <div class="pa-aura-fields">
+        <label data-tooltip="{{localize 'PRIMAL_AURAS.HUD.RangeHint'}}">
+          <span>{{localize "PRIMAL_AURAS.HUD.Range"}}</span>
+          <input type="number" data-field="radius" value="{{radius}}" min="0" step="{{../step}}" {{#unless canEdit}}disabled{{/unless}}>
+          <span class="pa-units">{{../units}}</span>
+        </label>
+        <label data-tooltip="{{localize 'PRIMAL_AURAS.HUD.InnerHint'}}">
+          <span>{{localize "PRIMAL_AURAS.HUD.Inner"}}</span>
+          <input type="number" data-field="innerRadius" value="{{innerRadius}}" min="0" step="{{../step}}" {{#unless canEdit}}disabled{{/unless}}>
+        </label>
+        <input type="color" data-field="color" value="{{color}}" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Color'}}" {{#unless canEdit}}disabled{{/unless}}>
+      </div>
+    </li>
+    {{/each}}
+  </ol>
+
+  <footer class="pa-palette-footer">
+    <button type="button" data-pa-action="add"><i class="fa-solid fa-plus"></i> {{localize "PRIMAL_AURAS.HUD.New"}}</button>
+    {{#if hasPresets}}
+    <div class="pa-preset-picker">
+      <select class="pa-preset-select">{{selectOptions presetChoices}}</select>
+      <button type="button" class="pa-icon" data-pa-action="addPreset" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.AddPreset'}}"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    {{/if}}
+  </footer>
+</div>

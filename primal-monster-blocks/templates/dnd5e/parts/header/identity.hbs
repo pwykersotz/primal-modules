@@ -1,0 +1,31 @@
+{{#unless flags.hide-profile-image}}
+	<figure class="profile-image">
+		<img
+			src="{{portrait.src}}" data-edit="{{portrait.path}}"
+			title="{{actor.name}}{{#if flags.editing}} - {{localize "MOBLOKS5E.EditHint"}}{{/if}}">
+	</figure>
+{{/unless}}
+<h1 class="charname" contenteditable="{{flags.editing}}" data-field-key="name" placeholder="{{localize "DND5E.Name"}}">{{actor.name}}</h1>
+<div class="chartype">
+	<div class="select-field" data-select-key="system.traits.size" data-selected-value="{{system.traits.size}}">
+		<label class="{{#if flags.editing}}select-label{{/if}}">{{labels.size}}</label>{{~" "~}}
+		{{#if flags.editing~}}
+			<ul class="actor-size select-list">
+			{{#each config.actorSizes as |sizeData size|}}
+				{{#unless (eq size ../system.traits.size)}}
+					<li data-selection-value="{{size}}">{{sizeData.label}}</li>
+				{{/unless}}
+			{{~/each~}}
+			</ul>
+		{{~/if~}}
+	</div>{{~" "~}}
+	<span class="optional-space">
+		{{~labels.type~}}
+		<a class="config-button" data-config="type" title="{{localize "DND5E.CreatureTypeConfig"}}">
+			<i class="fas fa-cog"></i>{{~" "~}}
+		</a>{{~" "~}}
+	</span>{{~" "~}}
+	<span class="optional-comma" contenteditable="{{flags.editing}}" placeholder="{{localize "DND5E.Alignment"}}" data-field-key="system.details.alignment">
+		{{~system.details.alignment~}}
+	</span>
+</div>

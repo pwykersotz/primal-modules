@@ -1,0 +1,21 @@
+<h4 class="attribute-name">{{localize "DND5E.Senses"}}</h4>
+{{#each senses as |sense|~}}
+	<span class="editable-wrapper{{#if @index}} optional-comma{{/if}}">
+		{{~#if sense.value}}{{sense.label}} {{/if~}}
+		{{#if sense.value}}{{sense.value}}{{/if~}}
+		{{~#if sense.value}} {{sense.unit}}{{/if~}}
+	</span>
+{{~/each~}}
+{{~#if senses.length}}{{localize "MOBLOKS5E.Comma"}} {{/if~}}
+{{~#if specialSenses.special.value~}}
+<span class="editable-wrapper">{{~" "~}}
+	{{~specialSenses.special.value~}}
+</span>
+{{~localize "MOBLOKS5E.Comma"}}
+{{/if~}}
+<span>
+	{{~specialSenses.passivePerception~}}
+</span>
+<a class="config-button" data-config="senses" title="{{localize "DND5E.SensesConfig"}}">
+	<i class="fas fa-cog"></i>{{~" "~}}
+</a>

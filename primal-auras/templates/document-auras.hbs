@@ -1,0 +1,42 @@
+<div class="pa-docauras">
+  <header class="pa-docauras-header">
+    <img src="{{img}}" alt="">
+    <div>
+      <h2>{{name}}</h2>
+      {{#if ownerName}}<span class="pa-sub">{{ownerName}}</span>{{/if}}
+    </div>
+  </header>
+  <p class="hint">{{localize "PRIMAL_AURAS.DocAuras.Hint"}}</p>
+
+  <ol class="pa-aura-list">
+    {{#each auras}}
+    <li class="pa-aura {{#if enabled}}is-on{{else}}is-off{{/if}}" data-aura-id="{{id}}">
+      <button type="button" class="pa-toggle" data-action="toggle" data-tooltip="{{#if enabled}}{{localize 'PRIMAL_AURAS.HUD.TurnOff'}}{{else}}{{localize 'PRIMAL_AURAS.HUD.TurnOn'}}{{/if}}">
+        <i class="fa-solid {{#if enabled}}fa-toggle-on{{else}}fa-toggle-off{{/if}}"></i>
+      </button>
+      <span class="pa-swatch small" style="background-color: {{color}};"><i class="fa-solid {{shapeIcon}}"></i></span>
+      <div class="pa-docaura-info">
+        <div class="pa-preset-name">{{name}}</div>
+        <div class="pa-preset-meta">
+          {{radius}} {{../units}}{{#if innerRadius}} ({{localize "PRIMAL_AURAS.Presets.Donut"}} {{innerRadius}}){{/if}} · {{activationLabel}}{{#if extras}} · {{extras}}{{/if}}
+          {{#if effectCount}} · {{localize "PRIMAL_AURAS.Presets.EffectCount" count=effectCount}}{{/if}}
+        </div>
+      </div>
+      <button type="button" class="pa-icon" data-action="edit" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Edit'}}"><i class="fa-solid fa-gear"></i></button>
+      <button type="button" class="pa-icon pa-danger" data-action="delete" data-tooltip="{{localize 'PRIMAL_AURAS.HUD.Delete'}}"><i class="fa-solid fa-trash"></i></button>
+    </li>
+    {{else}}
+    <li class="pa-empty">{{localize "PRIMAL_AURAS.DocAuras.Empty"}}</li>
+    {{/each}}
+  </ol>
+
+  <footer class="pa-docauras-footer">
+    <button type="button" data-action="add"><i class="fa-solid fa-plus"></i> {{localize "PRIMAL_AURAS.HUD.New"}}</button>
+    {{#if hasPresets}}
+    <div class="pa-preset-picker">
+      <select class="pa-preset-select">{{selectOptions presetChoices}}</select>
+      <button type="button" data-action="addPreset"><i class="fa-solid fa-book"></i> {{localize "PRIMAL_AURAS.HUD.AddPreset"}}</button>
+    </div>
+    {{/if}}
+  </footer>
+</div>

@@ -1,0 +1,263 @@
+/* Status pane: the full text of every active status, beside the Token HUD's status palette */
+#mg-status-pane {
+  position: fixed;
+  z-index: 60;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: 0.5rem 0.6rem 0.6rem;
+  background: rgba(14, 12, 18, 0.94);
+  color: #ece6d6;
+  border: 1px solid rgba(201, 170, 113, 0.6);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: left;
+  pointer-events: auto;
+}
+#mg-status-pane[hidden] { display: none !important; }
+#mg-status-pane .mg-sp-head {
+  position: sticky;
+  top: -0.5rem;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: -0.5rem -0.6rem 0.4rem;
+  padding: 0.45rem 0.6rem 0.35rem;
+  background: rgba(14, 12, 18, 0.98);
+  border-bottom: 1px solid rgba(201, 170, 113, 0.35);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #c9aa71;
+}
+#mg-status-pane .mg-sp-who {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  color: #ece6d6;
+  opacity: 0.8;
+}
+#mg-status-pane .mg-sp-effect {
+  padding: 0.4rem 0.45rem 0.35rem;
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+#mg-status-pane .mg-sp-effect + .mg-sp-effect {
+  margin-top: 0.3rem;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.12);
+}
+#mg-status-pane .mg-sp-effect.mg-sp-hl {
+  background: rgba(255, 100, 0, 0.13);
+  border-left-color: #ff6400;
+}
+#mg-status-pane .mg-sp-effect.mg-sp-hl .mg-sp-hl > strong { color: #ffb27a; }
+#mg-status-pane header:not(.mg-sp-head) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+#mg-status-pane header img {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.45);
+  object-fit: contain;
+}
+#mg-status-pane header strong { display: block; font-size: 14px; }
+#mg-status-pane header small { display: block; font-size: 11px; opacity: 0.75; }
+#mg-status-pane header .mg-sp-title { flex: 1 1 auto; min-width: 0; }
+#mg-status-pane .mg-sp-time {
+  flex: none;
+  align-self: flex-start;
+  margin-top: 3px;
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: rgba(201, 170, 113, 0.18);
+  color: #ead5a8;
+  font-size: 11px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+#mg-status-pane .mg-sp-time i { margin-right: 2px; font-size: 10px; }
+#mg-status-pane .mg-sp-remove {
+  flex: none;
+  align-self: flex-start;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  margin: 1px 0 0;
+  padding: 0;
+  line-height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ece6d6;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.7;
+}
+#mg-status-pane .mg-sp-remove:is(:hover, :focus-visible) {
+  opacity: 1;
+  border-color: #ff6400;
+  background: rgba(255, 100, 0, 0.25);
+  color: #fff;
+}
+#mg-status-pane .mg-sp-remove:disabled { opacity: 0.3; cursor: default; }
+#mg-status-pane .mg-sp-text p { margin: 0 0 0.3rem; }
+#mg-status-pane .mg-sp-text :is(ul, ol) { margin: 0.15rem 0 0.35rem; padding-left: 1.2rem; }
+#mg-status-pane .mg-sp-text li { margin: 0 0 0.1rem; }
+#mg-status-pane .mg-sp-text :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0.4rem 0 0.15rem;
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+#mg-status-pane .mg-sp-text img { max-width: 100%; height: auto; border: none; }
+#mg-status-pane .mg-sp-text table { width: 100%; margin: 0.2rem 0; font-size: 12px; }
+#mg-status-pane .mg-sp-rules + .mg-sp-rules,
+#mg-status-pane .mg-sp-own + .mg-sp-rules { margin-top: 0.35rem; }
+#mg-status-pane .mg-sp-rules > strong { display: block; }
+#mg-status-pane .mg-sp-none { font-style: italic; opacity: 0.75; }
+#mg-status-pane a { color: #ffb27a; }
+
+/* Roll dialogs: make the suggested button (Advantage / Normal / Disadvantage, or Critical) obvious */
+.application.roll-configuration nav.dialog-buttons button[autofocus],
+.application.roll-configuration nav.dialog-buttons button[autofocus]:hover,
+.application.roll-configuration nav.dialog-buttons button[autofocus]:focus,
+.application.roll-configuration nav.dialog-buttons button[autofocus]:focus-visible {
+  outline: 3px solid #39d353 !important;
+  outline-offset: 1px;
+  border-color: #39d353 !important;
+  box-shadow: 0 0 10px 3px rgba(57, 211, 83, 0.7), inset 0 0 8px rgba(57, 211, 83, 0.35) !important;
+  font-weight: bold;
+}
+
+/* Module Settings: let this module's setting titles use the row's free space instead of wrapping
+   at half width (the control beside them is only a checkbox or a short list). The control keeps
+   its own size and the title takes the rest, so both stay on one line above the hint. */
+.form-group:has(.form-fields [name^="primal-status."]) > label {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+.form-group:has(.form-fields [name^="primal-status."]) > .form-fields {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+
+/* When one column would run past the screen, the pane's body splits into columns side by side */
+#mg-status-pane .mg-sp-body {
+  column-gap: 14px;
+  column-rule: 1px solid rgba(201, 170, 113, 0.22);
+  column-fill: balance;
+}
+#mg-status-pane .mg-sp-body > .mg-sp-effect {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Status pane: the value of Jinxed (X), Valor (X) and Burning (X) */
+#mg-status-pane .mg-sp-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.4rem;
+  margin: 0 0 0.35rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(201, 170, 113, 0.1);
+  font-size: 12px;
+}
+#mg-status-pane .mg-sp-value-label { flex: 1 0 100%; color: #ead5a8; font-size: 11px; }
+#mg-status-pane .mg-sp-value-input {
+  flex: none;
+  width: 5.2em;
+  height: 22px;
+  min-height: 0;
+  margin: 0;
+  padding: 0 5px;
+  border: 1px solid rgba(201, 170, 113, 0.6);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+#mg-status-pane .mg-sp-value-input:focus { outline: none; border-color: #ff6400; box-shadow: 0 0 0 2px rgba(255, 100, 0, 0.35); }
+#mg-status-pane .mg-sp-value-input.mg-sp-invalid { border-color: #e04040; box-shadow: 0 0 0 2px rgba(224, 64, 64, 0.45); }
+#mg-status-pane .mg-sp-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+#mg-status-pane .mg-sp-chip {
+  flex: none;
+  width: auto;
+  height: 22px;
+  min-height: 0;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ece6d6;
+  font-size: 11px;
+  line-height: 20px;
+  cursor: pointer;
+}
+#mg-status-pane .mg-sp-chip:is(:hover, :focus-visible) { border-color: #ff6400; color: #fff; }
+#mg-status-pane .mg-sp-chip.active { border-color: #c9aa71; background: rgba(201, 170, 113, 0.3); color: #fff; }
+/* Burning's damage type: its own row of buttons above the dice, coloured by type */
+#mg-status-pane .mg-sp-types { flex: 1 0 100%; display: flex; gap: 3px; }
+#mg-status-pane .mg-sp-type { min-width: 4.2em; font-weight: bold; }
+#mg-status-pane .mg-sp-type[data-type="fire"].active { border-color: #ff7a1a; background: rgba(255, 100, 0, 0.35); }
+#mg-status-pane .mg-sp-type[data-type="acid"].active { border-color: #8fdc2a; background: rgba(110, 200, 30, 0.35); }
+#mg-status-pane .mg-sp-type[data-type="acid"]:is(:hover, :focus-visible) { border-color: #8fdc2a; }
+
+/* ---------- Desperation Attack chat cards (a hidden GM option, 09-desperation.js) ---------- */
+.chat-message.primal-desperation {
+  border: 2px solid #c0281c !important;
+  border-radius: 6px;
+  box-shadow: 0 0 8px 1px rgba(255, 72, 24, 0.7), inset 0 0 14px rgba(150, 16, 8, 0.35);
+  animation: primal-desperation-glow 2.4s ease-in-out infinite;
+}
+.chat-message.primal-desperation .card-header {
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(150, 18, 10, 0.85), rgba(60, 6, 4, 0.35) 75%, transparent) !important;
+}
+.chat-message.primal-desperation .card-header .title,
+.chat-message.primal-desperation .message-header .flavor-text {
+  color: #ffb347 !important;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 0 4px rgba(255, 90, 30, 0.95), 0 0 10px rgba(200, 30, 10, 0.8);
+}
+.chat-message.primal-desperation .card-header .title .primal-desperation-icon { margin-right: 0.35em; }
+.chat-message.primal-desperation .dice-total {
+  border-color: #c0281c;
+  color: #ffd27a;
+  text-shadow: 0 0 6px rgba(255, 80, 20, 0.9);
+}
+@keyframes primal-desperation-glow {
+  0%, 100% { box-shadow: 0 0 6px 1px rgba(255, 72, 24, 0.55), inset 0 0 12px rgba(150, 16, 8, 0.3); }
+  50% { box-shadow: 0 0 14px 3px rgba(255, 96, 32, 0.9), inset 0 0 18px rgba(170, 20, 10, 0.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-message.primal-desperation { animation: none; }
+}

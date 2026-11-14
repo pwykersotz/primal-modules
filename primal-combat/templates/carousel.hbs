@@ -1,0 +1,83 @@
+{{#if visible}}
+<div class="pc-shell">
+  <div class="pc-bar">
+    <div class="pc-controls pc-controls-start">
+      {{#if controls.showPrevious}}
+      <button type="button" class="pc-button" data-action="previous" data-tooltip="{{controls.previousLabel}}"
+              aria-label="{{controls.previousLabel}}"><i class="fa-solid fa-chevron-left"></i></button>
+      {{/if}}
+    </div>
+
+    <ol class="pc-track">
+      {{#each entries}}
+      {{#if isSlot}}
+      <li class="{{css}}" data-key="{{key}}" data-combatant-id="{{id}}" data-token-id="{{tokenId}}"
+          data-tooltip-html="{{tooltip}}" data-tooltip-direction="DOWN" aria-label="{{name}}">
+        <div class="pc-face">
+          <div class="pc-portrait"><img src="{{img}}" alt="" draggable="false"></div>
+          <img class="pc-frame" src="{{@root.frameSrc}}" alt="" draggable="false">
+          {{#if hp}}
+          <div class="pc-hp{{#if hp.temp}} pc-hp-temp{{/if}}"><div class="pc-hp-fill" style="width: {{hp.pct}}%; background: {{hp.color}}"></div></div>
+          {{/if}}
+          {{#if defeated}}<span class="pc-mark pc-mark-defeated"><i class="fa-solid fa-skull"></i></span>
+          {{else if done}}<span class="pc-mark pc-mark-done"><i class="fa-solid fa-check"></i></span>
+          {{else if canToggle}}<span class="pc-mark pc-mark-hint"><i class="fa-solid fa-check"></i></span>{{/if}}
+          {{#if hidden}}<span class="pc-corner pc-corner-hidden"><i class="fa-solid fa-eye-slash"></i></span>{{/if}}
+          {{#if canRoll}}
+          <button type="button" class="pc-badge pc-roll" data-action="rollInitiative" data-tooltip="{{@root.labels.roll}}"
+                  aria-label="{{@root.labels.roll}}"><i class="fa-solid fa-dice-d20"></i></button>
+          {{else if initiative}}
+          <span class="pc-badge pc-init">{{initiative}}</span>
+          {{/if}}
+        </div>
+      </li>
+      {{else if isLabel}}
+      <li class="pc-label {{css}}" data-key="{{key}}" data-tooltip="{{tooltip}}" data-tooltip-direction="DOWN">
+        <i class="{{icon}}"></i>
+        {{#if roll}}<span class="pc-label-roll">{{roll}}</span>{{/if}}
+      </li>
+      {{else}}
+      <li class="pc-divider" data-key="{{key}}" data-tooltip="{{tooltip}}" data-tooltip-direction="DOWN"><span>{{label}}</span></li>
+      {{/if}}
+      {{/each}}
+    </ol>
+
+    <div class="pc-controls pc-controls-end">
+      {{#if controls.showQuickRoll}}
+      <button type="button" class="pc-button" data-action="quickRoll" data-tooltip="{{controls.quickRollLabel}}"
+              aria-label="{{controls.quickRollLabel}}"><i class="fa-solid fa-dice-d20"></i></button>
+      {{/if}}
+      {{#if controls.showStart}}
+      <button type="button" class="pc-button pc-primary" data-action="startCombat" data-tooltip="{{labels.start}}"
+              aria-label="{{labels.start}}"><i class="fa-solid fa-play"></i></button>
+      {{/if}}
+      {{#if controls.showNext}}
+      <button type="button" class="pc-button{{#if controls.nextPrimary}} pc-primary{{/if}}" data-action="next"
+              data-tooltip="{{controls.nextLabel}}" aria-label="{{controls.nextLabel}}">
+        <i class="{{controls.nextIcon}}"></i>{{#if controls.nextText}}<span>{{controls.nextText}}</span>{{/if}}
+      </button>
+      {{/if}}
+      {{#if controls.showMenu}}
+      <button type="button" class="pc-button pc-menu" data-tooltip="{{labels.menu}}" aria-label="{{labels.menu}}">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="pc-status">
+    {{#if status.round}}<strong class="pc-status-round">{{status.round}}</strong>{{/if}}
+    {{#if status.timer}}
+    <span class="pc-status-timer{{#if status.timer.paused}} pc-timer-paused{{/if}}{{#if status.timer.canRestart}} pc-timer-restart{{/if}}"
+          data-start="{{status.timer.start}}" data-paused-at="{{status.timer.pausedAt}}"
+          data-tooltip-html="{{status.timer.tooltip}}" data-tooltip-direction="DOWN"
+          {{#if status.timer.canRestart}}data-action="restartTimer" role="button" tabindex="0"{{/if}}>
+      <i class="{{#if status.timer.paused}}fa-solid fa-pause{{else}}fa-regular fa-clock{{/if}}"></i><span class="pc-timer-value">{{status.timer.text}}</span>
+    </span>
+    {{/if}}
+    {{#if status.text}}<span class="pc-status-text {{status.css}}">{{status.text}}</span>{{/if}}
+    {{#if status.detail}}<span class="pc-status-detail">{{status.detail}}</span>{{/if}}
+    {{#if status.hint}}<span class="pc-status-hint">{{status.hint}}</span>{{/if}}
+  </div>
+</div>
+{{/if}}

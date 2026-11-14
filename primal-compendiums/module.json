@@ -1,0 +1,28 @@
+{
+  "id": "primal-compendiums",
+  "title": "Primal Compendiums",
+  "description": "Adds a Compendiums tab to the Actors, Items, Scenes, Journal, Roll Tables, Cards, Macros and Playlists sidebars, for the GM. Each tab lists the compendiums you choose for it, in the same folder-and-entry style as the sidebar itself, so you can switch between the world's actors and your compendium monsters with one click, search them, open sheets, drag entries onto the map or into the world, and import them. Both sides get filters and sorting: actors by CR, creature type and source book, items by rarity, item type and source book, and everything by name. Actors show CR or level badges, and Ignore folders turns either side into one list. Nothing changes for players: the module does nothing on their side and never changes who can see a compendium. Made with AI: written with Claude (Anthropic).",
+  "version": "1.2.1",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-compendiums.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

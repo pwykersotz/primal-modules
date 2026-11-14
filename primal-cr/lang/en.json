@@ -1,0 +1,174 @@
+{
+  "PRIMAL_CR": {
+    "Window": {
+      "Title": "Primal CR: Encounter Danger",
+      "NoVerdict": "No verdict yet",
+      "Waiting": "Add a party and some enemies to see how the fight tends to go.",
+      "NeedParty": "Add the party: press Player characters, or drag characters in.",
+      "NeedEnemies": "Add some enemies: drag them in from the Actors sidebar or a compendium, or use the buttons below for tokens on the map.",
+      "Party": "Party",
+      "Enemies": "Enemies",
+      "Total": "{count} with {hp} HP",
+      "FillParty": "Player characters",
+      "FillPartyTip": "Replace the party with the world's player characters (dnd5e's primary party if one is set, otherwise each player's character).",
+      "ClearEnemies": "Clear",
+      "ClearEnemiesTip": "Remove every enemy.",
+      "EmptyParty": "Nobody yet. Drag characters here.",
+      "EmptyEnemies": "Nobody yet. Drag creatures here.",
+      "DropHint": "Drag actors or folders in from the Actors sidebar, a compendium or the Compendiums side, or right-click one there and choose Add to Primal CR.",
+      "FromMap": "From the map",
+      "AddSelected": "Selected tokens",
+      "AddSelectedTip": "Add the tokens you have selected, as they are now. Player-owned and friendly tokens join the party, the rest the enemies.",
+      "AddScene": "Whole scene",
+      "AddSceneTip": "Add every token on this scene, as they are now: friendly and player-owned tokens to the party, hostile ones to the enemies. Neutral tokens and the defeated are left out.",
+      "LoadCombat": "Current combat",
+      "LoadCombatTip": "Replace both sides with the combatants of the current combat, as they are now.",
+      "Rested": "Party fully rested",
+      "RestedTip": "Read the party as if it had just finished a long rest: full hit points, every spell slot and use back, no conditions. Untick it to use the characters as they are right now.",
+      "Live": "Keep up to date",
+      "LiveTip": "Work the danger out again whenever someone in the fight changes: hit points, conditions, spell slots.",
+      "Rerun": "Run again",
+      "RerunTip": "Read every sheet again and play the fight out again with fresh dice.",
+      "Runs": "{runs} fights played out",
+      "Details": "What the module read from this sheet",
+      "OpenSheet": "Open the sheet",
+      "Remove": "Remove",
+      "ToParty": "Move to the party",
+      "ToEnemies": "Move to the enemies",
+      "Count": "How many",
+      "Fewer": "One fewer",
+      "More": "One more",
+      "StatWin": "Party wins",
+      "StatWinTip": "How often every enemy was beaten.",
+      "StatDrop": "Someone drops",
+      "StatDropTip": "How often at least one player character was reduced to 0 hit points at some point in the fight.",
+      "StatWipe": "Whole party down",
+      "StatWipeTip": "How often the fight ended with every member of the party at 0 hit points or dead.",
+      "StatDeath": "A character dies",
+      "StatDeathTip": "How often at least one player character died: three failed death saves, or damage enough to kill outright.",
+      "StatLost": "Party HP lost",
+      "StatLostTip": "The damage the player characters took in an average fight, as a share of their total hit points.",
+      "StatRounds": "Rounds",
+      "StatRoundsTip": "How long the fight lasts on average.",
+      "BookTip": "The rulebook's own measure, from Challenge Rating and XP. It isn't used for the verdict above.",
+      "Book": "By the book (XP): {level}. The enemies are worth {xp} XP; this party's budgets are {low} low, {moderate} moderate, {high} high.",
+      "Missing": "Missing",
+      "MissingSub": "This actor or token can't be found any more.",
+      "Unreadable": "This sheet couldn't be read.",
+      "Level": "Level {level}",
+      "CR": "CR {cr}",
+      "HPAC": "HP {hp}/{max} · AC {ac}",
+      "OnMap": "on the map",
+      "Down": "down",
+      "ChipDrops": "drops {chance}",
+      "ChipDropsTip": "How often this character was reduced to 0 hit points. Dies: {death}.",
+      "ChipDeals": "{share} of damage",
+      "ChipDealsPartyTip": "This character's share of the damage the party deals.",
+      "ChipDealsEnemyTip": "This creature's share of the damage the enemies deal (all of them, if there are several).",
+      "ChipDies": "falls round {round}",
+      "ChipDiesTip": "The round it is beaten in, on average. Beaten in {chance} of fights.",
+      "ChipSurvives": "survives {chance}",
+      "ChipSurvivesTip": "How often it is still standing at the end.",
+      "Scan": "Scan party",
+      "ScanTip": "Check each character's sheet: what Primal CR read, what it could not use, and a place to describe homebrew by hand."
+    },
+    "Level": {
+      "Easy": "Easy",
+      "Medium": "Medium",
+      "Hard": "Hard",
+      "Boss": "Boss",
+      "Impossible": "Impossible"
+    },
+    "LevelHint": {
+      "Easy": "The party wins without trouble.",
+      "Medium": "The party wins with a bit of trouble: it loses {medium}% of its hit points or more.",
+      "Hard": "The party wins, but a character drops to 0 HP in {hard}% of fights or more.",
+      "Boss": "The whole party goes down in {boss}% of fights or more.",
+      "Impossible": "The party wins fewer than {impossible}% of fights."
+    },
+    "Sentence": {
+      "Easy": "The party wins without trouble: it wins {win} of the time and loses about {lost} of its hit points.",
+      "Medium": "The party wins with a bit of trouble: it wins {win} of the time but loses about {lost} of its hit points.",
+      "Hard": "The party should win ({win}), but a character drops to 0 HP in {drop} of fights.",
+      "Boss": "The whole party goes down in {wipe} of fights. It wins {win} of the time.",
+      "Impossible": "The party wins only {win} of the time.",
+      "Stalemate": "Neither side could finish the other in {stalemate} of fights."
+    },
+    "Book": {
+      "None": "no threat",
+      "Low": "Low",
+      "Moderate": "Moderate",
+      "High": "High",
+      "Beyond": "beyond High"
+    },
+    "Context": {
+      "Add": "Add to Primal CR",
+      "AddFolder": "Add Folder to Primal CR"
+    },
+    "Controls": {
+      "Open": "Primal CR: Encounter Danger",
+      "OpenHint": "Open the encounter danger window (GM).",
+      "Combat": "Primal CR: how dangerous is this combat right now?"
+    },
+    "Errors": {
+      "GMOnly": "Primal CR is for the GM.",
+      "NoSelected": "Select some tokens on the map first.",
+      "NoScene": "There are no friendly or hostile tokens on this scene.",
+      "NoCombat": "There is no combat with combatants to load.",
+      "NoCharacters": "No player characters were found. Drag characters into the party.",
+      "NotActor": "Only actors, and folders of actors, can be added.",
+      "Failed": "Primal CR couldn't work out this encounter. The console has the details."
+    },
+    "Settings": {
+      "runs": {
+        "Name": "Fights played out",
+        "Hint": "How many times each encounter is played out. More gives steadier percentages and takes a little longer."
+      },
+      "tactics": {
+        "Name": "Enemy tactics",
+        "Hint": "How the enemies choose who to attack. The party always gangs up on the enemy closest to falling.",
+        "Mixed": "By intelligence: clever enemies often gang up, beasts pick at random",
+        "Focus": "Always gang up on the weakest character",
+        "Random": "Always pick at random"
+      },
+      "medium": {
+        "Name": "Medium: party hit points lost (%)",
+        "Hint": "An encounter is at least Medium when the party loses this share of its hit points in an average fight."
+      },
+      "hard": {
+        "Name": "Hard: chance a character drops (%)",
+        "Hint": "An encounter is at least Hard when a player character drops to 0 HP in this share of fights."
+      },
+      "boss": {
+        "Name": "Boss: chance the whole party goes down (%)",
+        "Hint": "An encounter is at least Boss when the whole party goes down in this share of fights."
+      },
+      "impossible": {
+        "Name": "Impossible: chance of victory below (%)",
+        "Hint": "An encounter is Impossible when the party wins less often than this."
+      }
+    },
+    "Scan": {
+      "Title": "Primal CR: Party Scan",
+      "Intro": "Sheets are read again every time the danger is worked out, so new levels, items and features are picked up on their own. This lists what was understood on each sheet and what was left out, so you can see where homebrew slips through.",
+      "Read": "Read from the sheet",
+      "Unread": "Looks useful in a fight, but not used",
+      "UnreadNone": "Nothing was left out.",
+      "AllRead": "all read",
+      "UnreadCount": "{count} not used",
+      "Unprepared": "{count} unprepared spells were skipped.",
+      "ReasonOther": "nothing here it knows how to play",
+      "ReasonReaction": "reactions to other creatures aren't played",
+      "ReasonSummon": "companions and summons aren't played; add the creature to the party instead",
+      "ReasonUnequipped": "not equipped",
+      "ReasonUtility": "no damage, healing or condition it recognises",
+      "OnHit": "Extra damage on one hit each turn",
+      "OnHitHint": "A dice formula such as 2d6 or 1d8 + 3. Added to the first attack that hits on each of this character's turns. Leave empty for none.",
+      "EveryHit": "Extra damage on every hit",
+      "EveryHitHint": "A dice formula such as 1d4. Added to every attack of this character's that hits. Leave empty for none.",
+      "Save": "Save and run again",
+      "NoParty": "There's no one on the party side to scan.",
+      "BadFormula": "\"{formula}\" for {name} isn't a dice formula Primal CR can read, so it was left out."
+    }
+  }
+}

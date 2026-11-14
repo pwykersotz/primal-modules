@@ -1,0 +1,67 @@
+{
+  "PRIMAL_SPELL_POINTS": {
+    "SpellPoints": "Spell Points",
+    "Warning": {
+      "TooHigh": "{actor} can't cast {level} spells with spell points yet.",
+      "HighLevelUsed": "{actor} has already cast a {level} spell since their last long rest. Spells of 6th level and higher can each be cast once per long rest with spell points.",
+      "NotEnough": "{actor} needs {cost} spell points to cast {spell} at {level} but has {value}.",
+      "GMOnly": "Only the GM can change spell points.",
+      "OtherModule": "Primal Spell Points and Advanced Magic - Spell Points System 5e are both turned on. They both replace spell slots, so turn one of them off in Manage Modules."
+    },
+    "Dialog": {
+      "Option": "{level} ({cost} SP)",
+      "OptionUsed": "{level} ({cost} SP, used since long rest)",
+      "NoneAffordable": "Not enough spell points to cast {name} at any level.",
+      "Available": "Spell points: {value} of {max} left.",
+      "Spend": "Spend {cost} Spell Points",
+      "SpendHint": "{value} of {max} left. Untick to cast without spending any."
+    },
+    "Sheet": {
+      "EditHint": "Type a new number, or +5 / -5 to add or take away. Only the GM can change this.",
+      "OncePerRest": "Once per long rest:",
+      "LevelReady": "{level}: ready",
+      "LevelUsed": "{level}: used since the last long rest",
+      "LevelToggle": "Click to switch between ready and used.",
+      "CostIntro": "Spell point cost by spell level",
+      "Cost": "{cost} SP",
+      "CostUsed": "{cost} SP · used",
+      "Off": "Spell points: off",
+      "OffHint": "This spellcaster uses spell slots. Only you (the GM) can see this. Turn spell points on here or in the sheet menu.",
+      "TurnOn": "Use spell points"
+    },
+    "Config": {
+      "Title": "Spell Points",
+      "Enabled": "Uses spell points",
+      "EnabledHint": "Each character or NPC is chosen on its own. When this is off, it casts with spell slots as usual.",
+      "NoSlots": "This actor has no spell slots from the Spellcasting feature (Pact Magic doesn't count), so spell points have nothing to replace. Spell points follow the slots dnd5e gives it: add a spellcasting class, or for an NPC set its spellcaster level.",
+      "Current": "Current",
+      "Bonus": "Bonus to maximum",
+      "BonusHint": "The table gives {base} spell points at spellcaster level {level}. The bonus is added to that and can be negative.",
+      "Override": "Fixed maximum",
+      "OverrideHint": "Leave empty to use the table plus the bonus. A number here replaces both.",
+      "HighLevel": "Used since the last long rest",
+      "HighLevelHint": "Spells of 6th level and higher can each be cast once per long rest with spell points. Ticked levels are used.",
+      "Restore": "Restore all"
+    },
+    "Tables": {
+      "Title": "Spell Point Tables",
+      "Intro": "These start as the Dungeon Master's Guide spell points tables. Changes apply to every spell point caster in this world straight away.",
+      "Cost": "Cost by spell level",
+      "Points": "Spell points by spellcaster level",
+      "PointsHint": "Spellcaster level is worked out the way dnd5e works out spell slots: full casters use their class level, half and third casters a share of it, and multiclass levels are combined. NPCs use their spellcaster level.",
+      "Level": "Level {level}",
+      "Reset": "Reset to DMG"
+    },
+    "Settings": {
+      "tablesMenu": {
+        "Name": "Spell point tables",
+        "Label": "Edit tables",
+        "Hint": "What each spell level costs and how many spell points casters have at each level. Starts as the Dungeon Master's Guide tables."
+      },
+      "highLevelLimit": {
+        "Name": "6th level and higher once per long rest",
+        "Hint": "As in the Dungeon Master's Guide: with spell points, each spell level from 6th to 9th can be cast once per long rest."
+      }
+    }
+  }
+}

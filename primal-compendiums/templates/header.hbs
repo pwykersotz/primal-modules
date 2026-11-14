@@ -1,0 +1,21 @@
+<header class="directory-header flexcol pcs-header">
+
+    {{!-- Header Actions --}}
+    <div class="header-actions action-buttons flexrow">
+        <button type="button" class="pcs-choose" data-action="choose">
+            <i class="fa-solid fa-list-check" inert></i>
+            <span>{{ localize "PRIMAL_COMPENDIUMS.View.Choose" }}</span>
+        </button>
+    </div>
+
+    {{!-- Search & Sort --}}
+    <search>
+        <span class="inline-control icon fa-solid fa-magnifying-glass pcs-search-icon" inert></span>
+        <input type="search" name="search" autocomplete="off" placeholder="{{ searchPlaceholder }}"
+               aria-label="{{ searchPlaceholder }}">
+        <button type="button" class="inline-control toggle-sort icon {{ sortMode.icon }}" data-action="toggleSort"
+                data-tooltip aria-label="{{ localize sortMode.label }}"></button>
+        <button type="button" class="inline-control collapse-all icon fa-duotone fa-folder-tree"
+                data-action="collapseFolders" data-tooltip aria-label="{{ localize "FOLDER.Collapse" }}"></button>
+    </search>
+</header>

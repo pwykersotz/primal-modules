@@ -1,0 +1,23 @@
+<li class="directory-item folder flexcol pcs-pack {{#if expanded}}expanded{{/if}} {{#if locked}}locked{{else}}unlocked{{/if}}"
+    data-pack="{{ id }}" data-folder-depth="0">
+
+    {{!-- Compendium header, drawn like a folder --}}
+    <header class="folder-header pcs-pack-header" data-action="togglePack"
+            {{#if banner}}style="background-image: var(--pcs-shade), url('{{ banner }}');"{{/if}}>
+        <span class="pcs-pack-icon" inert><i class="fa-solid fa-book-atlas fa-fw"></i></span>
+        <span class="folder-name ellipsis">{{ title }}</span>
+        <span class="pcs-count" data-tooltip="{{ source }}">{{ count }}</span>
+        <button type="button" class="create-button pcs-open icon fa-solid fa-arrow-up-right-from-square"
+                data-action="openPack" data-tooltip aria-label="{{ localize "PRIMAL_COMPENDIUMS.Context.OpenPack" }}"></button>
+    </header>
+
+    {{!-- Compendium contents --}}
+    <ol class="subdirectory plain">
+        {{~#each tree.children}}
+        {{> (lookup @root "folderPartial") node=this folder=folder }}
+        {{/each}}
+        {{~#each tree.entries}}
+        {{> (lookup @root "entryPartial") }}
+        {{/each}}
+    </ol>
+</li>

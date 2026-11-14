@@ -1,0 +1,149 @@
+{{#*inline "partyEffect"}}
+<li class="party-effect{{#if temporary}} temporary{{/if}}{{#if concentration}} concentration{{/if}}"
+	data-action="openEffect" data-effect-uuid="{{uuid}}" data-tooltip-direction="{{tooltipDirection}}"
+	{{#if tooltip}}data-tooltip-html="{{tooltip}}"{{else}}data-tooltip="{{name}}"{{/if}}>
+	<img class="party-effect-img{{#if svg}} svg{{/if}}" src="{{img}}" alt="">
+	<div class="party-effect-text">
+		<span class="party-effect-name">{{name}}{{#if countLabel}}<span class="party-effect-count">{{countLabel}}</span>{{/if}}</span>
+		{{#if subtitle}}<span class="party-effect-source">{{subtitle}}</span>{{/if}}
+		{{#if imposes.length}}
+		<span class="party-effect-imposes">{{#each imposes}}<span class="party-effect-tag">{{this}}</span>{{/each}}</span>
+		{{/if}}
+	</div>
+	{{#if duration}}
+	<span class="party-effect-duration"><i class="fa-solid {{durationIcon}}" inert></i>{{duration}}</span>
+	{{/if}}
+</li>
+{{/inline}}
+
+<div class="party-body flexcol">
+	{{#each members}}
+	<section class="party-member party-{{hp.state}}{{#if dead}} party-dead{{/if}}" data-uuid="{{uuid}}"
+		{{#if color}}style="--player-color: {{color}}"{{/if}}>
+		<header class="party-member-header">
+			<a class="party-portrait" data-action="openSheet" data-tooltip="{{localize "MOBLOKS5E.party.openSheet"}}">
+				<img src="{{img}}" alt="">
+				{{#if level}}<span class="party-level">{{level}}</span>{{/if}}
+			</a>
+			<div class="party-identity">
+				<h3 class="party-name" data-action="openSheet" data-tooltip="{{name}}">{{name}}</h3>
+				<div class="party-subline">
+					{{#if classes}}<span class="party-details">{{classes}}</span>{{/if}}
+					{{#if player}}<span class="party-player">{{player}}</span>{{/if}}
+				</div>
+			</div>
+			{{#if inspiration}}
+			<span class="party-inspiration" data-tooltip="{{localize "MOBLOKS5E.party.inspiration"}}"><i class="fa-solid fa-dice-d20" inert></i></span>
+			{{/if}}
+			{{#if @root.canEdit}}
+			<button type="button" class="party-remove" data-action="removeMember"
+				data-tooltip="{{localize "MOBLOKS5E.party.remove"}}" aria-label="{{localize "MOBLOKS5E.party.remove"}}">
+				<i class="fa-solid fa-xmark" inert></i>
+			</button>
+			{{/if}}
+		</header>
+
+		{{#if observer}}
+		<div class="party-hp" data-tooltip="{{localize "MOBLOKS5E.party.hp"}}">
+			<div class="party-hp-fill" style="width: {{hp.pct}}%"></div>
+			{{#if hp.temp}}<div class="party-hp-temp-fill" style="width: {{hp.tempPct}}%"></div>{{/if}}
+			<span class="party-hp-text">
+				<i class="fa-solid {{hp.icon}}" inert></i>
+				<span class="party-hp-value">{{hp.value}}</span>
+				<span class="party-hp-max">/ {{hp.max}}</span>
+				{{#if hp.temp}}<span class="party-hp-temp">+{{hp.temp}} {{localize "MOBLOKS5E.party.temp"}}</span>{{/if}}
+			</span>
+		</div>
+
+		{{#if death}}
+		<div class="party-death">
+			<span class="party-death-label"><i class="fa-solid fa-skull" inert></i> {{localize "MOBLOKS5E.party.deathSaves"}}</span>
+			<span class="party-pips success" data-tooltip="{{localize "MOBLOKS5E.party.successes"}}">{{#each death.success}}<i class="party-pip{{#if this}} filled{{/if}}"></i>{{/each}}</span>
+			<span class="party-pips failure" data-tooltip="{{localize "MOBLOKS5E.party.failures"}}">{{#each death.failure}}<i class="party-pip{{#if this}} filled{{/if}}"></i>{{/each}}</span>
+		</div>
+		{{/if}}
+
+		<div class="party-stats">
+			<div class="party-stat" data-tooltip="{{localize "MOBLOKS5E.party.armorClass"}}">
+				<i class="fa-solid fa-shield-halved" inert></i>
+				<span class="party-stat-value">{{ac}}</span>
+				<span class="party-stat-label">{{localize "MOBLOKS5E.party.ac"}}</span>
+			</div>
+			<div class="party-stat" data-tooltip="{{localize "MOBLOKS5E.party.initiative"}}">
+				<i class="fa-solid fa-bolt" inert></i>
+				<span class="party-stat-value">{{init}}</span>
+				<span class="party-stat-label">{{localize "MOBLOKS5E.party.init"}}</span>
+			</div>
+			<div class="party-stat" data-tooltip="{{speed}}">
+				<i class="fa-solid fa-person-running" inert></i>
+				<span class="party-stat-value">{{walk}}</span>
+				<span class="party-stat-label">{{localize "MOBLOKS5E.party.speed"}}</span>
+			</div>
+			{{#if spellDC}}
+			<div class="party-stat" data-tooltip="{{localize "MOBLOKS5E.party.spellSave"}}">
+				<i class="fa-solid fa-wand-sparkles" inert></i>
+				<span class="party-stat-value">{{spellDC}}</span>
+				<span class="party-stat-label">{{localize "MOBLOKS5E.party.spellDC"}}</span>
+			</div>
+			{{/if}}
+		</div>
+
+		<div class="party-senses" aria-label="{{localize "MOBLOKS5E.party.passive"}}">
+			<span class="party-sense" data-tooltip="{{localize "MOBLOKS5E.party.passivePerception"}}"><i class="fa-solid fa-eye" inert></i>{{localize "MOBLOKS5E.party.perception"}} <b>{{passive.prc}}</b></span>
+			<span class="party-sense" data-tooltip="{{localize "MOBLOKS5E.party.passiveInsight"}}"><i class="fa-solid fa-brain" inert></i>{{localize "MOBLOKS5E.party.insight"}} <b>{{passive.ins}}</b></span>
+			<span class="party-sense" data-tooltip="{{localize "MOBLOKS5E.party.passiveInvestigation"}}"><i class="fa-solid fa-magnifying-glass" inert></i>{{localize "MOBLOKS5E.party.investigation"}} <b>{{passive.inv}}</b></span>
+		</div>
+		{{#if movement.length}}
+		<div class="party-movement">
+			{{#each movement}}<span class="party-move" data-tooltip="{{label}}"><i class="fa-solid {{icon}}" inert></i>{{label}} {{value}}</span>{{/each}}
+		</div>
+		{{/if}}
+
+		{{#if exhaustion}}
+		<div class="party-exhaustion" data-tooltip="{{localize "MOBLOKS5E.party.exhaustion"}} {{exhaustion.level}}">
+			<span class="party-exhaustion-label">{{localize "MOBLOKS5E.party.exhaustion"}} {{exhaustion.level}}</span>
+			<span class="party-pips">{{#each exhaustion.pips}}<i class="party-pip{{#if this}} filled{{/if}}"></i>{{/each}}</span>
+		</div>
+		{{/if}}
+
+		{{#if hasStatus}}
+		<div class="party-status-area">
+			{{#if conditions.length}}
+			<div class="party-conditions">
+				{{#each conditions}}
+				<span class="party-condition tone-{{tone}}" data-tooltip-direction="{{tooltipDirection}}"
+					{{#if tooltip}}data-tooltip-html="{{tooltip}}"{{else}}data-tooltip="{{name}}"{{/if}}>
+					{{#if img}}<span class="party-condition-icon"><img src="{{img}}" alt=""{{#if svg}} class="svg"{{/if}}></span>{{/if}}
+					<span class="party-condition-name">{{name}}</span>
+					{{#if duration}}<span class="party-condition-duration">{{duration}}</span>{{/if}}
+				</span>
+				{{/each}}
+			</div>
+			{{/if}}
+
+			{{#if effects.length}}
+			<ul class="party-effects">
+				{{#each effects}}{{> partyEffect}}{{/each}}
+			</ul>
+			{{/if}}
+
+			{{#if passiveEffects.length}}
+			<details class="party-passive"{{#if passiveOpen}} open{{/if}}>
+				<summary>
+					<i class="fa-solid fa-chevron-right" inert></i>
+					{{localize "MOBLOKS5E.party.passiveEffects"}}
+					<span class="party-passive-count">{{passiveEffects.length}}</span>
+				</summary>
+				<ul class="party-effects">
+					{{#each passiveEffects}}{{> partyEffect}}{{/each}}
+				</ul>
+			</details>
+			{{/if}}
+		</div>
+		{{/if}}
+		{{/if}}
+	</section>
+	{{else}}
+	<p class="party-empty">{{empty}}</p>
+	{{/each}}
+</div>

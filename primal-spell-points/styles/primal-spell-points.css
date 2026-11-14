@@ -1,0 +1,252 @@
+/* ---------------------------------------- */
+/* Primal Spell Points                      */
+/* ---------------------------------------- */
+
+.primal-sp-tracker {
+  --primal-sp-fill: linear-gradient(90deg, #3f6fd1, #8b5bd6);
+  --primal-sp-track: rgba(0, 0, 0, 0.15);
+  --primal-sp-border: var(--dnd5e-color-gold, #b59e6b);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid var(--primal-sp-border);
+  border-radius: 6px;
+  min-width: 180px;
+}
+
+.theme-dark .primal-sp-tracker,
+.primal-sp-tracker.tidy.theme-dark {
+  --primal-sp-track: rgba(255, 255, 255, 0.15);
+}
+
+/* GM-only strip on a spellcaster that still uses spell slots. */
+.primal-sp-tracker.primal-sp-off {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.primal-sp-off .primal-sp-title {
+  font-weight: normal;
+}
+
+.primal-sp-tracker button.primal-sp-turn-on {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 2px 8px;
+  font-size: 0.9em;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.primal-sp-tracker.empty .primal-sp-value {
+  color: var(--dnd5e-color-crimson, #b3261e);
+}
+
+/* dnd5e sheets: a card in the row with the spellcasting cards. */
+.primal-sp-tracker.dnd5e {
+  flex: 0 0 auto;
+  align-self: stretch;
+  justify-content: center;
+}
+
+/* Tidy 5e sheets: a strip across the top of the spellbook tab. */
+.primal-sp-tracker.tidy {
+  margin: 0 0 8px;
+  flex: 0 0 auto;
+}
+
+.primal-sp-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primal-sp-title {
+  flex: 1;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: help;
+}
+
+.primal-sp-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 1.15em;
+  white-space: nowrap;
+}
+
+.primal-sp-numbers .primal-sp-value {
+  font-weight: bold;
+}
+
+.primal-sp-numbers input.primal-sp-value {
+  width: 3.5em;
+  height: 1.6em;
+  padding: 0 4px;
+  text-align: right;
+  font-size: inherit;
+}
+
+.primal-sp-numbers .primal-sp-sep,
+.primal-sp-numbers .primal-sp-max {
+  opacity: 0.7;
+}
+
+.primal-sp-tracker button.primal-sp-configure {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 2px 4px;
+  border: none;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  opacity: 0.7;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.primal-sp-tracker button.primal-sp-configure:hover {
+  opacity: 1;
+}
+
+.primal-sp-bar {
+  height: 7px;
+  border-radius: 4px;
+  background: var(--primal-sp-track);
+  overflow: hidden;
+}
+
+.primal-sp-fill {
+  display: block;
+  height: 100%;
+  background: var(--primal-sp-fill);
+  transition: width 0.3s ease;
+}
+
+.primal-sp-high {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 0.85em;
+}
+
+.primal-sp-high-label {
+  opacity: 0.8;
+  margin-right: 2px;
+}
+
+.primal-sp-tracker .primal-sp-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7em;
+  width: auto;
+  height: 1.5em;
+  min-height: 0;
+  margin: 0;
+  padding: 0 4px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font-size: inherit;
+  line-height: 1;
+}
+
+.primal-sp-tracker button.primal-sp-level {
+  cursor: pointer;
+}
+
+.primal-sp-tracker .primal-sp-level.used {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* Spell level headings show their cost (the text comes from a stylesheet the module writes on load). */
+.primal-sp .items-section[data-method="spell"] > .items-header > h3.item-name::after,
+.primal-sp header.tidy-table-header-row[data-method="spell"][data-slot] h3::after {
+  margin-left: 0.6em;
+  font-size: 0.8em;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
+/* Slot pips and slot counters are replaced by the spell point pool. */
+.primal-sp .items-section[data-method="spell"] > .pips,
+.primal-sp header.tidy-table-header-row[data-method="spell"] .spell-slot-tracker,
+.primal-sp header.tidy-table-header-row[data-method="spell"] .spell-pips {
+  display: none !important;
+}
+
+/* Cost tooltip. */
+.primal-sp-tooltip p {
+  margin: 0 0 4px;
+  font-weight: bold;
+}
+
+.primal-sp-tooltip table {
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+.primal-sp-tooltip td {
+  padding: 0 6px;
+  border: none;
+}
+
+.primal-sp-tooltip td + td {
+  text-align: right;
+}
+
+/* Settings windows. */
+.primal-sp-config-max {
+  flex: 0 0 auto;
+  opacity: 0.8;
+}
+
+.primal-sp-config-high {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.primal-sp-config-high label.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.primal-sp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 12px;
+}
+
+.primal-sp-grid.points {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.primal-sp-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.primal-sp-cell input {
+  width: 4em;
+  flex: 0 0 auto;
+  text-align: right;
+}

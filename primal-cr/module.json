@@ -1,0 +1,47 @@
+{
+  "id": "primal-cr",
+  "title": "Primal CR",
+  "description": "How dangerous is this fight for this party? Primal CR ignores Challenge Rating and reads the sheets instead: hit points, Armor Class, saving throws, attack bonuses and damage, save DCs, areas, multiattacks, recharge and limited uses, spell slots, resistances and immunities, conditions handed out and conditions already in play, healing, legendary actions and resistances, and more. It then plays the fight out a thousand times with dice and tells the GM what tends to happen: Easy (the party wins without trouble), Medium (wins with a bit of trouble), Hard (wins, but someone may drop to 0 HP), Boss (the whole party may go down) or Impossible (fewer than 1 win in 10). Add creatures by right-clicking or dragging them from the Actors sidebar, compendiums or Primal Compendiums' lists, or load the selected tokens, the whole scene or the current combat from the map; mid-fight it uses everyone's current hit points, conditions and spent resources and keeps itself up to date. For the GM only. Made with AI: written with Claude (Anthropic).",
+  "version": "1.1.2",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "primal-compendiums",
+        "type": "module",
+        "reason": "Adds compendium lists to the Actors sidebar; their entries can be right-clicked or dragged into Primal CR."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-cr.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

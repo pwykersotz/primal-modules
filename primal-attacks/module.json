@@ -1,0 +1,52 @@
+{
+  "id": "primal-attacks",
+  "title": "Primal Attacks",
+  "description": "Roll several weapon or spell attacks at once. dnd5e's Attack Roll window (Advantage, Normal, Disadvantage) gets an Attacks field: pick how many, press a button, and every attack is rolled together and thrown together by Dice So Nice, then the damage of the hits is rolled together. With Midi-QOL, every attack still gets its own workflow (hit checks, damage, saves, effects). Can post a summary of hits and damage. Made with AI: written with Claude (Anthropic).",
+  "version": "1.6.0",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.0.6"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "reason": "Lets Primal Attacks share dnd5e's attack code cleanly with other modules instead of replacing it."
+      },
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "reason": "Throws every attack's dice together."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-attacks.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

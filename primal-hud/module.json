@@ -1,0 +1,28 @@
+{
+  "id": "primal-hud",
+  "title": "Primal HUD",
+  "description": "Customizes the Token HUD. Shows a panel beside the HUD with the actor's dnd5e favorites, their ready spells (with spell slots at a glance) and their saves and skills, so they can be used and rolled without opening the character sheet. Each user picks which HUD buttons they see and arranges them on the left and right sides, including buttons other modules add, from settings windows players can open too. Also adds -10, -1, +1 and +10 buttons under a token's hit point box: damage uses up temporary HP first, as in dnd5e, and quick clicks are combined into one change. Can also stop a double right-click on a token from opening Token Config. Made with AI: written with Claude (Anthropic).",
+  "version": "1.5.2",
+  "authors": [
+    {
+      "name": "Pwykersotz"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/primal-hud.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

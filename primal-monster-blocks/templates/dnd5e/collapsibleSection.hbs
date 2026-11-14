@@ -1,0 +1,4 @@
+{{> "modules/primal-monster-blocks/templates/dnd5e/sectionHeader.hbs"}}
+{{#unless (and flags.show-collapsible (lookup flags.collapsed section))}}
+    {{> @partial-block}}
+{{/unless}}

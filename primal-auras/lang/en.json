@@ -1,0 +1,319 @@
+{
+  "PRIMAL_AURAS": {
+    "Aura": {
+      "DefaultName": "New Aura"
+    },
+    "Shape": {
+      "circle": "Circle",
+      "grid": "Grid spaces",
+      "none": "Per aura (no override)"
+    },
+    "MeasureFrom": {
+      "edge": "Token edge",
+      "center": "Token centre"
+    },
+    "Visibility": {
+      "all": "Everyone",
+      "owner": "Owners and GM",
+      "gm": "GM only"
+    },
+    "ShowWhen": {
+      "always": "Always",
+      "hover": "When hovered or selected",
+      "controlled": "When selected",
+      "combat": "Only in combat"
+    },
+    "Activation": {
+      "passive": "Always on (passive)",
+      "equipped": "While equipped",
+      "manual": "Manual (switch on from the HUD or on use)"
+    },
+    "Mode": {
+      "triggered": "Triggered (saves, damage, healing, timed conditions)",
+      "continuous": "While inside (buffs, debuffs, conditions)"
+    },
+    "Affects": {
+      "enemies": "Enemies",
+      "allies": "Allies",
+      "all": "Everyone",
+      "self": "Only the source"
+    },
+    "OnSuccess": {
+      "half": "Half damage, no conditions",
+      "none": "No effect"
+    },
+    "Duration": {
+      "none": "Until removed",
+      "turnStartTarget": "Until the start of the target's next turn",
+      "turnEndTarget": "Until the end of the target's next turn",
+      "turnStartSource": "Until the start of the source's next turn",
+      "turnEndSource": "Until the end of the source's next turn",
+      "rounds": "Number of rounds",
+      "RoundsCount": "{rounds} round(s)"
+    },
+    "Trigger": {
+      "onEnter": "Enters the aura",
+      "onLeave": "Leaves the aura",
+      "targetTurnStart": "Starts its turn inside",
+      "targetTurnEnd": "Ends its turn inside",
+      "sourceTurnStart": "At the start of the source's turn",
+      "sourceTurnEnd": "At the end of the source's turn"
+    },
+    "ChangeType": {
+      "add": "Add",
+      "multiply": "Multiply",
+      "override": "Override",
+      "upgrade": "Upgrade",
+      "downgrade": "Downgrade",
+      "custom": "Custom"
+    },
+    "HUD": {
+      "Button": "Auras",
+      "Title": "Auras",
+      "NoAuras": "This token has no auras yet.",
+      "TurnOn": "Turn on",
+      "TurnOff": "Turn off",
+      "SwapShape": "Swap circle / grid",
+      "Edit": "Configure",
+      "Delete": "Delete",
+      "Range": "Range",
+      "RangeHint": "How far the aura reaches.",
+      "Inner": "Hole",
+      "InnerHint": "Inner radius. Anything above 0 makes a donut that leaves this distance empty.",
+      "Color": "Colour",
+      "New": "New aura",
+      "AddPreset": "Add from library",
+      "Library": "Aura library",
+      "ItemAuras": "Auras on this character's abilities and items",
+      "EffectCount": "Effects",
+      "NotEquipped": "Inactive: the item is not equipped.",
+      "OverrideNotice": "All auras are forced to {shape} by the world setting.",
+      "DeleteTitle": "Delete aura",
+      "DeleteConfirm": "Delete the aura <strong>{name}</strong>?",
+      "ItemPickerTitle": "Ability and item auras",
+      "ItemPickerHint": "Auras on an ability, spell or item go wherever the character goes, in every scene.",
+      "ItemPickerOk": "Configure"
+    },
+    "Config": {
+      "Title": "Aura: {name}",
+      "TitleFor": "Aura: {name} — {owner}",
+      "Tabs": {
+        "Appearance": "Appearance",
+        "Effects": "Effects"
+      },
+      "Name": "Name",
+      "Enabled": "On",
+      "Description": "Description",
+      "ShapeAndRange": "Shape and range",
+      "Shape": "Shape",
+      "ShapeHint": "Circle draws a true radius. Grid spaces highlights the spaces within range, counted the way your scene counts diagonals.",
+      "Radius": "Range",
+      "InnerRadius": "Donut hole",
+      "InnerRadiusHint": "Leave at 0 for a solid aura. A value above 0 leaves that distance empty around the token, making a ring.",
+      "MeasureFrom": "Measure from",
+      "MeasureFromHint": "Circles only. Grid auras always count outward from the spaces the token occupies.",
+      "WallsBlock": "Blocked by walls",
+      "WallsBlockHint": "Clip the aura with movement-blocking walls, and don't affect tokens behind them.",
+      "EnterOnAppear": "Those inside when it switches on count as entering",
+      "EnterOnAppearHint": "When the aura appears or is switched on, creatures already inside get its \"enters the aura\" effects (a spell's area on casting, for example).",
+      "Colors": "Colours",
+      "Fill": "Fill",
+      "Border": "Border",
+      "BorderWidth": "Border width",
+      "Opacity": "Opacity",
+      "Visibility": "Visibility",
+      "VisibleTo": "Visible to",
+      "ShowWhen": "Show",
+      "ItemSettings": "Ability / item behaviour",
+      "Activation": "Active",
+      "ActivationHint": "Passive auras are always on. Equipped auras switch off when the item is unequipped. Manual auras start off.",
+      "EnableOnUse": "Switch on when used",
+      "EnableOnUseHint": "Using the item (casting the spell, activating the feature) turns this aura on.",
+      "EndWithConcentration": "Ends with concentration",
+      "EndWithConcentrationHint": "Turn the aura off when concentration on this item ends.",
+      "PresetItemHint": "Used when this preset is attached to an ability or item.",
+      "EffectsIntro": "Effects are optional. An aura with no effects is purely visual. \"@\" values (e.g. @abilities.cha.mod, @attributes.spell.dc) are read from the aura's source.",
+      "NoEffects": "No effects: this aura is visual only.",
+      "AddEffect": "Add effect",
+      "ImportEffects": "Copy effects from",
+      "SaveAsPreset": "Save to library",
+      "Save": "Save aura",
+      "Copy": "copy"
+    },
+    "Effect": {
+      "DefaultName": "Aura effect",
+      "Name": "Effect name",
+      "Description": "From {aura} ({source})",
+      "Duplicate": "Duplicate effect",
+      "Remove": "Remove effect",
+      "Mode": "Type",
+      "Affects": "Affects",
+      "IncludeSelf": "Also affects the source",
+      "ContinuousHint": "Applied while a creature is inside and removed as soon as it leaves or the aura switches off.",
+      "TriggeredHint": "Resolved each time one of the chosen moments happens, with an optional saving throw.",
+      "When": "When",
+      "OncePerTurn": "At most once per turn for each creature",
+      "SavingThrow": "Saving throw",
+      "SaveAbility": "Save",
+      "NoSave": "No save",
+      "DC": "DC (number or formula)",
+      "OnSuccess": "On a success",
+      "DamageHealing": "Damage and healing",
+      "Damage": "Damage",
+      "Healing": "Healing",
+      "TempHP": "Temporary HP",
+      "Type": "type",
+      "Conditions": "Conditions",
+      "Modifiers": "Modifiers (buffs and debuffs)",
+      "ModifiersHint": "Active Effect changes: attribute key, change type and value. Values may use dice (+1d4) and the source's data (@abilities.cha.mod).",
+      "AddModifier": "Add modifier",
+      "RemoveModifier": "Remove modifier",
+      "Duration": "Conditions and modifiers last",
+      "Chat": "Post a chat card",
+      "Stacks": "Stacks with the same effect from other sources",
+      "StacksTriggered": "Stacks with earlier applications"
+    },
+    "Chat": {
+      "Save": "save",
+      "DC": "DC",
+      "Success": "success",
+      "Failure": "failure",
+      "Damage": "Takes {amount} {type} damage",
+      "Halved": "halved from {rolled}",
+      "Healing": "Regains {amount} hit points",
+      "TempHP": "Gains {amount} temporary hit points",
+      "Modifiers": "{name} modifiers applied",
+      "Negated": "No effect",
+      "SaveFlavor": "{ability} saving throw (DC {dc})"
+    },
+    "Presets": {
+      "Title": "Aura Library",
+      "Intro": "Saved auras, including their effects. Add them to tokens from the Token HUD, to abilities and items from their sheets, or to every selected token from here.",
+      "Create": "New",
+      "Import": "Import",
+      "Export": "Export",
+      "Restore": "Restore defaults",
+      "RestoreHint": "Re-add the presets that ship with the module (your own presets are kept).",
+      "RestoreTitle": "Restore default presets",
+      "RestoreConfirm": "Re-add the module's default presets? Default presets you edited will be reset; presets you created are kept.",
+      "Apply": "Add to selected tokens",
+      "Edit": "Edit",
+      "Duplicate": "Duplicate",
+      "Delete": "Delete",
+      "DeleteTitle": "Delete preset",
+      "DeleteConfirm": "Delete the preset <strong>{name}</strong>? Auras already on tokens and items are not affected.",
+      "Empty": "The library is empty.",
+      "NewName": "New preset",
+      "EditTitle": "Preset: {name}",
+      "Donut": "hole",
+      "EffectCount": "{count} effect(s)",
+      "ImportTitle": "Import presets",
+      "ImportHint": "Choose an exported .json file or paste its contents."
+    },
+    "DocAuras": {
+      "Title": "Auras: {name}",
+      "Hint": "Every token of a character that has this ability or item projects these auras.",
+      "Empty": "No auras yet.",
+      "OnUse": "on use",
+      "Concentration": "ends with concentration"
+    },
+    "Item": {
+      "HeaderButton": "Auras"
+    },
+    "Notify": {
+      "DisplayOn": "Auras shown.",
+      "DisplayOff": "Auras hidden.",
+      "ShapeOverride": "Aura shape override: {shape}.",
+      "OverrideActive": "A world setting currently forces every aura to one shape.",
+      "InnerTooLarge": "The donut hole must be smaller than the range.",
+      "PickPreset": "Choose a preset first.",
+      "PresetSaved": "Saved \"{name}\" to the aura library.",
+      "SelectTokens": "Select one or more tokens first.",
+      "Applied": "Added \"{name}\" to {count} token(s).",
+      "Imported": "Imported {count} preset(s).",
+      "BadJson": "That is not valid preset JSON.",
+      "NoItems": "This character has no items or abilities you can edit.",
+      "EnabledOnUse": "{name}: aura switched on.",
+      "DisabledConcentration": "{name}: concentration ended, aura switched off.",
+      "Migrated": "Primal Auras carried over your auras, aura library and settings from Enhanced Token Auras."
+    },
+    "Keybindings": {
+      "Toggle": {
+        "Name": "Show / hide auras",
+        "Hint": "Toggle aura display for you only."
+      },
+      "CycleShape": {
+        "Name": "Cycle aura shape override",
+        "Hint": "GM: switch every aura between per-aura shape, all circles and all grid spaces."
+      }
+    },
+    "Settings": {
+      "Library": {
+        "Name": "Aura library",
+        "Label": "Open aura library",
+        "Hint": "Create, edit, import and export saved auras."
+      },
+      "ShowAuras": {
+        "Name": "Show auras",
+        "Hint": "Draw auras on the canvas for you. Does not affect automation."
+      },
+      "DefaultShape": {
+        "Name": "Default shape for new auras",
+        "Hint": "Each aura can still be switched from the Token HUD."
+      },
+      "ShapeOverride": {
+        "Name": "Force aura shape",
+        "Hint": "Draw and evaluate every aura as a circle or as grid spaces, e.g. per table or per scene type. Gridless scenes always use circles."
+      },
+      "TargetInclusion": {
+        "Name": "A creature is inside an aura when",
+        "Hint": "Applies to automation.",
+        "any": "Any part of its space is inside",
+        "center": "Its centre is inside"
+      },
+      "PassThrough": {
+        "Name": "Moving through an aura counts as entering it",
+        "Hint": "A creature that passes through an aura during a move, and ends it outside, gets the aura's \"Enters the aura\" effects (then its \"Leaves the aura\" ones). The same for creatures an aura passes over as its source moves. \"Once per turn\" still applies. Teleporting doesn't count."
+      },
+      "ConsiderElevation": {
+        "Name": "Account for elevation",
+        "Hint": "Creatures whose elevation differs from the source by more than the aura's range are not inside it."
+      },
+      "Automation": {
+        "Name": "Automate aura effects",
+        "Hint": "Apply saves, damage, healing, conditions and modifiers from auras. Runs on the GM's client; a GM must be connected."
+      },
+      "IgnoreDefeated": {
+        "Name": "Ignore defeated tokens",
+        "Hint": "Defeated tokens neither project auras nor are affected by them."
+      },
+      "PlayerSaves": {
+        "Name": "Players roll their own saves",
+        "Hint": "Ask the owning player to roll aura saving throws. The GM rolls if they don't answer in time."
+      },
+      "SaveTimeout": {
+        "Name": "Player save timeout (seconds)",
+        "Hint": "How long to wait for a player's saving throw before the GM rolls it."
+      },
+      "AutoExpire": {
+        "Name": "Expire timed aura effects",
+        "Hint": "Remove conditions and modifiers from triggered effects when their duration ends."
+      },
+      "ChatMode": {
+        "Name": "Aura chat cards",
+        "Hint": "Who sees the summary card posted when a triggered effect resolves.",
+        "public": "Everyone",
+        "gm": "GM only (whisper)",
+        "none": "Don't post"
+      },
+      "GenericSave": {
+        "Name": "Saving throw formula (other systems)",
+        "Hint": "Used outside D&D 5e and PF2e. {ability} is replaced with the ability chosen on the effect."
+      },
+      "GenericHp": {
+        "Name": "Hit point path (other systems)",
+        "Hint": "Used outside D&D 5e for damage and healing."
+      }
+    }
+  }
+}

@@ -1,0 +1,535 @@
+{
+	"MOBLOKS5E": {
+		"mini-block": {
+			"label": "Mini Blocks"
+		},
+		"compact-window": {
+			"enable": "Enable compact window",
+			"disable": "Disable compact window",
+			"settings": {
+				"name": "Compact window",
+				"hint": "Remove the window's title bar."
+			}
+		},
+		"compact-layout": {
+			"enable": "Enable compact layout",
+			"disable": "Disable compact layout",
+			"settings": {
+				"name": "Compact layout",
+				"hint": "Less space between the parts of the sheet."
+			}
+		},
+		"compact-feats": {
+			"enable": "Enable compact features",
+			"disable": "Disable compact features",
+			"settings": {
+				"name": "Compact features",
+				"hint": "Show two lines of each feature; hover for the rest, or click to open it."
+			}
+		},
+		"show-collapsible": {
+			"enable": "Enable collapsible sections",
+			"disable": "Disable collapsible sections",
+			"settings": {
+				"name": "Collapsible sections",
+				"hint": "Add a button to fold away each section of features."
+			}
+		},
+		"font-size": {
+			"label": "Font size",
+			"placeholder": "Font size (px)",
+			"NaN-error": "Font size must be a number.",
+			"settings": {
+				"name": "Font size",
+				"hint": "Text size in pixels; the whole sheet scales with it."
+			}
+		},
+		"resetDefaults": {
+			"label": "Reset to defaults"
+		},
+		"attack-descriptions": {
+			"enable": "Show generated attack",
+			"disable": "Hide generated attack",
+			"settings": {
+				"name": "Attack descriptions",
+				"hint": "Write out each attack's bonus, reach and damage from its data."
+			}
+		},
+		"casting-feature": {
+			"enable": "Show generated spellcasting",
+			"disable": "Hide generated spellcasting",
+			"settings": {
+				"name": "Spellcasting feature",
+				"hint": "Write out the Spellcasting feature from the monster's spells."
+			}
+		},
+		"inline-secrets": {
+			"enable": "Enable inline secrets",
+			"disable": "Disable inline secrets",
+			"settings": {
+				"name": "Secrets inline",
+				"hint": "Show secret text like the rest of the text instead of as a separate block."
+			}
+		},
+		"hidden-secrets": {
+			"enable": "Hide secrets",
+			"disable": "Show secrets",
+			"settings": {
+				"name": "Hide secrets",
+				"hint": "Leave secret text off the sheet."
+			}
+		},
+		"hide-profile-image": {
+			"enable": "Hide profile image",
+			"disable": "Show profile image",
+			"settings": {
+				"name": "Hide the picture",
+				"hint": "Leave the creature's picture off the sheet, as in the books."
+			}
+		},
+		"use-token-image": {
+			"enable": "Use token image",
+			"disable": "Use profile image",
+			"settings": {
+				"name": "Use the token image",
+				"hint": "Show the token image instead of the portrait. The portrait stays on the biography page."
+			}
+		},
+		"show-lair-actions": {
+			"enable": "Show lair actions",
+			"disable": "Hide lair actions",
+			"settings": {
+				"name": "Lair actions",
+				"hint": "Show lair actions, which stat blocks don't normally include."
+			}
+		},
+		"current-hit-points": {
+			"enable": "Show current hit points",
+			"disable": "Hide current hit points",
+			"settings": {
+				"name": "Current hit points",
+				"hint": "Show the monster's current hit points."
+			}
+		},
+		"maximum-hit-points": {
+			"enable": "Show maximum hit points",
+			"disable": "Hide maximum hit points",
+			"settings": {
+				"name": "Maximum hit points",
+				"hint": "Show the monster's maximum hit points. With neither shown, the average is shown."
+			}
+		},
+		"max-height-offset": {
+			"settings": {
+				"name": "Space below stat blocks",
+				"hint": "Pixels kept free below a stat block window. Less makes sheets taller and narrower; more makes them wider."
+			}
+		},
+		"default-theme": {
+			"settings": {
+				"name": "Theme",
+				"hint": "How sheets look, unless a sheet's own menu picks another."
+			}
+		},
+		"custom-theme-class": {
+			"settings": {
+				"name": "Custom theme class",
+				"hint": "The CSS class used by the Custom theme."
+			}
+		},
+		"editing": {
+			"enable": "Enable editing",
+			"disable": "Disable editing",
+			"settings": {
+				"name": "Editing on",
+				"hint": "Sheets open ready to edit."
+			}
+		},
+		"show-not-prof": {
+			"enable": "Show not-proficient checks",
+			"disable": "Hide not-proficient checks",
+			"settings": {
+				"name": "Skills and saves without proficiency",
+				"hint": "List the skills and saves the monster isn't proficient in too."
+			}
+		},
+		"show-resources": {
+			"enable": "Show resource values",
+			"disable": "Hide resource values",
+			"settings": {
+				"name": "Uses left",
+				"hint": "Show how many uses and spell slots are left beside the totals."
+			}
+		},
+		"show-skill-save": {
+			"enable": "Always show skills & saves",
+			"disable": "Hide empty skills & saves",
+			"settings": {
+				"name": "Empty skill and save lines",
+				"hint": "Show the Skills and Saving Throws lines even when they're empty."
+			}
+		},
+		"show-delete": {
+			"enable": "Always show delete buttons",
+			"disable": "Show delete buttons on hover only"
+		},
+		"auto-proficiency": {
+			"settings": {
+				"name": "Proficient in all saves and skills",
+				"hint": "Give a monster proficiency in every save and skill when it's opened (expertise is kept). This changes the monster's data."
+			}
+		},
+		"pane-on-select": {
+			"settings": {
+				"name": "Show a monster's stat block when its token is selected",
+				"hint": "Opens it in a panel at the edge of the screen. The dragon button in the token controls turns this on and off."
+			},
+			"toggle": "Primal Monster Blocks panel for the selected token",
+			"on": "Primal Monster Blocks panel on: select a token to see its stat block (or the party, for a player character if that option is on).",
+			"off": "Primal Monster Blocks panel off."
+		},
+		"party-active-only": {
+			"settings": {
+				"name": "Only show players' characters while they're logged in",
+				"hint": "A player's character leaves the party sheet when they log out and comes back when they log in. Creatures added by hand always show."
+			}
+		},
+		"party-for-players": {
+			"settings": {
+				"name": "Let players use the party sheet",
+				"hint": "Players can turn the party sheet on for themselves. While this is off, only the GM can use it."
+			}
+		},
+		"party-on-select": {
+			"settings": {
+				"name": "Show the party when a player character is selected",
+				"hint": "With the panel on, shows every player's character: hit points, AC, conditions and effects."
+			}
+		},
+		"party": {
+			"title": "Party",
+			"empty": "No one is in the party yet.",
+			"emptyGM": "No one is in the party. Drag actors here from the Actors list, or add them with Add to the party in an actor's right-click menu or on a token's HUD.",
+			"openSheet": "Open character sheet",
+			"hp": "Hit points",
+			"temp": "temp",
+			"ac": "AC",
+			"armorClass": "Armor Class",
+			"init": "Init",
+			"initiative": "Initiative",
+			"speed": "Speed",
+			"spellDC": "Spell DC",
+			"spellSave": "Spell save DC",
+			"passive": "Passive",
+			"perception": "Perception",
+			"insight": "Insight",
+			"investigation": "Investigation",
+			"passivePerception": "Passive Perception",
+			"passiveInsight": "Passive Insight",
+			"passiveInvestigation": "Passive Investigation",
+			"inspiration": "Heroic Inspiration",
+			"deathSaves": "Death Saves",
+			"successes": "Successes",
+			"failures": "Failures",
+			"exhaustion": "Exhaustion",
+			"concentrating": "Concentrating",
+			"passiveEffects": "Passive effects",
+			"cr": "CR",
+			"add": "Add to the party",
+			"remove": "Remove from the party",
+			"reset": "Reset the party",
+			"resetConfirm": "Go back to just the players' characters? Creatures you added will leave the party, and characters you removed will come back.",
+			"fromCompendium": "Import the actor from the compendium first, then add it to the party."
+		},
+		"config": {
+			"title": "Primal Monster Blocks Settings",
+			"menu": {
+				"name": "Primal Monster Blocks",
+				"label": "Open Settings",
+				"hint": "The stat block panel and party sheet, and how every Primal Monster Blocks sheet looks and what it shows by default."
+			},
+			"tabs": {
+				"panel": "Panel & Party",
+				"appearance": "Appearance",
+				"layout": "Layout",
+				"content": "Content",
+				"editing": "Editing",
+				"other": "Other"
+			},
+			"groups": {
+				"statBlock": "Stat block panel",
+				"party": "Party sheet",
+				"theme": "Theme and text",
+				"picture": "Picture",
+				"compact": "Compact sheets",
+				"sizing": "Sections and size",
+				"hitPoints": "Hit points",
+				"generated": "Generated text",
+				"sections": "Sections",
+				"secrets": "Secrets",
+				"interface": "Foundry's interface",
+				"editing": "Editing",
+				"other": "Other"
+			},
+			"scope": {
+				"personal": "Just for you: each player chooses their own.",
+				"world": "For the whole world. These are the defaults; each sheet's own menu can still change them.",
+				"mixed": "Just for you, apart from the settings marked World setting, which apply to everyone.",
+				"worldBadge": "World setting",
+				"mixedWorld": "For the whole world. These are the defaults; each sheet's own menu can still change them. Settings marked Just for you are each player's own.",
+				"personalBadge": "Just for you"
+			},
+			"partyLocked": "Your GM hasn't let players use the party sheet.",
+			"reset": "Reset This Tab",
+			"resetHint": "Put this tab's settings back to their defaults. Nothing is saved until you click Save.",
+			"save": "Save Changes"
+		},
+		"party-columns": {
+			"settings": {
+				"name": "Party sheet columns",
+				"hint": "Automatic uses as few columns as it takes to show everyone without scrolling, narrowing Foundry's interface if it has to."
+			},
+			"auto": "Automatic: fit everyone",
+			"one": "1 column",
+			"two": "2 columns",
+			"three": "3 columns"
+		},
+		"party-background": {
+			"settings": {
+				"name": "Party sheet background",
+				"hint": "The character sheet banner is dnd5e's dragon artwork behind the cards, tinted with the color below, like the headers of the Tidy 5e character sheets."
+			},
+			"theme": "Monster Blocks theme",
+			"banner": "Character sheet banner"
+		},
+		"party-background-color": {
+			"settings": {
+				"name": "Banner color",
+				"hint": "The color the character sheet banner is tinted with."
+			}
+		},
+		"columns": {
+			"auto": "As many as fit",
+			"one": "1 column (scrolls)",
+			"two": "Up to 2 columns",
+			"three": "Up to 3 columns"
+		},
+		"stat-block-columns": {
+			"settings": {
+				"name": "Most columns in a stat block",
+				"hint": "In the panel and in stat block windows. Each column makes the stat block one column wider, so columns are never squeezed. A stat block that needs more columns than this scrolls instead."
+			}
+		},
+		"hide-hotbar": {
+			"settings": {
+				"name": "Hide the hotbar",
+				"hint": "Hide Foundry's macro hotbar, always or only while the stat block panel or party sheet is open. The panel gets the room it used."
+			},
+			"never": "Never",
+			"panel": "While the panel is open",
+			"always": "Always"
+		},
+		"pane-side": {
+			"settings": {
+				"name": "Panel side",
+				"hint": "Which edge of the screen the panel is on. On the left, it sits beside the 5e.tools panel."
+			},
+			"right": "Right edge of the screen",
+			"left": "Left (beside the 5e.tools panel if it is open)"
+		},
+		"compact-skills": {
+			"settings": {
+				"name": "Compact skills",
+				"hint": "Show only Perception and Stealth; click Skills for the full list."
+			}
+		},
+		"skills": {
+			"expand": "Click to show all skills"
+		},
+		"modern": {
+			"cr": "CR",
+			"xpPb": "XP {xp}; PB {pb}"
+		},
+		"confirm-delete": {
+			"settings": {
+				"name": "Confirm before deleting",
+				"hint": "Ask before a feature, action or spell is deleted."
+			}
+		},
+		"delete": {
+			"tooltip": "Delete",
+			"title": "Delete {name}?",
+			"content": "This permanently removes {name} from {actor}.",
+			"yes": "Delete",
+			"no": "Cancel"
+		},
+		"attackMods": {
+			"label": "Attack modifiers:",
+			"toHit": "to hit",
+			"damage": "damage",
+			"mixed": "varies",
+			"toHitHint": "Added to every attack roll this creature makes, including spell attacks. Accepts numbers or dice, e.g. 2 or 1d4.",
+			"damageHint": "Added to the damage of every weapon and spell attack. Accepts numbers or dice, e.g. 2 or 1d6."
+		},
+		"show-bio": {
+			"enable": "Show biography",
+			"disable": "Hide biography"
+		},
+			
+		"MonsterBlocks": "Primal Monster Blocks",
+		
+		"SwitchToDefault": "Switch to default sheet",
+		"SwitchToMobloks": "Switch to Primal Monster Blocks",
+		"CannotSwitchSheet": "You must own this actor, and it must not be in a compendium, to change its sheet.",
+
+		"DescriptionS": "Descriptions",
+		"ProfileImage": "Profile image",
+		"OpenTokenizer": "Open VTTA Tokenizer",
+		"QuickInsert": "Quick Insert",
+
+		"Theme": "Theme",
+		"CustomThemeName": "Custom",
+		"DefaultThemeName": "Monster Manual",
+		"SimpleThemeName": "5e SRD",
+		"DarkThemeName": "Darkness",
+		"CoolThemeName": "Icy Breeze",
+		"HotThemeName": "Smouldering Ember",
+		"FoundryThemeName": "Foundry",
+		"SystemThemeName": "5e System",
+		"ModernThemeName": "Monster Manual (2024)",
+		
+		"Average": "Average",
+		"hp": {
+			"temp": "temp",
+			"roll": "Roll the hit point formula and set current and maximum hit points",
+			"average": "Set current and maximum hit points to the formula's average",
+			"heal": "Restore to maximum hit points and clear temporary hit points",
+			"baseMax": "base {value} before bonuses",
+			"noFormula": "This creature has no hit point formula."
+		},
+		"Current": "Current",
+		"Maximum": "Maximum",
+		
+		"Abbrstr": "str",
+		"Abbrdex": "dex",
+		"Abbrcon": "con",
+		"Abbrint": "int",
+		"Abbrwis": "wis",
+		"Abbrcha": "cha",
+		"Abbrhon": "hon",
+		"Abbrsan": "san",
+		"Abbrblo": "blo",
+
+		"Score": "Score",
+		"Modifier": "Modifier",
+		"SavingThrowS": "Saving Throws",
+		"PassivePerception": "passive Perception {pp}",
+		"PerceptionLocator": "perception",
+		"SkillS": "Skills",
+		"XPLabel": "{xp} XP",
+		"physicalDamage": "bludgeoning, piercing, and slashing from nonmagical attacks",
+		"physicalDamageBypass": "bludgeoning, piercing, and slashing from attacks that aren't {bypass}",
+		"Challenge": "Challenge",
+		"ProfBonus": "Proficiency Bonus",
+
+		"EditHint": "Right-click to edit",
+		"EditButtonHint": "Click the + button above to add features",
+
+		"AddFeat": "Feature",
+		"AddAttack": "Attack",
+		"AddAct": "Action",
+		"AddSpell": "Spell",
+		"AddInventory": "Loot",
+		"AddConsumable": "Consumable",
+		
+		"Recharge": "Recharge",
+		"NCharged": "Not charged",
+		"Costs": "Costs",
+		"ResourceRefresh": "Day",
+		
+		"zero": "zero",
+		"one": "one",
+		"two": "two",
+		"three": "three",
+		"four": "four",
+		"five": "five",
+		"six": "six",
+		"seven": "seven",
+		"eight": "eight",
+		"nine": "nine",
+		
+		"FullStop": ".",
+		"NameDescriptionSep": ".",
+		"SpeedUnitAbbrEnd": ".",
+		"Comma": ",",
+		"Colon": ":",
+		"SemiColon": ";",
+		
+		"Cantrips": "Cantrips",
+		"AtWill": "at will",
+
+		"CasterNameLevel": "The {name} is a {level}-level spellcaster.",
+		"CastingAbility": "Its spellcasting ability is {ability}",
+		"InnateCastingAbility": "The {name}'s innate spellcasting ability is {ability}",
+		"CastingStats": "(spell save DC {savedc}, {bonus} to hit with spell attacks).",
+		"CasterAtWill": " can cast {spells} at will and",
+		"CasterSpellsPreped": "The {name}{atwill} has the following spells prepared:",
+		"WarlockSpellsPreped": "It{atwill} has the following warlock spells prepared:",
+		"InnateSpellsKnown": "The {name} can innately cast the following spells, requiring no material components:",
+		"WarlockSlotRegain": "It regains its expended spell slots when it finishes a short or long rest.",
+		"ListFinalConjunctionAnd": "and",
+		"MultiDamageAttackConjunctionPlus": "plus",
+
+		"SpellLevel": "{level} level",
+		"SpellCost": "{cost} each",
+		"SpellSlots": "{slots} slots",
+		"SpellPactSlots": "{slots} {level}-level slots",
+		
+		"range": "range",
+		"reach": "reach",
+		"target": "target",
+		"targetS": "targets",
+		"AttackToHit": "{bonus} to hit",
+		"AttackRange": "{reachRange} {range}{sep}{max} {units}.",
+		"AttackTarget": "{quantity} {type}",
+		"AttackHitLabel": "Hit:",
+		"AttackDamageTemplate": "{average} ({formula}) {type}",
+		"AttackVersatile": "or {damage} damage if used with two hands",
+		"damage": "damage",
+		
+		"Reactions": "Reactions",
+		"BonusActions": "Bonus Actions",
+		"Multiattack": "Multiattack",
+		"LegendaryResistance": "Legendary Resistance",
+		
+		"OrdinalSuffixes": ["st", "nd", "rd", "th"],
+		
+		"MultiattackLocators": [
+			"multiattack",
+			"extraattack",
+			"extraattacks",
+			"multiattacks",
+			"multipleattacks",
+			"manyattacks"
+		],
+		"WarlockLocators": [
+			"warlock",
+			"pactmagic"
+		],
+		"SpellcastingLocators": [
+			"spellcasting",
+			"pactmagic"
+		],
+		"InnateCastingLocators": [
+			"innatespellcasting",
+			"innatespellcasting(psionics)",
+			"innatespellcastingpsionics"
+		],
+		
+		"LegActionCost": "Costs {number} Actions",
+		"LegendaryText": "The {name} can take {number} legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The {name} regains spent legendary actions at the start of its turn.",
+		
+		"LairActionsHeading": "Lair Actions",
+		"LairText": "On initiative count 20 (losing all initiative ties), the {name} takes a lair action to cause one of the following effects; the {name} can't use the same effect two rounds in a row:"
+	}
+}
