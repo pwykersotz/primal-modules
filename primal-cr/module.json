@@ -2,7 +2,7 @@
   "id": "primal-cr",
   "title": "Primal CR",
   "description": "How dangerous is this fight for this party? Primal CR ignores Challenge Rating and reads the sheets instead: hit points, Armor Class, saving throws, attack bonuses and damage, save DCs, areas, multiattacks, recharge and limited uses, spell slots, resistances and immunities, conditions handed out and conditions already in play, healing, legendary actions and resistances, and more. It then plays the fight out a thousand times with dice and tells the GM what tends to happen: Easy (the party wins without trouble), Medium (wins with a bit of trouble), Hard (wins, but someone may drop to 0 HP), Boss (the whole party may go down) or Impossible (fewer than 1 win in 10). Add creatures by right-clicking or dragging them from the Actors sidebar, compendiums or Primal Compendiums' lists, or load the selected tokens, the whole scene or the current combat from the map; mid-fight it uses everyone's current hit points, conditions and spent resources and keeps itself up to date. For the GM only. Made with AI: written with Claude (Anthropic).",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "authors": [
     {
       "name": "Pwykersotz"
@@ -46,7 +46,7 @@
   ],
   "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-cr",
   "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-cr/module.json",
-  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-cr-v1.1.2/primal-cr.zip",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-cr-v1.1.3/primal-cr.zip",
   "bugs": "https://github.com/pwykersotz/primal-modules/issues",
   "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-cr/README.md",
   "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-cr/CHANGELOG.md"

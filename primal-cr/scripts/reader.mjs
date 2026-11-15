@@ -1045,12 +1045,36 @@ function findOptionByName(profile, phrase, { act = "action" } = {}) {
   }) ?? null;
 }
 
+/** Words that make a number a measurement ("30 feet", "1 minute") rather than a count of attacks. */
+const MEASURE = /^(?:feet|foot|ft|miles?|yards?|inch(?:es)?|hours?|minutes?|rounds?|days?|hit points?|damage)\b/;
+const COUNT_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten";
+const SHARED_ATTACK = new RegExp(`\\b(${COUNT_WORDS})\\s+((?:[a-z'-]+\\s+){0,3}?[a-z'-]+?)`
+  + `(?=\\s*(?:,\\s*(?:and\\s+)?|\\s+and\\s+)(?:${COUNT_WORDS})\\s+(?:[a-z'-]+\\s+){0,3}?attacks?\\b)`, "g");
+
+/**
+ * "one bite and two claw attacks" names two kinds of attack that share one "attacks". Spell it out for each
+ * ("one bite attack and two claw attacks") so the second count isn't swallowed into the first name. Only a list
+ * whose last item ends in "attack" is touched, working back from it ("one bite, one claw, and one tail attack").
+ * "one with its bite and two with its claws" is left alone; it has its own reading.
+ */
+function shareAttackWord(text) {
+  for ( let pass = 0; pass < 6; pass++ ) {
+    const next = text.replace(SHARED_ATTACK, (whole, count, words) => {
+      if ( /attacks?$/.test(words) || /^with\b/.test(words) || MEASURE.test(words) ) return whole;
+      return `${count} ${words} attack`;
+    });
+    if ( next === text ) break;
+    text = next;
+  }
+  return text;
+}
+
 /**
  * Read "makes two Claw attacks and one Bite attack" into a list of attacks.
  * @returns {Array<{index: number, count: number}>|null}
  */
 export function parseAttackList(text, profile) {
-  const lower = ` ${text.toLowerCase()} `;
+  const lower = shareAttackWord(` ${text.toLowerCase()} `);
   const alternatives = lower.split(/(?:,|;)? or (?:it )?(?:makes |uses )?/);
   let best = null;
   const attacksOnly = profile.options.filter(o => (o.act === "action") && (o.kind === "attack"));
@@ -1096,6 +1120,11 @@ export function parseAttackList(text, profile) {
     let m;
     while ( (m = re.exec(alt)) ) {
       const count = wordNumber(m[1]);
+      // "moves up to 20 feet and makes one attack": a distance, not twenty attacks. Look again just after it.
+      if ( MEASURE.test(m[2]) ) {
+        re.lastIndex = m.index + m[1].length + 1;
+        continue;
+      }
       if ( !count ) continue;
       const phrase = m[2].replace(/\b(melee|ranged|weapon|spell|of|its|the|with)\b/g, " ").replace(/\s+/g, " ").trim();
       const option = phrase ? findOptionByName(profile, phrase) : null;
