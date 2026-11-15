@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3
+- Fixed: "makes one bite and two claw attacks" was read as a single Bite. Each kind in a list that shares one
+  "attacks" is now counted ("one bite, one claw, and one tail attack" too).
+- Fixed: a distance in an action was read as a number of attacks, so "moves up to 20 feet and makes one attack"
+  counted twenty attacks and "within 30 feet of it to attack" thirty-one. Distances and durations are skipped.
+
 ## 1.1.2
 - Each attack read from a sheet now records its activity id, so Primal Attacks' Multiattack window can use the exact attack Primal CR read.
 

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import * as dice from "../../scripts/dice.mjs";
-import { readActor, targetsInArea, plainText } from "../../scripts/reader.mjs";
+import { readActor, targetsInArea, plainText, parseAttackList } from "../../scripts/reader.mjs";
 import { simulate } from "../../scripts/sim.mjs";
 import { judge, percent, bookDifficulty, LEVELS, DEFAULT_THRESHOLDS } from "../../scripts/verdict.mjs";
 
@@ -156,4 +156,19 @@ test("verdict: the book's XP measure", () => {
   assert.deepEqual(bookDifficulty([1, 1, 1, 1], 350, table), { level: "high", xp: 350, budgets: [200, 300, 400] });
   assert.equal(bookDifficulty([1, 1, 1, 1], 500, table).level, "beyond");
   assert.equal(bookDifficulty([], 500, table), null);
+});
+
+test("reader: attack lists that share one \"attacks\" and distances in legendary actions", () => {
+  const strike = (name, die) => ({ name, act: "action", kind: "attack", dmg: [{ dice: [[1, die]], flat: 2 }] });
+  const profile = { options: [strike("Bite", 8), strike("Claw", 6), strike("Tail", 10)] };
+  assert.deepEqual(parseAttackList("The drake makes one bite and two claw attacks.", profile),
+    [{ index: 0, count: 1 }, { index: 1, count: 2 }]);
+  assert.deepEqual(parseAttackList("The dragon makes one bite, one claw, and one tail attack.", profile),
+    [{ index: 0, count: 1 }, { index: 1, count: 1 }, { index: 2, count: 1 }]);
+  assert.deepEqual(parseAttackList("It makes three attacks: one with its bite and two with its claws.", profile),
+    [{ index: 0, count: 1 }, { index: 1, count: 2 }]);
+  assert.deepEqual(parseAttackList("It moves up to 20 feet and makes one Tail attack.", profile), [{ index: 2, count: 1 }]);
+  assert.equal(parseAttackList("It commands one ally within 30 feet of it to attack.", profile), null);
+  // A list that doesn't end in "attack" is not an attack list: "one a deafening shriek, one a frightful screech"
+  assert.equal(parseAttackList("One a deafening shriek, one a frightful screech, and one a stunning bellow.", profile), null);
 });
