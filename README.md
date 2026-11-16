@@ -15,6 +15,7 @@ that installs and works on its own; where two modules know about each other, the
 | [Primal CR](primal-cr) | How dangerous a fight is for this party, simulated from the sheets. |
 | [Primal Drakkenheim Automation](primal-drakkenheim) | Rules glue for the automated Monsters of Drakkenheim pack. |
 | [Primal Harvesting](primal-harvesting) | Harvest beaten monsters with the rules of *Heliana's Guide to Monster Hunting*. |
+| [Primal Houserules](primal-houserules) | Table houserules: save extremes, an AC cap, half-die hit points, MVP and a Quick Break. |
 | [Primal HUD](primal-hud) | Token HUD additions: HP buttons and a favorites, spells, saves and skills panel. |
 | [Primal Monster Blocks](primal-monster-blocks) | A stat block NPC sheet: a port of zeel's Monster Blocks. |
 | [Primal Mounts](primal-mounts) | Mounted combat: mount, ride and fall, with the pair moving as one. |
