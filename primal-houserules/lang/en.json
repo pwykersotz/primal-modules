@@ -9,6 +9,10 @@
         "Name": "Armor Class cap",
         "Hint": "No creature's Armor Class goes above this, however it is worked out. 0 switches the cap off."
       },
+      "gearBonusesHighestOnly": {
+        "Name": "Gear bonuses don't stack",
+        "Hint": "When several items give a bonus to attack rolls or to saving throws, only the highest counts. A magic weapon's own +X is compared with gear bonuses to that attack. Bonuses from spells and features, penalties and dice bonuses still stack."
+      },
       "halfHitPoints": {
         "Name": "Half-die hit points",
         "Hint": "When hit points are rolled at level up, half the hit die is fixed and the other half is rolled: a d6 rolls 1d3 + 3, a d8 1d4 + 4, a d10 1d5 + 5 and a d12 1d6 + 6. The Constitution modifier is still added."

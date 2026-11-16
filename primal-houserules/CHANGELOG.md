@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+- **Gear bonuses don't stack.** When several items give a bonus to attack rolls or to saving throws, only the highest counts. A magic weapon's own +X (and its ammunition's) is compared with gear bonuses to that attack, so a +2 weapon with a +1 to-hit badge attacks at +2, on the sheet and on the roll. Bonuses from spells and features, penalties and dice bonuses still stack. On by default; switch it off in the settings.
+
 ## 1.0.0
 - **Natural 20s and 1s on saves against damage.** A natural 20 takes no damage; a natural 1 takes the most damage the dice could roll, with no reduction for the save. Works with Midi-QOL's workflow and with dnd5e's own damage card.
 - **Armor Class cap.** No creature's AC goes above 24 (a setting; 0 switches it off).
