@@ -52,6 +52,18 @@ export function combatTurnSignal(combat) {
   }
 }
 
+/**
+ * How long an effect's "At most once per turn" lasts: "turn" (the default) or "round". Other modules can widen it to
+ * a round through the `primal-auras.onceScope` hook, which gets { scope, aura, entry, effect, source, target, combat }
+ * and may set `scope` to "round" (Primal Houserules does this for spell emanations).
+ */
+export function onceScope({ inst, effect, targetDoc, combat }) {
+  const context = { scope: "turn", aura: inst.aura, entry: inst.entry, effect, source: inst.sourceDoc, target: targetDoc, combat };
+  try { globalThis.Hooks?.callAll?.("primal-auras.onceScope", context); }
+  catch (err) { error("A primal-auras.onceScope listener failed", err); }
+  return context.scope === "round" ? "round" : "turn";
+}
+
 const compareTurn = (a, b) => (a.round !== b.round ? a.round - b.round : (a.turn ?? 0) - (b.turn ?? 0));
 
 export class AuraEngine {
@@ -183,8 +195,10 @@ export class AuraEngine {
     if (!effectAffects(effect, inst.sourceDoc, targetDoc)) return;
     if (effect.oncePerTurn && turnKey) {
       const k = `${inst.key}|${effect.id}|${targetDoc.id}`;
-      if (this.onceTracker.get(k) === turnKey) return;
-      this.onceTracker.set(k, turnKey);
+      const onceKey = onceScope({ inst, effect, targetDoc, combat }) === "round" && combat
+        ? `${combat.id}:${combat.round}` : turnKey;
+      if (this.onceTracker.get(k) === onceKey) return;
+      this.onceTracker.set(k, onceKey);
     }
     await applyTriggeredEffect({ scene, inst, effect, targetDoc, trigger, combat });
   }

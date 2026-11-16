@@ -1,0 +1,48 @@
+{
+  "PRIMAL_HOUSERULES": {
+    "Settings": {
+      "saveExtremes": {
+        "Name": "Natural 20s and 1s on saves against damage",
+        "Hint": "A natural 20 on a saving throw takes no damage. A natural 1 takes the most damage the dice could roll, with no reduction for the save. Resistance, vulnerability and immunity still apply."
+      },
+      "acCap": {
+        "Name": "Armor Class cap",
+        "Hint": "No creature's Armor Class goes above this, however it is worked out. 0 switches the cap off."
+      },
+      "halfHitPoints": {
+        "Name": "Half-die hit points",
+        "Hint": "When hit points are rolled at level up, half the hit die is fixed and the other half is rolled: a d6 rolls 1d3 + 3, a d8 1d4 + 4, a d10 1d5 + 5 and a d12 1d6 + 6. The Constitution modifier is still added."
+      },
+      "emanationsOncePerRound": {
+        "Name": "Emanations once per round",
+        "Hint": "A spell emanation such as Spirit Guardians affects a creature at most once per round, not once per turn. Needs Primal Auras 1.3.0 or later; works on aura effects marked \"once per turn\"."
+      },
+      "emanationScope": {
+        "Name": "Which auras are once per round",
+        "Hint": "Spell auras are auras on a spell, or named after a spell the caster has (like the Spirit Guardians preset). All auras makes every once-per-turn aura effect once per round.",
+        "Spells": "Spell auras",
+        "All": "All auras"
+      },
+      "mvpPip": {
+        "Name": "MVP pip",
+        "Hint": "A second pip beside the Inspiration marker on character sheets, for MVP. Click it to light it or spend it."
+      },
+      "quickRest": {
+        "Name": "Quick Break rest",
+        "Hint": "A Quick Break button beside the short and long rests: 10 minutes, one Hit Die, and nothing else recovers."
+      }
+    },
+    "MVP": {
+      "Lit": "MVP: lit. Click to spend it.",
+      "Unlit": "MVP: not lit. Click to light it.",
+      "Spent": "{name} spends their MVP."
+    },
+    "QuickRest": {
+      "Label": "Quick Break",
+      "Hint": "Take a 10 minute breather. You can spend one Hit Die; nothing else recovers.",
+      "OneDie": "One Hit Die per Quick Break.",
+      "Rolled": "You've spent your Hit Die for this Quick Break.",
+      "Result": "{name} takes a Quick Break and regains {health}."
+    }
+  }
+}

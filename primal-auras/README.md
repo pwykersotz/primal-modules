@@ -154,6 +154,13 @@ auras.openPresetLibrary();
 auras.openItemAuras(item);
 ```
 
+### Hook: `primal-auras.onceScope`
+
+Before an effect marked *At most once per turn* is applied, the hook `primal-auras.onceScope` is called with
+`{ scope, aura, entry, effect, source, target, combat }`. `scope` starts as `"turn"`; a listener that sets it to
+`"round"` makes that effect hit each creature at most once per round instead (Primal Houserules does this for
+spell emanations such as Spirit Guardians). Outside combat there's no limit either way.
+
 ## How it works / limits
 
 * Automation runs on the **GM's** client, so a GM must be connected for effects to apply. Drawing works

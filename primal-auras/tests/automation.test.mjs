@@ -77,3 +77,36 @@ test("without Primal Combat there's no turn signal", () => {
   game.modules.get = () => null;
   assert.equal(combatTurnSignal(combat), null);
 });
+
+test("once per turn, or once per round when a primal-auras.onceScope listener says so", async () => {
+  const { onceScope } = await import(new URL("automation.js", base));
+  const listeners = [];
+  globalThis.Hooks = { callAll: (name, ctx) => { if (name === "primal-auras.onceScope") for (const fn of listeners) fn(ctx); } };
+  const effect = { id: "e", oncePerTurn: true, affects: "all" };
+  const inst = { key: "k", aura: createAura({ name: "Spirit Guardians" }), entry: { sourceType: "item", item: { type: "spell" } }, sourceDoc: { id: "src" } };
+  const target = { id: "t", actor: null };
+  const c = { id: "c", round: 3, turn: 1 };
+  assert.equal(onceScope({ inst, effect, targetDoc: target, combat: c }), "turn");
+  engine.onceTracker.clear();
+  await engine.processTriggered({}, { inst, effect, trigger: "onEnter", turnKey: "c:3:1" }, target, c);
+  assert.equal(engine.onceTracker.get("k|e|t"), "c:3:1", "turn key by default");
+
+  let seen;
+  listeners.push(ctx => { seen = ctx; if (ctx.entry?.item?.type === "spell") ctx.scope = "round"; });
+  engine.onceTracker.clear();
+  await engine.processTriggered({}, { inst, effect, trigger: "onEnter", turnKey: "c:3:1" }, target, c);
+  assert.equal(engine.onceTracker.get("k|e|t"), "c:3", "round key when widened");
+  assert.equal(seen.aura.name, "Spirit Guardians");
+  assert.equal(seen.target, target);
+  // The same round on a later turn is blocked; the next round isn't.
+  let sets = 0;
+  const set = engine.onceTracker.set.bind(engine.onceTracker);
+  engine.onceTracker.set = (k, v) => { sets++; return set(k, v); };
+  await engine.processTriggered({}, { inst, effect, trigger: "targetTurnEnd", turnKey: "c:3:2" }, target, { ...c, turn: 2 });
+  assert.equal(sets, 0, "a later turn of the same round is blocked");
+  await engine.processTriggered({}, { inst, effect, trigger: "onEnter", turnKey: "c:4:0" }, target, { ...c, round: 4, turn: 0 });
+  assert.equal(sets, 1, "the next round goes through");
+  assert.equal(engine.onceTracker.get("k|e|t"), "c:4");
+  delete engine.onceTracker.set;
+  delete globalThis.Hooks;
+});
