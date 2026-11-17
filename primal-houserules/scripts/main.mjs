@@ -6,6 +6,7 @@ import { MODULE_ID, SETTINGS, runFirst, setting } from "./constants.mjs";
 import { registerSettings } from "./settings.mjs";
 import { onPreCalculateDamage } from "./saves.mjs";
 import { registerArmorCap } from "./armor.mjs";
+import { gearPlan, registerGearBonuses } from "./gear-bonuses.mjs";
 import { onPreRollClassHitPoints } from "./hit-points.mjs";
 import { onOnceScope } from "./emanations.mjs";
 import { hasMvp, onRenderActorSheet, onUpdateActor, setMvp } from "./mvp.mjs";
@@ -13,7 +14,7 @@ import { registerQuickRest } from "./quick-rest.mjs";
 
 let damageHook = null;
 
-/** Prepare every actor again, so a new AC cap shows straight away. */
+/** Prepare every actor again, so a new AC cap or gear bonus rule shows straight away. */
 function refreshActors() {
   for ( const actor of game.actors ?? [] ) {
     actor.reset?.();
@@ -35,10 +36,11 @@ function redrawSheets() {
 }
 
 Hooks.once("init", () => {
-  registerSettings({ onArmorChange: refreshActors, onSheetChange: redrawSheets });
+  registerSettings({ onArmorChange: refreshActors, onSheetChange: redrawSheets, onGearChange: refreshActors });
 
-  // Actors are prepared before the setup hook, so the AC cap has to be in place now.
+  // Actors are prepared before the setup hook, so the AC cap and the gear bonus rule have to be in place now.
   registerArmorCap();
+  registerGearBonuses();
 
   // Natural 20s and 1s on saves: ahead of Midi-QOL's own handler, which halves damage on a successful save.
   damageHook = Hooks.on("dnd5e.preCalculateDamage", onPreCalculateDamage);
@@ -67,5 +69,5 @@ Hooks.once("ready", () => {
 
   const module = game.modules.get(MODULE_ID);
   console.log(`${MODULE_ID} | ${module?.version ?? ""} ready`);
-  if ( module ) module.api = { hasMvp, setMvp };
+  if ( module ) module.api = { hasMvp, setMvp, gearPlan };
 });

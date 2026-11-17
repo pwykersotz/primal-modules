@@ -1,8 +1,8 @@
 {
   "id": "primal-houserules",
   "title": "Primal Houserules",
-  "description": "Table houserules for dnd5e, each one switched on or off in the settings: a natural 20 on a saving throw takes no damage and a natural 1 takes maximum damage; Armor Class is capped (24 to start with) for everyone; hit points rolled at level up are half the die fixed plus a roll for the other half; spell emanations like Spirit Guardians hit a creature at most once per round (with Primal Auras); an MVP pip beside Inspiration on character sheets; and a Quick Break rest (10 minutes, one Hit Die) beside the short and long rests on dnd5e and Tidy 5e sheets. Works with or without Midi-QOL. Made with AI: written with Claude (Anthropic).",
-  "version": "1.0.0",
+  "description": "Table houserules for dnd5e, each one switched on or off in the settings: a natural 20 on a saving throw takes no damage and a natural 1 takes maximum damage; Armor Class is capped (24 to start with) for everyone; bonuses from gear to attack rolls and saving throws don't stack, only the highest counts; hit points rolled at level up are half the die fixed plus a roll for the other half; spell emanations like Spirit Guardians hit a creature at most once per round (with Primal Auras); an MVP pip beside Inspiration on character sheets; and a Quick Break rest (10 minutes, one Hit Die) beside the short and long rests on dnd5e and Tidy 5e sheets. Works with or without Midi-QOL. Made with AI: written with Claude (Anthropic).",
+  "version": "1.1.0",
   "authors": [
     {
       "name": "Pwykersotz"
@@ -32,7 +32,7 @@
       {
         "id": "lib-wrapper",
         "type": "module",
-        "reason": "The Armor Class cap is added through libWrapper when it's on, so it works alongside other modules."
+        "reason": "The Armor Class cap and the gear bonus rule are added through libWrapper when it's on, so they work alongside other modules."
       }
     ]
   },
@@ -51,7 +51,7 @@
   ],
   "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-houserules",
   "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-houserules/module.json",
-  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-houserules-v1.0.0/primal-houserules.zip",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-houserules-v1.1.0/primal-houserules.zip",
   "bugs": "https://github.com/pwykersotz/primal-modules/issues",
   "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-houserules/README.md",
   "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-houserules/CHANGELOG.md"

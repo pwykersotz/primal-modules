@@ -24,6 +24,17 @@ If you pick a multiplier by hand on dnd5e's damage card (half, double), a natura
 
 No creature's Armor Class goes above **24**, however it's worked out: armor, natural armor, a flat or custom formula, items, effects or cover. Every sheet, attack roll and module sees the capped number. Change the cap in the settings, or set it to 0 to switch it off. With libWrapper on, the cap is added through it.
 
+### Gear bonuses don't stack
+
+When several items give a bonus of the same kind, only the highest one counts. Two kinds are covered:
+
+- **Attack rolls.** A gear bonus to every attack, a gear bonus to one type of attack (melee weapon, ranged weapon, melee spell or ranged spell), and a magic weapon's own +X (or its ammunition's). For each attack, only the highest of these counts. A +2 spear with a badge that gives +1 to melee weapon attacks attacks at +2, not +3, and a non-magic weapon still gets the badge's +1.
+- **Saving throws.** A gear bonus to every save and a gear bonus to one ability's saves. A Cloak of Protection (+1 to saves) and a Ring of Protection (+1 to saves) give +1, not +2.
+
+"Gear" means an effect that comes from an item the creature carries: a weapon, armor, a ring, a cloak, a badge, and so on. The effect still has to be active, so an item that needs to be equipped or attuned only counts when it is. Everything else stacks as normal: bonuses from spells like Bless, from class features and from conditions, penalties (a cursed -1), and dice bonuses (a 1d4 from an item). Only flat bonuses above 0 are compared.
+
+The result is the same everywhere: the save bonuses and to-hit numbers on the sheet, the rolls, and other modules that read them. The item's effect still shows as active on the sheet's Effects tab; it just adds nothing when a higher bonus of the same kind is there. `game.modules.get("primal-houserules").api.gearPlan(actor)` shows what counted for an actor.
+
 ### Half-die hit points
 
 When a character rolls hit points at level up, half the hit die is fixed and the other half is rolled:
@@ -62,6 +73,7 @@ All are world settings, so only a GM can change them.
 | --- | --- |
 | Natural 20s and 1s on saves against damage | On |
 | Armor Class cap | 24 (0 is off) |
+| Gear bonuses don't stack | On |
 | Half-die hit points | On |
 | Emanations once per round | On |
 | Which auras are once per round | Spell auras |
@@ -74,12 +86,14 @@ All are world settings, so only a GM can change them.
 const api = game.modules.get("primal-houserules").api;
 api.hasMvp(actor);          // true when the MVP pip is lit
 await api.setMvp(actor);    // switch it; or setMvp(actor, true) / setMvp(actor, false)
+api.gearPlan(actor);        // gear bonuses that were dropped or cut down, and the gear bonus that counts per kind
 ```
 
 The Quick Break is the dnd5e rest type `quick`, so `actor.initiateRest({ type: "quick" })` starts one, and other modules can listen for `dnd5e.preQuickRest` and `dnd5e.quickRest`.
 
 ## Limits
 
+- **Gear bonuses are compared by key.** The rule knows the dnd5e bonuses to attack rolls (all attacks and each attack type) and to saving throws (all saves and each ability's). A bonus an item adds some other way, like a bonus written straight into one attack's formula, or a Midi-QOL optional bonus, isn't compared. Bonuses to ability checks, skills, spell save DCs and AC aren't covered.
 - **Saves without a chat card link.** Without Midi, a save only counts when it was rolled from the same chat card as the damage (the save button on the spell's card). A save rolled from the character sheet isn't linked to the damage, so the rule can't see it.
 - **Maximum damage needs the rolls.** On dnd5e's damage card the maximum comes from the card's damage rolls. If a module changes the damage entries so they no longer line up with those rolls, the natural 1 still loses the save's reduction but keeps the rolled damage.
 - **The MVP pip's place on Tidy 5e** depends on Tidy's layout; if a Tidy update moves the Inspiration badge, the pip moves with it but might need its spacing adjusted.

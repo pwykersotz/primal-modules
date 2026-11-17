@@ -6,8 +6,9 @@ import { MODULE_ID, SETTINGS } from "./constants.mjs";
  * @param {object} handlers
  * @param {Function} handlers.onArmorChange   The AC cap changed: prepare actors again.
  * @param {Function} handlers.onSheetChange   A sheet addition was switched: draw open sheets again.
+ * @param {Function} handlers.onGearChange    The gear bonus rule was switched: prepare actors again.
  */
-export function registerSettings({ onArmorChange, onSheetChange }={}) {
+export function registerSettings({ onArmorChange, onSheetChange, onGearChange }={}) {
   const L = key => `PRIMAL_HOUSERULES.Settings.${key}`;
   const register = (key, data) => game.settings.register(MODULE_ID, key, {
     name: L(`${key}.Name`),
@@ -23,6 +24,7 @@ export function registerSettings({ onArmorChange, onSheetChange }={}) {
     default: 24,
     onChange: onArmorChange
   });
+  register(SETTINGS.gearBonuses, { type: Boolean, default: true, onChange: onGearChange });
   register(SETTINGS.halfHitPoints, { type: Boolean, default: true });
   register(SETTINGS.emanations, { type: Boolean, default: true });
   register(SETTINGS.emanationScope, {
