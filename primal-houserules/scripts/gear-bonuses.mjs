@@ -11,7 +11,7 @@
  * (a cursed -1 or a 1d4 from an item is left alone). Only flat bonuses above 0 are compared.
  *
  * How: when Foundry starts applying an actor's effects, the gear bonuses are collected and the lower ones are marked.
- * While the effects are applied, a marked change is skipped (or, for a single-ability or single-attack-type bonus that beats a
+ * Foundry is then told a marked change doesn't apply (or, for a single-ability or single-attack-type bonus that beats a
  * smaller all-round one, cut down to the difference). A weapon's own +X is compared when its attack bonus is worked
  * out, which covers the to-hit shown on the sheet as well as the roll.
  */
@@ -205,13 +205,15 @@ export function collectGearBonuses(actor) {
       const data = effect.getReplacementData?.(getRollData()) ?? getRollData();
       const value = flatBonus(change.value, data);
       if ( !(value > 0) ) continue;
+      // Some modules (DAE) move a change to another phase, so it counts if it applies in either one.
+      const phases = [...new Set([change.phase ?? "initial", "initial", "final"])];
+      let applies = !effect.shouldApplyChange;
       try {
-        if ( effect.shouldApplyChange && !effect.shouldApplyChange(change, { phase: change.phase, replacementData: data }) ) {
-          continue;
-        }
+        applies ||= phases.some(phase => effect.shouldApplyChange(change, { phase, replacementData: data }));
       } catch {
-        continue;
+        applies = false;
       }
+      if ( !applies ) continue;
       entries.push({ id: changeId(effect, change), key, value, label: `${effect.parent.name}: ${effect.name}` });
     }
   }
@@ -230,17 +232,34 @@ const PENDING = Symbol("pending");
 export function gearPlan(actor) {
   if ( !actor ) return undefined;
   let plan = plans.get(actor);
-  if ( plan !== PENDING ) return plan;
+  if ( (plan !== PENDING) || computing.has(actor) ) return plan === PENDING ? undefined : plan;
   plan = undefined;
+  computing.add(actor);
   try {
     const entries = collectGearBonuses(actor);
     if ( entries.length ) plan = planGearBonuses(entries);
   } catch (err) {
     console.error(`${MODULE_ID} | Could not compare the gear bonuses of ${actor.name}`, err);
+  } finally {
+    computing.delete(actor);
   }
   if ( plan ) plans.set(actor, plan);
   else plans.delete(actor);
   return plan;
+}
+
+/** Actors whose plan is being worked out right now (collecting asks each effect whether it applies). */
+const computing = new WeakSet();
+
+/**
+ * The actor a gear effect's changes go to.
+ * @param {ActiveEffect} effect
+ * @returns {Actor|null}
+ */
+function gearActor(effect) {
+  if ( !isGearEffect(effect) ) return null;
+  const actor = effect.parent?.parent;
+  return actor?.documentName === "Actor" ? actor : null;
 }
 
 /** Whether the rule is on. */
@@ -259,16 +278,27 @@ export function registerGearBonuses() {
     return wrapped(phase, ...rest);
   });
 
-  // 2. Skip or cut down the gear bonuses that don't count.
+  // 2. A gear bonus that doesn't count isn't applied. Done by answering "no" when Foundry asks whether the change
+  //    applies, after every other module has had its say, so no one else's wrapper is ever skipped.
+  wrap("CONFIG.ActiveEffect.documentClass.prototype", "shouldApplyChange", function(wrapped, change, ...rest) {
+    const result = wrapped(change, ...rest);
+    if ( !result ) return result;
+    const actor = gearActor(this);
+    const plan = actor ? gearPlan(actor) : null;
+    if ( plan?.skip.has(changeId(this, change)) ) {
+      if ( change && ("applied" in change) ) change.applied = false;
+      return false;
+    }
+    return result;
+  });
+
+  //    A single-ability or single-attack-type bonus that beats a smaller all-round one adds only the difference.
   wrap("CONFIG.ActiveEffect.documentClass", "applyChange", function(wrapped, model, change, ...rest) {
     const plan = (model?.documentName === "Actor") && change?.effect ? gearPlan(model) : null;
-    if ( plan ) {
-      const id = changeId(change.effect, change);
-      if ( plan.skip.has(id) ) return {};
-      if ( plan.reduce.has(id) ) return wrapped(model, { ...change, value: String(plan.reduce.get(id)) }, ...rest);
-    }
+    const id = plan ? changeId(change.effect, change) : null;
+    if ( plan?.reduce.has(id) ) return wrapped(model, { ...change, value: String(plan.reduce.get(id)) }, ...rest);
     return wrapped(model, change, ...rest);
-  }, "MIXED");
+  });
 
   // 3. A weapon's own +X against the gear bonus to that attack.
   const attackClass = "CONFIG.DND5E.activityTypes.attack.documentClass.prototype";

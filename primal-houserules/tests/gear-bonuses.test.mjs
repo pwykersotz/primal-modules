@@ -62,7 +62,7 @@ class FakeActor {
   }
 
   give(itemName, type, changes, { active=true }={}) {
-    const item = { documentName: "Item", type, name: itemName, uuid: `Actor.x.Item.${itemName}` };
+    const item = { documentName: "Item", type, name: itemName, uuid: `Actor.x.Item.${itemName}`, parent: this };
     this.effects.push(new FakeEffect({ name: itemName, item, changes, active }));
     return this;
   }
@@ -232,4 +232,21 @@ test("features, spells, penalties and items that aren't active are left alone", 
 test("an actor with no gear bonuses gets no plan", () => {
   const actor = new FakeActor("E").cast("Bless", [{ key: SAVE, value: "1d4" }]).prepare();
   assert.equal(gearPlan(actor), undefined);
+});
+
+test("with libWrapper, every wrapper calls through, so other modules' wrappers (DAE, Midi) always run", () => {
+  const registered = [];
+  globalThis.libWrapper = { register: (id, target, fn, type) => registered.push({ id, target, type }) };
+  try {
+    registerGearBonuses();
+  } finally {
+    delete globalThis.libWrapper;
+  }
+  assert.deepEqual(registered.map(r => r.target), [
+    "CONFIG.Actor.documentClass.prototype.applyActiveEffects",
+    "CONFIG.ActiveEffect.documentClass.prototype.shouldApplyChange",
+    "CONFIG.ActiveEffect.documentClass.applyChange",
+    "CONFIG.DND5E.activityTypes.attack.documentClass.prototype.getAttackData"
+  ]);
+  assert.ok(registered.every(r => (r.id === "primal-houserules") && (r.type === "WRAPPER")));
 });
