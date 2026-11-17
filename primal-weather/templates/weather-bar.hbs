@@ -1,5 +1,6 @@
-{{#if visible}}
 <div class="pw-bar">
+  {{!-- The part must always render exactly one element, so the bar stays and only its contents are conditional. --}}
+{{#if visible}}
   {{#if isGM}}
   <div class="pw-button">
     <button type="button" data-action="roll" data-tooltip="{{labels.roll}}" data-tooltip-direction="LEFT"
@@ -34,5 +35,5 @@
             aria-label="{{labels.menu}}"><i class="fa-solid fa-ellipsis-vertical"></i></button>
   </div>
   {{/if}}
-</div>
 {{/if}}
+</div>

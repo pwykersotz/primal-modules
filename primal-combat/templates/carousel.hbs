@@ -1,5 +1,6 @@
-{{#if visible}}
 <div class="pc-shell">
+  {{!-- The part must always render exactly one element, so the shell stays and only its contents are conditional. --}}
+{{#if visible}}
   <div class="pc-bar">
     <div class="pc-controls pc-controls-start">
       {{#if controls.showPrevious}}
@@ -79,5 +80,5 @@
     {{#if status.detail}}<span class="pc-status-detail">{{status.detail}}</span>{{/if}}
     {{#if status.hint}}<span class="pc-status-hint">{{status.hint}}</span>{{/if}}
   </div>
-</div>
 {{/if}}
+</div>
