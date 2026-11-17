@@ -12,6 +12,38 @@ const rawDamage = new WeakMap();
 /** Mounts with a fall-off check in progress. */
 const fallLocks = new Set();
 
+/** The paths already wrapped, so a second call (or a second setup) doesn't wrap twice. */
+const wrappedPaths = new Set();
+
+/**
+ * Wrap a method, through libWrapper when it's active so other modules that wrap the same method (Primal Houserules
+ * wraps prepareDerivedData, for one) work alongside this one without a conflict warning. Without libWrapper the
+ * method is patched directly.
+ * @param {string} path      Dotted path to the object holding the method, from globalThis.
+ * @param {string} method
+ * @param {Function} fn      Called as fn.call(instance, wrapped, ...args).
+ * @param {string} [type]    libWrapper type: "MIXED" when fn sometimes doesn't call the wrapped method.
+ */
+export function wrap(path, method, fn, type="WRAPPER") {
+  const target = `${path}.${method}`;
+  if ( wrappedPaths.has(target) ) return;
+  wrappedPaths.add(target);
+  if ( globalThis.libWrapper ) {
+    try {
+      globalThis.libWrapper.register(MODULE_ID, target, fn, type);
+      return;
+    } catch(err) {
+      console.warn(`${MODULE_ID} | libWrapper could not wrap ${target}, patching directly`, err);
+    }
+  }
+  const holder = foundry.utils.getProperty(globalThis, path);
+  const original = holder?.[method];
+  if ( typeof original !== "function" ) return;
+  holder[method] = function(...args) {
+    return fn.call(this, original.bind(this), ...args);
+  };
+}
+
 export function registerRules() {
   Hooks.on("dnd5e.preRollAttackV2", onPreRollAttack);
   Hooks.on("dnd5e.rollAttackV2", onRollAttack);
@@ -71,9 +103,8 @@ function names(pair) {
  */
 export function patchFalling() {
   const proto = CONFIG.Token?.documentClass?.prototype;
-  if ( !proto || (typeof proto._isFalling !== "function") || proto._isFalling.primalMounts ) return;
-  const isFalling = proto._isFalling;
-  const patchedIsFalling = function(...args) {
+  if ( !proto || (typeof proto._isFalling !== "function") ) return;
+  wrap("CONFIG.Token.documentClass.prototype", "_isFalling", function(wrapped, ...args) {
     const mount = getMountOf(this);
     if ( mount ) {
       try {
@@ -82,20 +113,15 @@ export function patchFalling() {
         return false;
       }
     }
-    return isFalling.apply(this, args);
-  };
-  patchedIsFalling.primalMounts = true;
-  proto._isFalling = patchedIsFalling;
+    return wrapped(...args);
+  }, "MIXED");
 
   if ( typeof proto.plummet === "function" ) {
-    const plummet = proto.plummet;
-    const patchedPlummet = function(...args) {
+    wrap("CONFIG.Token.documentClass.prototype", "plummet", function(wrapped, ...args) {
       const mount = getMountOf(this);
       if ( mount && (typeof mount.plummet === "function") ) return mount.plummet(...args);
-      return plummet.apply(this, args);
-    };
-    patchedPlummet.primalMounts = true;
-    proto.plummet = patchedPlummet;
+      return wrapped(...args);
+    }, "MIXED");
   }
 }
 
@@ -205,10 +231,9 @@ export function refreshRiderActors(actors) {
  */
 export function patchSpeeds() {
   const proto = CONFIG.Actor?.documentClass?.prototype;
-  if ( !proto || (typeof proto.prepareDerivedData !== "function") || proto.prepareDerivedData.primalMounts ) return;
-  const prepareDerivedData = proto.prepareDerivedData;
-  const patched = function(...args) {
-    const result = prepareDerivedData.apply(this, args);
+  if ( !proto || (typeof proto.prepareDerivedData !== "function") ) return;
+  wrap("CONFIG.Actor.documentClass.prototype", "prepareDerivedData", function(wrapped, ...args) {
+    const result = wrapped(...args);
     try {
       applyMountSpeeds(this);
       const riders = riderActorsOf(this);
@@ -217,9 +242,7 @@ export function patchSpeeds() {
       console.error(`${MODULE_ID} | could not apply mount speeds`, err);
     }
     return result;
-  };
-  patched.primalMounts = true;
-  proto.prepareDerivedData = patched;
+  });
 }
 
 /* -------------------------------------------- */

@@ -2,7 +2,7 @@
   "id": "primal-mounts",
   "title": "Primal Mounts",
   "description": "Mounted combat for D&D 5e. Drop a smaller creature's token onto a larger one and choose Mount from the Token HUD: the pair moves and displays as one united token, follows the mounted combat rules (control, initiative, falling off) and the Mounted Combatant feat, until Unmount is chosen. Overlapping tokens also stay visible and selectable. Made with AI: written with Claude (Anthropic).",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "authors": [
     {
       "name": "Pwykersotz"
@@ -22,6 +22,13 @@
           "verified": "6.0.6"
         }
       }
+    ],
+    "recommends": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "reason": "Rider speeds and falling are added through libWrapper when it's on, so they work alongside other modules that change the same functions (such as Primal Houserules)."
+      }
     ]
   },
   "esmodules": [
@@ -40,7 +47,7 @@
   "socket": true,
   "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-mounts",
   "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-mounts/module.json",
-  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-mounts-v1.0.9/primal-mounts.zip",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-mounts-v1.0.10/primal-mounts.zip",
   "bugs": "https://github.com/pwykersotz/primal-modules/issues",
   "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-mounts/README.md"
 }
