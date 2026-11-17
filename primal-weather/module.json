@@ -2,7 +2,7 @@
   "id": "primal-weather",
   "title": "Primal Weather",
   "description": "A weather generator shown in a small bar under dnd5e's calendar. It rolls each day's weather for the climate and the calendar's season, following on from the day before, so warm spells and wet weeks last a while. The temperature follows the time of day, and hovering the bar shows the rules for heavy rain, strong wind, extreme heat and cold. The GM can roll again, set the weather by hand, see tomorrow's forecast, post it to chat, and show it on outdoor scenes with Foundry's rain, fog and snow effects. Made with AI: written with Claude (Anthropic).",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "authors": [
     {
       "name": "Pwykersotz"
@@ -27,7 +27,7 @@
   ],
   "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-weather",
   "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-weather/module.json",
-  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-weather-v1.1.0/primal-weather.zip",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-weather-v1.1.1/primal-weather.zip",
   "bugs": "https://github.com/pwykersotz/primal-modules/issues",
   "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-weather/README.md",
   "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-weather/CHANGELOG.md"
