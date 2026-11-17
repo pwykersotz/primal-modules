@@ -2,7 +2,7 @@
   "id": "primal-combat",
   "title": "Primal Combat",
   "description": "A combat tracker carousel across the top of the screen, below dnd5e's calendar. It shows the turn order as portraits, rolls initiative, and moves turns forward or back. Also supports side initiative: the whole acting side is framed with the turn marker art, each player clicks their own portrait when they're done and it fades, and hovering a portrait lights up that creature's token so you can tell identical enemies apart. Lair actions and other events can go on any initiative count, in individual or side initiative. Made with AI: written with Claude (Anthropic).",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "authors": [
     {
       "name": "Pwykersotz"
@@ -27,7 +27,7 @@
   ],
   "url": "https://github.com/pwykersotz/primal-modules/tree/main/primal-combat",
   "manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-combat/module.json",
-  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-combat-v1.7.0/primal-combat.zip",
+  "download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-combat-v1.7.1/primal-combat.zip",
   "bugs": "https://github.com/pwykersotz/primal-modules/issues",
   "readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-combat/README.md",
   "changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-combat/CHANGELOG.md"
