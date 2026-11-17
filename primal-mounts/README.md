@@ -90,6 +90,7 @@ Per-player settings:
   before the rider clicks the button, apply the damage to the rider by hand.
 - Macro API: `game.modules.get("primal-mounts").api`. It provides `getPair`, `mountCandidates`, `mount`,
   `unmount`, `toggleControl` and `fallCheck`.
+- **libWrapper.** With libWrapper on, rider speeds and falling are added through it, so modules that wrap the same functions (Primal Houserules' AC cap and gear bonus rule) don't raise a conflict warning.
 
 ## Made with AI
 
