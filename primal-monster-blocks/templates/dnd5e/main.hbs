@@ -12,7 +12,7 @@
 		{{#> "modules/primal-monster-blocks/templates/dnd5e/collapsibleSection.hbs" title=featuresTitle hide-title=(not modern) section="feats"}}
 			{{! Spellcasting Features }}
 			{{#each features.casting.items as |casting id|}}
-				{{#if @root.flags.casting-feature}}
+				{{#if (and @root.flags.casting-feature casting.hasSpells)}}
 					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/main/spellcasting.hbs" casting=casting}}
 				{{else}}
 					{{> "modules/primal-monster-blocks/templates/dnd5e/parts/featureBlock.hbs" item=casting}}

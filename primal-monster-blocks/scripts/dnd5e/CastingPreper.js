@@ -1,5 +1,5 @@
 import Helpers from "./Helpers5e.js";
-import { debug, getTranslationArray } from "../utilities.js";
+import { debug, getActivities, getTranslationArray } from "../utilities.js";
 import ItemPreper from "./ItemPreper.js";
 import * as Templates from "./templates.js";
 
@@ -17,7 +17,25 @@ export default class CastingPreper extends ItemPreper {
 	 * @memberof CastingPreper
 	 */
 	static isCasting(item) {
+		if (this.castsWithActivities(item)) return false;
 		return this.isSpellcasting(item) || this.isInnateSpellcasting(item);
+	}
+	/**
+	 * Determine if the item casts its spells through Cast activities, as the
+	 * "Spellcasting" action of monsters from the 2024 Monster Manual does.
+	 *
+	 * Those spells aren't spell items on the actor (dnd5e only keeps hidden copies,
+	 * flagged as cached for the activity), there's no caster level and the item's
+	 * own description already lists the spells and their uses. So the feature is
+	 * shown like any other action, with its own text, instead of a generated one.
+	 *
+	 * @static
+	 * @param {Item5e} item - An item that might be a spellcasting feature
+	 * @return {boolean}
+	 * @memberof CastingPreper
+	 */
+	static castsWithActivities(item) {
+		return getActivities(item.document ?? item).some(a => a?.type === "cast");
 	}
 	/**
 	 * Determine if the item is a standard casting feature or pact magic,
@@ -127,6 +145,10 @@ export default class CastingPreper extends ItemPreper {
 		/** @type {string} The type of casting feature */
 		this.ct = this.data.castingType;
 		this.data.spellbook = this.reformatSpellbook();
+
+		/** @type {boolean} Whether there are any spells to write out. Without any, the item's own text is shown. */
+		this.data.hasSpells = this.data.hasAtWill ||
+			this.data.spellbook.some(page => page.spells?.length);
 
 		[this.abilityTitle, this.castingAbility] = this.getCastingAbility();
 		this.tohit = this.getSpellAttackBonus();
@@ -416,6 +438,7 @@ export default class CastingPreper extends ItemPreper {
 	 */
 	get spellLevelText() {
 		if (this.ct == this.cts.innate) return "";
+		if (this.casterLevel < 1 && !this.editing) return "";  // No caster level set: "a 0-level spellcaster" means nothing
 
 		return game.i18n.format("MOBLOKS5E.CasterNameLevel", {
 			name: this.sheet.actor.name,

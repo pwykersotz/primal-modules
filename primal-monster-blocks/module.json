@@ -13,7 +13,7 @@
 			"name": "Pwykersotz"
 		}
 	],
-	"version": "4.0.3",
+	"version": "4.0.4",
 	"compatibility": {
 		"minimum": "14",
 		"verified": "14.369"
@@ -70,7 +70,8 @@
 		}
 	],
 	"manifest": "https://raw.githubusercontent.com/pwykersotz/primal-modules/main/primal-monster-blocks/module.json",
-	"download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-monster-blocks-v4.0.3/primal-monster-blocks.zip",
+	"download": "https://github.com/pwykersotz/primal-modules/releases/download/primal-monster-blocks-v4.0.4/primal-monster-blocks.zip",
 	"bugs": "https://github.com/pwykersotz/primal-modules/issues",
-	"readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-monster-blocks/README.md"
+	"readme": "https://github.com/pwykersotz/primal-modules/blob/main/primal-monster-blocks/README.md",
+	"changelog": "https://github.com/pwykersotz/primal-modules/blob/main/primal-monster-blocks/CHANGELOG.md"
 }
